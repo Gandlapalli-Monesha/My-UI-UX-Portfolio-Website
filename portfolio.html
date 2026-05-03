@@ -89,10 +89,38 @@
     color: var(--white);
     line-height: 0.88;
     letter-spacing: -2px;
-    margin: 8px 0 4px;
     text-transform: uppercase;
   }
-  .hero-name span { display: block; }
+  .hero-name span {
+    display: block;
+    margin-bottom: 8px;
+  }
+  .hero-name span:last-child {
+    margin-bottom: 0;
+  }
+
+  .hero-wrapper {
+    display: inline-block;
+    position: relative;
+    margin: 18px auto 12px;
+    width: fit-content;
+  }
+  .hero-name {
+    text-align: center;
+  }
+  .hero-badge {
+    position: absolute;
+    left: 96%;
+    top: 80%;
+    transform: translate(-15%, -50%);
+    width: clamp(90px, 11vw, 140px);
+    max-height: 140px;
+    object-fit: contain;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    margin-left: 0;
+  }
 
   .welcome-tag {
     font-family: 'Playfair Display', serif;
@@ -909,9 +937,12 @@
 
   <div class="header-masthead">
     <div class="paper-name">✦ The Design Times ✦</div>
-    <div class="hero-name">
-      <span>Gandlapalli</span>
-      <span>Monesha</span>
+    <div class="hero-wrapper">
+      <div class="hero-name">
+        <span>Gandlapalli</span>
+        <span>Monesha</span>
+      </div>
+      <img src="chennai-badge.png" alt="Chennai badge" class="hero-badge" />
     </div>
     <div class="welcome-tag">✦ Welcome To My Portfolio ✦</div>
   </div>
