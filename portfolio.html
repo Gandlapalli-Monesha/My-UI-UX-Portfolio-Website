@@ -181,6 +181,9 @@
       rgba(255,255,255,0.22) 18px 24px
     );
   }
+  .section-divider.no-reel::after {
+    display: none;
+  }
   .section-divider.gold {
     background: var(--gold);
   }
@@ -204,7 +207,6 @@
     display: grid;
     grid-template-columns: 1fr 1.6fr;
     gap: 0;
-    border-bottom: 3px solid var(--black);
   }
 
   .about-left {
@@ -353,7 +355,15 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 0;
-    border-top: 3px solid var(--black);
+    position: relative;
+    padding-top: 24px;
+    overflow: visible;
+  }
+  .cases-grid::before {
+    display: none;
+  }
+  .cases-grid::after {
+    display: none;
   }
   .case-card {
     border-right: 2px solid var(--black);
@@ -365,6 +375,7 @@
     cursor: default;
   }
   .case-card:nth-child(even) { border-right: none; }
+  .case-card:nth-last-child(-n+2) { border-bottom: none; }
   .case-card:hover { background: var(--cream); }
 
   .case-card .case-number {
@@ -562,8 +573,22 @@
 
   /* ===== CREATIVE SECTION ===== */
   .creative-section {
-    padding: 40px 0;
-    border-top: 3px solid var(--black);
+    padding: 58px 0 40px;
+    position: relative;
+    overflow: visible;
+  }
+  .creative-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50vw;
+    transform: translateX(-50%);
+    width: 100vw;
+    height: 16px;
+    background: var(--black);
+  }
+  .creative-section::after {
+    display: none;
   }
 
   .creative-heading {
@@ -1076,6 +1101,8 @@
     <h2>The Design Desk: Stories Told in Figma &amp; Canva</h2>
   </div>
 
+  <div class="section-divider"></div>
+
   <div class="page-content">
     <div class="cases-grid">
 
@@ -1220,7 +1247,7 @@
   </div><!-- /page-content -->
 </div>
 
-<div class="section-divider"></div>
+<div class="section-divider no-reel"></div>
 
 <!-- CREATIVE WORK -->
 <div id="creative">
@@ -1286,7 +1313,7 @@
   </div>
 </div>
 
-<div class="section-divider"></div>
+<div class="section-divider no-reel"></div>
 
 <!-- FOOTER / CONTACT -->
 <footer class="footer-section" id="contact">
