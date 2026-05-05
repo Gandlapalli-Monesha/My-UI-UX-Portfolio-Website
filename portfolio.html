@@ -160,16 +160,7 @@
     overflow: hidden;
   }
   .section-divider::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      to bottom,
-      rgba(255,255,255,0.08) 0%,
-      rgba(255,255,255,0.02) 20%,
-      rgba(255,255,255,0.02) 80%,
-      rgba(255,255,255,0.08) 100%
-    );
+    display: none;
   }
   .section-divider::after {
     content: '';
@@ -578,14 +569,7 @@
     overflow: visible;
   }
   .creative-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 50vw;
-    transform: translateX(-50%);
-    width: 100vw;
-    height: 16px;
-    background: var(--black);
+    display: none;
   }
   .creative-section::after {
     display: none;
@@ -1246,8 +1230,6 @@
     </div><!-- /cases-grid -->
   </div><!-- /page-content -->
 </div>
-
-<div class="section-divider no-reel"></div>
 
 <!-- CREATIVE WORK -->
 <div id="creative">
