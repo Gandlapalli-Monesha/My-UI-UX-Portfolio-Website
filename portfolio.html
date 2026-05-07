@@ -39,22 +39,25 @@
   }
 
   .header-ticker {
-    background: var(--red);
+    background: #a00000;
     color: var(--white);
     font-family: 'Space Mono', monospace;
     font-size: 11px;
     letter-spacing: 2px;
     padding: 6px 0;
-    white-space: nowrap;
     overflow: hidden;
   }
   .ticker-inner {
-    display: inline-block;
-    animation: ticker 25s linear infinite;
+    display: inline-flex;
+    animation: ticker 12s linear infinite;
+  }
+  .ticker-item {
+    white-space: nowrap;
+    padding-right: 3rem;
   }
   @keyframes ticker {
-    0% { transform: translateX(100vw); }
-    100% { transform: translateX(-100%); }
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
   }
 
   .header-masthead {
@@ -88,7 +91,7 @@
     font-size: clamp(52px, 12vw, 130px);
     color: var(--white);
     line-height: 0.88;
-    letter-spacing: -2px;
+    letter-spacing: 2px;
     text-transform: uppercase;
   }
   .hero-name span {
@@ -802,7 +805,7 @@
   .footer-section {
     background: var(--black);
     color: var(--white);
-    padding: 40px 20px;
+    padding: 0px 20px 40px;
   }
   .footer-inner {
     max-width: 1200px;
@@ -970,9 +973,10 @@
 <!-- HEADER -->
 <header class="site-header">
   <div class="header-ticker">
-    <span class="ticker-inner">
-      ✦ PRODUCT DESIGNER &nbsp;&nbsp; ✦ UI/UX &nbsp;&nbsp; ✦ FIGMA &nbsp;&nbsp; ✦ CANVA &nbsp;&nbsp; ✦ ARTIFICIAL INTELLIGENCE &nbsp;&nbsp; ✦ MACHINE LEARNING &nbsp;&nbsp; ✦ VISUAL DESIGN &nbsp;&nbsp; ✦ BRANDING &nbsp;&nbsp; ✦ WEB DESIGN &nbsp;&nbsp; ✦ ILLUSTRATION &nbsp;&nbsp; ✦ TYPOGRAPHY &nbsp;&nbsp; ✦ PRODUCT DESIGNER &nbsp;&nbsp; ✦ UI/UX &nbsp;&nbsp; ✦ FIGMA &nbsp;&nbsp; ✦ CANVA &nbsp;&nbsp; ✦ ARTIFICIAL INTELLIGENCE &nbsp;&nbsp;
-    </span>
+    <div class="ticker-inner">
+      <span class="ticker-item">✦ UI/UX ✦ WEB DESIGN ✦ BRANDING ✦ PROTOTYPING ✦ WIREFRAMING ✦ VISUAL DESIGN ✦ POSTER DESIGN ✦ PRESENTATION DESIGN ✦ USER RESEARCH ✦ AI IN DESIGN ✦</span>
+      <span class="ticker-item">✦ UI/UX ✦ WEB DESIGN ✦ BRANDING ✦ PROTOTYPING ✦ WIREFRAMING ✦ VISUAL DESIGN ✦ POSTER DESIGN ✦ PRESENTATION DESIGN ✦ USER RESEARCH ✦ AI IN DESIGN ✦</span>
+    </div>
   </div>
 
   <div class="header-masthead">
@@ -990,7 +994,6 @@
   <nav class="header-nav">
     <a href="#about">About Me</a>
     <a href="#work">My Work</a>
-    <a href="#creative">Creative</a>
     <a href="#contact">Get In Touch</a>
   </nav>
 </header>
@@ -1234,7 +1237,7 @@
 <div class="section-divider"></div>
 
 <!-- CREATIVE WORK -->
-<div id="creative">
+<div>
   <div class="section-masthead">
     <div class="sub">— Design &amp; More —</div>
     <h2>Creative Footnotes: Posters, Stories &amp; More</h2>
