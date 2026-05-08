@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&family=Ballet:opsz@16..72&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&family=Ballet:opsz@16..72&family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&display=swap"
     rel="stylesheet">
   <style>
     :root {
@@ -174,19 +174,22 @@
     }
 
     .header-nav a {
-      font-family: 'Space Mono', monospace;
-      font-size: 11px;
+      font-family: 'Courier Prime', monospace;
+      font-weight: 700;
+      font-size: 14px;
       letter-spacing: 2px;
       text-transform: uppercase;
       color: var(--black);
       text-decoration: none;
-      padding: 10px 24px;
-      border-right: 1px solid rgba(0, 0, 0, 0.2);
+      padding: 10px 40px;
+      border-right: 2px solid rgba(0, 0, 0, 0.2);
       transition: background 0.2s, color 0.2s;
+      flex: 1;
+      text-align: center;
     }
 
     .header-nav a:first-child {
-      border-left: 1px solid rgba(0, 0, 0, 0.2);
+      border-left: 2px solid rgba(0, 0, 0, 0.2);
     }
 
     .header-nav a:hover {
