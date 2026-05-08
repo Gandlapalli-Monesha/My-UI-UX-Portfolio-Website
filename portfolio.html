@@ -182,14 +182,14 @@
       color: var(--black);
       text-decoration: none;
       padding: 10px 40px;
-      border-right: 2px solid rgba(0, 0, 0, 0.2);
+      border-right: 2px solid rgba(0, 0, 0, 0.6);
       transition: background 0.2s, color 0.2s;
       flex: 1;
       text-align: center;
     }
 
     .header-nav a:first-child {
-      border-left: 2px solid rgba(0, 0, 0, 0.2);
+      border-left: 2px solid rgba(0, 0, 0, 0.6);
     }
 
     .header-nav a:hover {
@@ -1198,6 +1198,52 @@
       opacity: 1;
       transform: translateY(0);
     }
+
+    /* ===== CUSTOM ANIMATIONS ===== */
+    @keyframes typing {
+      from {
+        max-width: 0;
+      }
+      to {
+        max-width: 100%;
+      }
+    }
+
+    @keyframes fadeInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .typing-animation {
+      overflow: hidden;
+      white-space: nowrap;
+      animation: typing 1.5s steps(15, end) forwards;
+      display: block;
+      text-align: center;
+      max-width: 0;
+      margin: 0 auto;
+    }
+
+    .typing-animation-delayed {
+      overflow: hidden;
+      white-space: nowrap;
+      animation: typing 1.5s steps(15, end) 1.5s forwards;
+      display: block;
+      text-align: center;
+      max-width: 0;
+      margin: 0 auto;
+    }
+
+    .fade-in-left {
+      opacity: 0;
+      animation: fadeInLeft 2s ease-out 1s forwards;
+    }
   </style>
 </head>
 
@@ -1218,12 +1264,12 @@
       <div class="paper-name">✦ The Design Times ✦</div>
       <div class="hero-wrapper">
         <div class="hero-name">
-          <span>Gandlapalli</span>
-          <span>Monesha</span>
+          <span class="typing-animation" style="display: block; text-align: center;">Gandlapalli</span>
+          <span class="typing-animation-delayed" style="display: block; text-align: center;">Monesha</span>
         </div>
         <img src="chennai-badge.png" alt="Chennai badge" class="hero-badge" />
       </div>
-      <div class="welcome-tag">Welcome To My Portfolio</div>
+      <div class="welcome-tag fade-in-left">Welcome To My Portfolio</div>
     </div>
 
     <nav class="header-nav">
@@ -1242,22 +1288,22 @@
       <span class="skill-item accent">Canva</span><span class="skill-sep">✦</span>
       <span class="skill-item">UI Design</span><span class="skill-sep">✦</span>
       <span class="skill-item accent">UX Research</span><span class="skill-sep">✦</span>
-      <span class="skill-item">Graphic Design</span><span class="skill-sep">✦</span>
-      <span class="skill-item accent">AI & ML</span><span class="skill-sep">✦</span>
+      <span class="skill-item">Prototyping</span><span class="skill-sep">✦</span>
+      <span class="skill-item accent">AI in Design & Developement</span><span class="skill-sep">✦</span>
       <span class="skill-item">Branding</span><span class="skill-sep">✦</span>
       <span class="skill-item accent">Web Design</span><span class="skill-sep">✦</span>
-      <span class="skill-item">Illustration</span><span class="skill-sep">✦</span>
+      <span class="skill-item">Posters & Presentations</span><span class="skill-sep">✦</span>
       <span class="skill-item accent">Typography</span><span class="skill-sep">✦</span>
       <!-- Duplicate for seamless loop -->
       <span class="skill-item">Figma</span><span class="skill-sep">✦</span>
       <span class="skill-item accent">Canva</span><span class="skill-sep">✦</span>
       <span class="skill-item">UI Design</span><span class="skill-sep">✦</span>
       <span class="skill-item accent">UX Research</span><span class="skill-sep">✦</span>
-      <span class="skill-item">Graphic Design</span><span class="skill-sep">✦</span>
-      <span class="skill-item accent">AI & ML</span><span class="skill-sep">✦</span>
+      <span class="skill-item">Prototyping</span><span class="skill-sep">✦</span>
+      <span class="skill-item accent">AI in Design & Developement</span><span class="skill-sep">✦</span>
       <span class="skill-item">Branding</span><span class="skill-sep">✦</span>
       <span class="skill-item accent">Web Design</span><span class="skill-sep">✦</span>
-      <span class="skill-item">Illustration</span><span class="skill-sep">✦</span>
+      <span class="skill-item">Posters & Presentations</span><span class="skill-sep">✦</span>
       <span class="skill-item accent">Typography</span><span class="skill-sep">✦</span>
     </div>
   </div>
