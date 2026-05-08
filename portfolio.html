@@ -1,1388 +1,1679 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Gandlapalli Monesha — Portfolio</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
-<style>
-  :root {
-    --black: #0d0d0d;
-    --white: #faf8f3;
-    --cream: #f5f0e8;
-    --red: #e63329;
-    --gold: #c9a84c;
-    --pink: #f7ccc8;
-    --dark-gray: #1a1a1a;
-    --mid-gray: #4a4a4a;
-    --light-gray: #e8e4dc;
-    --accent-green: #2d5a27;
-  }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gandlapalli Monesha — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&family=Ballet:opsz@16..72&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --black: #0d0d0d;
+      --white: #faf8f3;
+      --cream: #f5f0e8;
+      --red: #e63329;
+      --gold: #c9a84c;
+      --pink: #f7ccc8;
+      --dark-gray: #1a1a1a;
+      --mid-gray: #4a4a4a;
+      --light-gray: #e8e4dc;
+      --accent-green: #2d5a27;
+    }
 
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-  html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+    }
 
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--white);
-    color: var(--black);
-    overflow-x: hidden;
-  }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--white);
+      color: var(--black);
+      overflow-x: hidden;
+    }
 
-  /* ===== HEADER ===== */
-  .site-header {
-    background: var(--black);
-    padding: 10px 0 0;
-    position: relative;
-    overflow: hidden;
-  }
+    /* ===== HEADER ===== */
+    .site-header {
+      background: var(--black);
+      padding: 10px 0 0;
+      position: relative;
+      overflow: hidden;
+    }
 
-  .header-ticker {
-    background: #a00000;
-    color: var(--white);
-    font-family: 'Space Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 2px;
-    padding: 6px 0;
-    overflow: hidden;
-  }
-  .ticker-inner {
-    display: inline-flex;
-    animation: ticker 12s linear infinite;
-  }
-  .ticker-item {
-    white-space: nowrap;
-    padding-right: 3rem;
-  }
-  @keyframes ticker {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-  }
+    .header-ticker {
+      background: #a00000;
+      color: var(--white);
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 2px;
+      padding: 6px 0;
+      overflow: hidden;
+    }
 
-  .header-masthead {
-    text-align: center;
-    padding: 18px 20px 0;
-    position: relative;
-  }
-  .header-masthead .paper-name {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(13px, 2vw, 18px);
-    color: var(--gold);
-    letter-spacing: 6px;
-    text-transform: uppercase;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 16px;
-  }
-  .header-masthead .paper-name::before,
-  .header-masthead .paper-name::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--gold);
-    max-width: 120px;
-  }
+    .ticker-inner {
+      display: inline-flex;
+      animation: ticker 12s linear infinite;
+    }
 
-  .hero-name {
-    font-family: 'Playfair Display', serif;
-    font-weight: 900;
-    font-size: clamp(52px, 12vw, 130px);
-    color: var(--white);
-    line-height: 0.88;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-  }
-  .hero-name span {
-    display: block;
-    margin-bottom: 8px;
-  }
-  .hero-name span:last-child {
-    margin-bottom: 0;
-  }
+    .ticker-item {
+      white-space: nowrap;
+      padding-right: 3rem;
+    }
 
-  .hero-wrapper {
-    display: inline-block;
-    position: relative;
-    margin: 18px auto 12px;
-    width: fit-content;
-  }
-  .hero-name {
-    text-align: center;
-  }
-  .hero-badge {
-    position: absolute;
-    left: 96%;
-    top: 80%;
-    transform: translate(-15%, -50%);
-    width: clamp(90px, 11vw, 140px);
-    max-height: 140px;
-    object-fit: contain;
-    border: none;
-    border-radius: 0;
-    background: transparent;
-    margin-left: 0;
-  }
+    @keyframes ticker {
+      0% {
+        transform: translateX(0);
+      }
 
-  .welcome-tag {
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-size: clamp(16px, 3vw, 26px);
-    color: var(--gold);
-    letter-spacing: 1px;
-    padding-bottom: 16px;
-  }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
 
-  .header-nav {
-    background: var(--gold);
-    display: flex;
-    justify-content: center;
-    gap: 0;
-    margin-top: 10px;
-  }
-  .header-nav a {
-    font-family: 'Space Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--black);
-    text-decoration: none;
-    padding: 10px 24px;
-    border-right: 1px solid rgba(0,0,0,0.2);
-    transition: background 0.2s, color 0.2s;
-  }
-  .header-nav a:first-child { border-left: 1px solid rgba(0,0,0,0.2); }
-  .header-nav a:hover { background: var(--black); color: var(--gold); }
+    .header-masthead {
+      text-align: center;
+      padding: 18px 20px 0;
+      position: relative;
+    }
 
-  /* ===== DIVIDER ===== */
-  .section-divider {
-    position: relative;
-    height: 18px;
-    background: var(--black);
-    overflow: hidden;
-  }
-  .section-divider::before {
-    display: none;
-  }
-  .section-divider::after {
-    content: '';
-    position: absolute;
-    inset: 3px 0 3px;
-    background: repeating-linear-gradient(
-      90deg,
-      transparent 0 18px,
-      rgba(255,255,255,0.22) 18px 24px
-    );
-  }
-  .section-divider.no-reel::after {
-    display: none;
-  }
-  .section-divider.gold {
-    background: var(--gold);
-  }
-  .section-divider.gold::after {
-    background: repeating-linear-gradient(
-      90deg,
-      transparent 0 18px,
-      rgba(255,255,255,0.24) 18px 24px
-    );
-  }
+    .header-masthead .paper-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(13px, 2vw, 18px);
+      color: var(--gold);
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 17px;
+    }
 
-  /* ===== MAIN GRID ===== */
-  .page-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-  }
+    .header-masthead .paper-name::before,
+    .header-masthead .paper-name::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--gold);
+      max-width: 120px;
+    }
 
-  /* ===== ABOUT + SPOTLIGHT ===== */
-  .about-section {
-    display: grid;
-    grid-template-columns: 1fr 1.6fr;
-    gap: 0;
-  }
+    .hero-name {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: clamp(52px, 12vw, 130px);
+      color: var(--white);
+      line-height: 0.88;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
 
-  .about-left {
-    padding: 32px 28px 32px 0;
-    border-right: 2px solid var(--black);
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
+    .hero-name span {
+      display: block;
+      margin-bottom: 12px;
+    }
 
-  .column-label {
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--mid-gray);
-    border-bottom: 1px solid var(--black);
-    padding-bottom: 6px;
-    margin-bottom: 4px;
-  }
+    .hero-name span:last-child {
+      margin-bottom: 0;
+    }
 
-  .about-photo-placeholder {
-    width: 100%;
-    aspect-ratio: 3/4;
-    background: var(--black);
-    position: relative;
-    overflow: hidden;
-    max-height: 260px;
-  }
-  .about-photo-placeholder::after {
-    content: 'GM';
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Playfair Display', serif;
-    font-size: 72px;
-    font-weight: 900;
-    color: var(--gold);
-    opacity: 0.3;
-  }
+    .hero-wrapper {
+      display: inline-block;
+      position: relative;
+      margin: 18px auto 12px;
+      width: fit-content;
+    }
 
-  .about-info p {
-    font-size: 13px;
-    color: var(--mid-gray);
-    line-height: 1.6;
-    margin-bottom: 8px;
-  }
-  .about-info strong { color: var(--black); }
+    .hero-name {
+      text-align: center;
+    }
 
-  .about-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-top: 4px;
-  }
-  .tag {
-    background: var(--black);
-    color: var(--white);
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 1px;
-    padding: 4px 10px;
-    text-transform: uppercase;
-  }
-  .tag.outline {
-    background: transparent;
-    border: 1.5px solid var(--black);
-    color: var(--black);
-  }
-  .tag.red { background: var(--red); }
+    .hero-badge {
+      position: absolute;
+      left: 96%;
+      top: 105%;
+      transform: translate(-15%, -50%);
+      width: clamp(90px, 11vw, 140px);
+      max-height: 140px;
+      object-fit: contain;
+      border: none;
+      border-radius: 0;
+      background: transparent;
+      margin-left: 0;
+    }
 
-  /* spotlight */
-  .spotlight-section {
-    padding: 32px 0 32px 36px;
-  }
-  .spotlight-section h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(20px, 3vw, 30px);
-    font-weight: 900;
-    line-height: 1.1;
-    margin-bottom: 6px;
-  }
-  .spotlight-section h2 em {
-    font-style: italic;
-    color: #a00000;
-  }
-  .spotlight-section .subhead {
-    font-family: 'Space Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 16px;
-  }
-  .spotlight-section p {
-    font-size: 13.5px;
-    line-height: 1.75;
-    color: var(--mid-gray);
-    margin-bottom: 12px;
-  }
-  .spotlight-section p strong { color: var(--black); }
+    .welcome-tag {
+      font-family: "Ballet", cursive;
+      font-optical-sizing: auto;
+      font-weight: 400;
+      font-style: normal;
+      font-size: clamp(32px, 5vw, 48px);
+      color: var(--gold);
+      letter-spacing: 3px;
+      word-spacing: 8px;
+      padding: 32px 16px 16px 16px;
+    }
 
-  .pull-quote {
-    border-left: 4px solid var(--red);
-    padding: 10px 16px;
-    margin: 20px 0;
-    background: var(--cream);
-  }
-  .pull-quote p {
-    font-family: 'Playfair Display', serif;
-    font-size: 16px;
-    font-style: italic;
-    color: var(--black) !important;
-    line-height: 1.5;
-    margin: 0 !important;
-  }
+    .header-nav {
+      background: var(--gold);
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      margin-top: 10px;
+    }
 
-  /* ===== SECTION HEADER ===== */
-  .section-masthead {
-    background: var(--black);
-    color: var(--white);
-    text-align: center;
-    padding: 16px 20px;
-    position: relative;
-    overflow: hidden;
-  }
-  .section-masthead h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(22px, 4vw, 40px);
-    font-weight: 900;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-  }
-  .section-masthead .sub {
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 4px;
-    color: var(--gold);
-    text-transform: uppercase;
-  }
+    .header-nav a {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--black);
+      text-decoration: none;
+      padding: 10px 24px;
+      border-right: 1px solid rgba(0, 0, 0, 0.2);
+      transition: background 0.2s, color 0.2s;
+    }
 
-  /* ===== CASE STUDIES GRID ===== */
-  .cases-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0;
-    position: relative;
-    padding-top: 24px;
-    overflow: visible;
-  }
-  .cases-grid::before {
-    display: none;
-  }
-  .cases-grid::after {
-    display: none;
-  }
-  .case-card {
-    border-right: 2px solid var(--black);
-    border-bottom: 2px solid var(--black);
-    padding: 28px 24px;
-    position: relative;
-    overflow: hidden;
-    transition: background 0.25s;
-    cursor: default;
-  }
-  .case-card:nth-child(even) { border-right: none; }
-  .case-card:nth-last-child(-n+2) { border-bottom: none; }
-  .case-card:hover { background: var(--cream); }
+    .header-nav a:first-child {
+      border-left: 1px solid rgba(0, 0, 0, 0.2);
+    }
 
-  .case-card .case-number {
-    font-family: 'Playfair Display', serif;
-    font-size: 72px;
-    font-weight: 900;
-    color: var(--light-gray);
-    position: absolute;
-    top: -10px;
-    right: 16px;
-    line-height: 1;
-    user-select: none;
-  }
+    .header-nav a:hover {
+      background: var(--black);
+      color: var(--gold);
+    }
 
-  .case-card .category {
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: #a00000;
-    margin-bottom: 6px;
-  }
-  .case-card h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(16px, 2.2vw, 22px);
-    font-weight: 700;
-    line-height: 1.2;
-    margin-bottom: 10px;
-  }
-  .case-card .card-preview {
-    width: 100%;
-    height: 160px;
-    background: var(--dark-gray);
-    margin-bottom: 14px;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .case-card p {
-    font-size: 12.5px;
-    color: var(--mid-gray);
-    line-height: 1.65;
-  }
+    /* ===== DIVIDER ===== */
+    .section-divider {
+      position: relative;
+      height: 18px;
+      background: var(--black);
+      overflow: hidden;
+    }
 
-  /* Mock UI inside cards */
-  .mock-ui {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    color: var(--gold);
-    letter-spacing: 2px;
-    flex-direction: column;
-    gap: 8px;
-    padding: 12px;
-  }
-  .mock-bar {
-    width: 80%;
-    height: 6px;
-    background: rgba(201,168,76,0.3);
-    border-radius: 2px;
-    position: relative;
-    overflow: hidden;
-  }
-  .mock-bar::after {
-    content: '';
-    position: absolute;
-    left: 0; top: 0; bottom: 0;
-    width: 60%;
-    background: var(--gold);
-  }
-  .mock-bars { width: 85%; }
-  .mock-bars .mock-bar { margin-bottom: 5px; }
-  .mock-bars .mock-bar:nth-child(2)::after { width: 80%; }
-  .mock-bars .mock-bar:nth-child(3)::after { width: 45%; }
+    .section-divider::before {
+      display: none;
+    }
 
-  .mock-card-ui {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(201,168,76,0.3);
-    padding: 8px;
-    width: 80%;
-  }
-  .mock-card-ui .mh {
-    width: 60%;
-    height: 5px;
-    background: var(--gold);
-    margin-bottom: 5px;
-  }
-  .mock-card-ui .mp {
-    width: 90%;
-    height: 3px;
-    background: rgba(201,168,76,0.3);
-    margin-bottom: 3px;
-  }
+    .section-divider::after {
+      content: '';
+      position: absolute;
+      inset: 3px 0 3px;
+      background: repeating-linear-gradient(90deg,
+          transparent 0 18px,
+          rgba(255, 255, 255, 0.22) 18px 24px);
+    }
 
-  .card-ui-msrm {
-    background: #1a2a4a;
-    color: #7eb3ff;
-    width: 90%;
-    padding: 10px;
-    font-size: 8px;
-    border-top: 2px solid #3366cc;
-  }
-  .card-ui-msrm .nav-dots { display: flex; gap: 4px; margin-bottom: 6px; }
-  .card-ui-msrm .nav-dots span {
-    width: 20px; height: 3px; background: #3366cc;
-  }
-  .card-ui-msrm .nav-dots span:first-child { background: #7eb3ff; }
+    .section-divider.no-reel::after {
+      display: none;
+    }
 
-  .card-ui-cherry {
-    background: #fff5f0;
-    color: #a00000;
-    width: 90%;
-    padding: 10px;
-    font-size: 8px;
-    border-bottom: 2px solid #e63329;
-  }
-  .card-ui-cherry .event-row {
-    display: flex; align-items: center; gap: 6px; margin-bottom: 4px;
-  }
-  .card-ui-cherry .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--red); }
+    .section-divider.gold {
+      background: var(--gold);
+    }
 
-  .card-ui-prada {
-    background: #f5f5f0;
-    color: #1a1a1a;
-    width: 90%;
-    padding: 10px;
-    font-size: 8px;
-    border: 1px solid #ccc;
-  }
-  .card-ui-prada .logo-line {
-    font-family: 'Playfair Display', serif;
-    font-size: 14px;
-    font-weight: 900;
-    letter-spacing: 4px;
-    margin-bottom: 6px;
-  }
+    .section-divider.gold::after {
+      background: repeating-linear-gradient(90deg,
+          transparent 0 18px,
+          rgba(255, 255, 255, 0.24) 18px 24px);
+    }
 
-  .card-ui-suzanne {
-    background: #0d0d0d;
-    color: #fff;
-    width: 90%;
-    padding: 10px;
-    font-size: 8px;
-    border: 1px solid #333;
-  }
-  .card-ui-suzanne .book-cover {
-    width: 40px; height: 55px;
-    background: #c9a84c;
-    margin-bottom: 6px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 6px; color: #000; text-align: center; padding: 3px;
-    font-weight: 700; letter-spacing: 1px;
-  }
+    /* ===== MAIN GRID ===== */
+    .page-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
 
-  .card-ui-codenex {
-    background: #0a0f1e;
-    color: #4af0b0;
-    width: 90%;
-    padding: 10px;
-    font-size: 8px;
-    border-left: 3px solid #4af0b0;
-  }
-  .stat-row { display: flex; gap: 8px; flex-wrap: wrap; }
-  .stat-pill {
-    background: rgba(74,240,176,0.15);
-    border: 1px solid #4af0b0;
-    padding: 3px 8px;
-    border-radius: 20px;
-    font-size: 8px;
-    color: #4af0b0;
-    font-family: 'Space Mono', monospace;
-  }
+    /* ===== ABOUT + SPOTLIGHT ===== */
+    .about-section {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 0;
+    }
 
-  .card-ui-nocturne {
-    background: #1a0a2e;
-    color: #c9a0dc;
-    width: 90%;
-    padding: 10px;
-    font-size: 8px;
-    border-radius: 4px;
-  }
-  .journal-lines { margin-top: 4px; }
-  .journal-line {
-    height: 2px;
-    background: rgba(201,160,220,0.25);
-    margin-bottom: 4px;
-  }
-  .journal-line.filled { background: rgba(201,160,220,0.6); width: 70%; }
+    .about-left {
+      padding: 32px 28px 32px 0;
+      border-right: 2px solid var(--black);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
 
-  /* ===== CREATIVE SECTION ===== */
-  .creative-section {
-    padding: 58px 0 40px;
-    position: relative;
-    overflow: visible;
-  }
-  .creative-section::before {
-    display: none;
-  }
-  .creative-section::after {
-    display: none;
-  }
+    .column-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--mid-gray);
+      border-bottom: 1px solid var(--black);
+      padding-bottom: 6px;
+      margin-bottom: 4px;
+    }
 
-  .creative-heading {
-    display: flex;
-    align-items: baseline;
-    gap: 16px;
-    margin-bottom: 24px;
-  }
-  .creative-heading h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(24px, 4vw, 42px);
-    font-weight: 900;
-  }
-  .creative-heading .footnote {
-    font-family: 'Space Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 2px;
-    color: var(--mid-gray);
-    text-transform: uppercase;
-  }
+    .about-photo-placeholder {
+      width: 100%;
+      aspect-ratio: 3/4;
+      background: var(--black);
+      position: relative;
+      overflow: hidden;
+      max-height: 260px;
+    }
 
-  .posters-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-  }
+    .about-photo-placeholder::after {
+      content: 'GM';
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 72px;
+      font-weight: 900;
+      color: var(--gold);
+      opacity: 0.3;
+    }
 
-  .poster-card {
-    aspect-ratio: 3/4;
-    position: relative;
-    overflow: hidden;
-    border: 2px solid var(--black);
-    cursor: pointer;
-  }
+    .about-info p {
+      font-size: 13px;
+      color: var(--mid-gray);
+      line-height: 1.6;
+      margin-bottom: 8px;
+    }
 
-  /* Halloween poster */
-  .poster-halloween {
-    background: #0a0a0a;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 8px;
-    padding: 12px;
-  }
-  .poster-halloween .ph-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 16px;
-    font-weight: 900;
-    color: #ff6600;
-    text-align: center;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    line-height: 1.2;
-  }
-  .jack-o-lantern {
-    width: 50px;
-    height: 50px;
-    background: #ff6600;
-    border-radius: 45% 45% 40% 40%;
-    position: relative;
-  }
-  .jack-o-lantern::before {
-    content: '';
-    position: absolute;
-    bottom: -6px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 20px;
-    height: 6px;
-    background: #4a2000;
-    border-radius: 0 0 4px 4px;
-  }
-  .poster-halloween .tagline {
-    font-family: 'Space Mono', monospace;
-    font-size: 7px;
-    letter-spacing: 2px;
-    color: #ff6600;
-    text-transform: uppercase;
-  }
+    .about-info strong {
+      color: var(--black);
+    }
 
-  /* Diwali poster */
-  .poster-diwali {
-    background: linear-gradient(135deg, #1a0a00 0%, #3d1a00 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 8px;
-    padding: 12px;
-  }
-  .diya {
-    width: 40px;
-    height: 20px;
-    background: #c9a84c;
-    border-radius: 50% 50% 0 0;
-    position: relative;
-  }
-  .diya::after {
-    content: '';
-    position: absolute;
-    top: -14px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 4px;
-    height: 14px;
-    background: linear-gradient(to top, #ff6600, #ffff00, transparent);
-    border-radius: 2px;
-  }
-  .poster-diwali .pd-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 18px;
-    font-weight: 900;
-    color: #c9a84c;
-    letter-spacing: 3px;
-    text-align: center;
-    text-transform: uppercase;
-  }
-  .poster-diwali .pd-sub {
-    font-size: 9px;
-    color: rgba(201,168,76,0.7);
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    font-family: 'Space Mono', monospace;
-  }
-  .rangoli {
-    display: grid;
-    grid-template-columns: repeat(5, 6px);
-    gap: 3px;
-    margin: 4px 0;
-  }
-  .rangoli span {
-    width: 6px;
-    height: 6px;
-    background: var(--red);
-    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-  }
-  .rangoli span:nth-child(3),
-  .rangoli span:nth-child(8),
-  .rangoli span:nth-child(13) { background: #c9a84c; }
+    .about-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 4px;
+    }
 
-  /* Old Roads poster */
-  .poster-oldroads {
-    background: var(--cream);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 6px;
-    padding: 12px;
-    border: none;
-    outline: 2px solid var(--black);
-  }
-  .poster-oldroads .or-num {
-    font-family: 'Playfair Display', serif;
-    font-size: 54px;
-    font-weight: 900;
-    color: var(--black);
-    line-height: 1;
-    opacity: 0.08;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-  }
-  .poster-oldroads .or-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 15px;
-    font-weight: 900;
-    color: var(--black);
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    text-align: center;
-    line-height: 1.2;
-    z-index: 1;
-  }
-  .old-roads-road {
-    width: 70%;
-    height: 2px;
-    background: var(--black);
-    margin: 4px 0;
-    position: relative;
-  }
-  .old-roads-road::before, .old-roads-road::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 6px;
-    height: 6px;
-    background: var(--red);
-    border-radius: 50%;
-  }
-  .old-roads-road::before { left: -3px; }
-  .old-roads-road::after { right: -3px; }
+    .tag {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 1px;
+      padding: 4px 10px;
+      text-transform: uppercase;
+    }
 
-  /* Wishes poster */
-  .poster-wishes {
-    background: linear-gradient(160deg, #fff9f0 0%, #ffe8d6 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 6px;
-    padding: 12px;
-  }
-  .poster-wishes .pw-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 13px;
-    font-style: italic;
-    color: var(--mid-gray);
-    text-align: center;
-  }
-  .wish-star {
-    font-size: 24px;
-    color: var(--gold);
-  }
-  .poster-wishes .pw-sub {
-    font-family: 'Space Mono', monospace;
-    font-size: 8px;
-    letter-spacing: 2px;
-    color: var(--mid-gray);
-    text-transform: uppercase;
-    text-align: center;
-  }
+    .tag.outline {
+      background: transparent;
+      border: 1.5px solid var(--black);
+      color: var(--black);
+    }
 
-  /* ===== FOOTER / CONTACT ===== */
-  .footer-section {
-    background: var(--black);
-    color: var(--white);
-    padding: 0px 20px 40px;
-  }
-  .footer-inner {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  .footer-masthead {
-    text-align: center;
-    border-bottom: 1px solid rgba(255,255,255,0.15);
-    padding-bottom: 24px;
-    margin-bottom: 32px;
-  }
-  .footer-masthead h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(18px, 3vw, 28px);
-    font-weight: 700;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-  }
-  .footer-masthead .sub {
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 4px;
-    color: var(--gold);
-    text-transform: uppercase;
-  }
+    .tag.red {
+      background: var(--red);
+    }
 
-  .contact-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-    margin-bottom: 32px;
-  }
-  .contact-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-  }
-  .contact-icon {
-    width: 36px;
-    height: 36px;
-    background: var(--gold);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    font-size: 14px;
-    color: var(--black);
-  }
-  .contact-item .info {
-    font-size: 12px;
-    line-height: 1.6;
-  }
-  .contact-item .info .label {
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 2px;
-  }
-  .contact-item .info a {
-    color: var(--white);
-    text-decoration: none;
-    font-size: 12px;
-  }
-  .contact-item .info a:hover { color: var(--gold); }
+    /* spotlight */
+    .spotlight-section {
+      padding: 32px 0 32px 36px;
+    }
 
-  .footer-bottom {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-top: 1px solid rgba(255,255,255,0.1);
-    padding-top: 20px;
-    flex-wrap: wrap;
-    gap: 12px;
-  }
-  .footer-bottom .copy {
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    color: rgba(255,255,255,0.4);
-    letter-spacing: 1px;
-  }
-  .footer-social {
-    display: flex;
-    gap: 8px;
-  }
-  .footer-social a {
-    width: 30px;
-    height: 30px;
-    border: 1px solid rgba(255,255,255,0.2);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--white);
-    text-decoration: none;
-    font-size: 11px;
-    transition: border-color 0.2s, background 0.2s;
-    font-family: 'Space Mono', monospace;
-  }
-  .footer-social a:hover { border-color: var(--gold); background: rgba(201,168,76,0.15); color: var(--gold); }
+    .spotlight-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(20px, 3vw, 30px);
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 6px;
+    }
 
-  /* ===== SKILLS ROW ===== */
-  .skills-bar {
-    background: var(--cream);
-    border-top: 2px solid var(--black);
-    border-bottom: 2px solid var(--black);
-    padding: 20px 0;
-    overflow: hidden;
-  }
-  .skills-scroll {
-    display: flex;
-    gap: 0;
-    animation: skills-slide 30s linear infinite;
-    width: max-content;
-  }
-  @keyframes skills-slide {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-  }
-  .skill-item {
-    font-family: 'Playfair Display', serif;
-    font-size: 22px;
-    font-weight: 700;
-    font-style: italic;
-    padding: 0 28px;
-    white-space: nowrap;
-    color: var(--black);
-  }
-  .skill-item.accent { color: #a00000; }
-  .skill-sep {
-    font-size: 22px;
-    color: var(--gold);
-    padding: 0 4px;
-    font-family: 'Space Mono', monospace;
-  }
+    .spotlight-section h2 em {
+      font-style: italic;
+      color: #a00000;
+    }
 
-  /* ===== RESPONSIVE ===== */
-  @media (max-width: 768px) {
-    .about-section { grid-template-columns: 1fr; }
-    .about-left { border-right: none; border-bottom: 2px solid var(--black); padding-right: 0; }
-    .spotlight-section { padding: 28px 0; }
-    .cases-grid { grid-template-columns: 1fr; }
-    .case-card { border-right: none; }
-    .posters-grid { grid-template-columns: repeat(2, 1fr); }
-    .contact-grid { grid-template-columns: 1fr; }
-    .header-nav { flex-wrap: wrap; }
-    .header-nav a { padding: 8px 14px; font-size: 10px; }
-  }
+    .spotlight-section .subhead {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
 
-  /* ===== ENTRY ANIMATIONS ===== */
-  .fade-up {
-    opacity: 0;
-    transform: translateY(28px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-  }
-  .fade-up.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-</style>
+    .spotlight-section p {
+      font-size: 13.5px;
+      line-height: 1.75;
+      color: var(--mid-gray);
+      margin-bottom: 12px;
+    }
+
+    .spotlight-section p strong {
+      color: var(--black);
+    }
+
+    .pull-quote {
+      border-left: 4px solid var(--red);
+      padding: 10px 16px;
+      margin: 20px 0;
+      background: var(--cream);
+    }
+
+    .pull-quote p {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px;
+      font-style: italic;
+      color: var(--black) !important;
+      line-height: 1.5;
+      margin: 0 !important;
+    }
+
+    /* ===== SECTION HEADER ===== */
+    .section-masthead {
+      background: var(--black);
+      color: var(--white);
+      text-align: center;
+      padding: 16px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .section-masthead h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(22px, 4vw, 40px);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .section-masthead .sub {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 4px;
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+
+    /* ===== CASE STUDIES GRID ===== */
+    .cases-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0;
+      position: relative;
+      padding-top: 24px;
+      overflow: visible;
+    }
+
+    .cases-grid::before {
+      display: none;
+    }
+
+    .cases-grid::after {
+      display: none;
+    }
+
+    .case-card {
+      border-right: 2px solid var(--black);
+      border-bottom: 2px solid var(--black);
+      padding: 28px 24px;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.25s;
+      cursor: default;
+    }
+
+    .case-card:nth-child(even) {
+      border-right: none;
+    }
+
+    .case-card:nth-last-child(-n+2) {
+      border-bottom: none;
+    }
+
+    .case-card:hover {
+      background: var(--cream);
+    }
+
+    .case-card .case-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 72px;
+      font-weight: 900;
+      color: var(--light-gray);
+      position: absolute;
+      top: -10px;
+      right: 16px;
+      line-height: 1;
+      user-select: none;
+    }
+
+    .case-card .category {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #a00000;
+      margin-bottom: 6px;
+    }
+
+    .case-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(16px, 2.2vw, 22px);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 10px;
+    }
+
+    .case-card .card-preview {
+      width: 100%;
+      height: 160px;
+      background: var(--dark-gray);
+      margin-bottom: 14px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .case-card p {
+      font-size: 12.5px;
+      color: var(--mid-gray);
+      line-height: 1.65;
+    }
+
+    /* Mock UI inside cards */
+    .mock-ui {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      color: var(--gold);
+      letter-spacing: 2px;
+      flex-direction: column;
+      gap: 8px;
+      padding: 12px;
+    }
+
+    .mock-bar {
+      width: 80%;
+      height: 6px;
+      background: rgba(201, 168, 76, 0.3);
+      border-radius: 2px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .mock-bar::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 60%;
+      background: var(--gold);
+    }
+
+    .mock-bars {
+      width: 85%;
+    }
+
+    .mock-bars .mock-bar {
+      margin-bottom: 5px;
+    }
+
+    .mock-bars .mock-bar:nth-child(2)::after {
+      width: 80%;
+    }
+
+    .mock-bars .mock-bar:nth-child(3)::after {
+      width: 45%;
+    }
+
+    .mock-card-ui {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(201, 168, 76, 0.3);
+      padding: 8px;
+      width: 80%;
+    }
+
+    .mock-card-ui .mh {
+      width: 60%;
+      height: 5px;
+      background: var(--gold);
+      margin-bottom: 5px;
+    }
+
+    .mock-card-ui .mp {
+      width: 90%;
+      height: 3px;
+      background: rgba(201, 168, 76, 0.3);
+      margin-bottom: 3px;
+    }
+
+    .card-ui-msrm {
+      background: #1a2a4a;
+      color: #7eb3ff;
+      width: 90%;
+      padding: 10px;
+      font-size: 8px;
+      border-top: 2px solid #3366cc;
+    }
+
+    .card-ui-msrm .nav-dots {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 6px;
+    }
+
+    .card-ui-msrm .nav-dots span {
+      width: 20px;
+      height: 3px;
+      background: #3366cc;
+    }
+
+    .card-ui-msrm .nav-dots span:first-child {
+      background: #7eb3ff;
+    }
+
+    .card-ui-cherry {
+      background: #fff5f0;
+      color: #a00000;
+      width: 90%;
+      padding: 10px;
+      font-size: 8px;
+      border-bottom: 2px solid #e63329;
+    }
+
+    .card-ui-cherry .event-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 4px;
+    }
+
+    .card-ui-cherry .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--red);
+    }
+
+    .card-ui-prada {
+      background: #f5f5f0;
+      color: #1a1a1a;
+      width: 90%;
+      padding: 10px;
+      font-size: 8px;
+      border: 1px solid #ccc;
+    }
+
+    .card-ui-prada .logo-line {
+      font-family: 'Playfair Display', serif;
+      font-size: 14px;
+      font-weight: 900;
+      letter-spacing: 4px;
+      margin-bottom: 6px;
+    }
+
+    .card-ui-suzanne {
+      background: #0d0d0d;
+      color: #fff;
+      width: 90%;
+      padding: 10px;
+      font-size: 8px;
+      border: 1px solid #333;
+    }
+
+    .card-ui-suzanne .book-cover {
+      width: 40px;
+      height: 55px;
+      background: #c9a84c;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 6px;
+      color: #000;
+      text-align: center;
+      padding: 3px;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .card-ui-codenex {
+      background: #0a0f1e;
+      color: #4af0b0;
+      width: 90%;
+      padding: 10px;
+      font-size: 8px;
+      border-left: 3px solid #4af0b0;
+    }
+
+    .stat-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .stat-pill {
+      background: rgba(74, 240, 176, 0.15);
+      border: 1px solid #4af0b0;
+      padding: 3px 8px;
+      border-radius: 20px;
+      font-size: 8px;
+      color: #4af0b0;
+      font-family: 'Space Mono', monospace;
+    }
+
+    .card-ui-nocturne {
+      background: #1a0a2e;
+      color: #c9a0dc;
+      width: 90%;
+      padding: 10px;
+      font-size: 8px;
+      border-radius: 4px;
+    }
+
+    .journal-lines {
+      margin-top: 4px;
+    }
+
+    .journal-line {
+      height: 2px;
+      background: rgba(201, 160, 220, 0.25);
+      margin-bottom: 4px;
+    }
+
+    .journal-line.filled {
+      background: rgba(201, 160, 220, 0.6);
+      width: 70%;
+    }
+
+    /* ===== CREATIVE SECTION ===== */
+    .creative-section {
+      padding: 58px 0 40px;
+      position: relative;
+      overflow: visible;
+    }
+
+    .creative-section::before {
+      display: none;
+    }
+
+    .creative-section::after {
+      display: none;
+    }
+
+    .creative-heading {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .creative-heading h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(24px, 4vw, 42px);
+      font-weight: 900;
+    }
+
+    .creative-heading .footnote {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 2px;
+      color: var(--mid-gray);
+      text-transform: uppercase;
+    }
+
+    .posters-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .poster-card {
+      aspect-ratio: 3/4;
+      position: relative;
+      overflow: hidden;
+      border: 2px solid var(--black);
+      cursor: pointer;
+    }
+
+    /* Halloween poster */
+    .poster-halloween {
+      background: #0a0a0a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 8px;
+      padding: 12px;
+    }
+
+    .poster-halloween .ph-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px;
+      font-weight: 900;
+      color: #ff6600;
+      text-align: center;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      line-height: 1.2;
+    }
+
+    .jack-o-lantern {
+      width: 50px;
+      height: 50px;
+      background: #ff6600;
+      border-radius: 45% 45% 40% 40%;
+      position: relative;
+    }
+
+    .jack-o-lantern::before {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 20px;
+      height: 6px;
+      background: #4a2000;
+      border-radius: 0 0 4px 4px;
+    }
+
+    .poster-halloween .tagline {
+      font-family: 'Space Mono', monospace;
+      font-size: 7px;
+      letter-spacing: 2px;
+      color: #ff6600;
+      text-transform: uppercase;
+    }
+
+    /* Diwali poster */
+    .poster-diwali {
+      background: linear-gradient(135deg, #1a0a00 0%, #3d1a00 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 8px;
+      padding: 12px;
+    }
+
+    .diya {
+      width: 40px;
+      height: 20px;
+      background: #c9a84c;
+      border-radius: 50% 50% 0 0;
+      position: relative;
+    }
+
+    .diya::after {
+      content: '';
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 4px;
+      height: 14px;
+      background: linear-gradient(to top, #ff6600, #ffff00, transparent);
+      border-radius: 2px;
+    }
+
+    .poster-diwali .pd-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 900;
+      color: #c9a84c;
+      letter-spacing: 3px;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .poster-diwali .pd-sub {
+      font-size: 9px;
+      color: rgba(201, 168, 76, 0.7);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-family: 'Space Mono', monospace;
+    }
+
+    .rangoli {
+      display: grid;
+      grid-template-columns: repeat(5, 6px);
+      gap: 3px;
+      margin: 4px 0;
+    }
+
+    .rangoli span {
+      width: 6px;
+      height: 6px;
+      background: var(--red);
+      clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+    }
+
+    .rangoli span:nth-child(3),
+    .rangoli span:nth-child(8),
+    .rangoli span:nth-child(13) {
+      background: #c9a84c;
+    }
+
+    /* Old Roads poster */
+    .poster-oldroads {
+      background: var(--cream);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 6px;
+      padding: 12px;
+      border: none;
+      outline: 2px solid var(--black);
+    }
+
+    .poster-oldroads .or-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 54px;
+      font-weight: 900;
+      color: var(--black);
+      line-height: 1;
+      opacity: 0.08;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+
+    .poster-oldroads .or-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 15px;
+      font-weight: 900;
+      color: var(--black);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      text-align: center;
+      line-height: 1.2;
+      z-index: 1;
+    }
+
+    .old-roads-road {
+      width: 70%;
+      height: 2px;
+      background: var(--black);
+      margin: 4px 0;
+      position: relative;
+    }
+
+    .old-roads-road::before,
+    .old-roads-road::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 6px;
+      height: 6px;
+      background: var(--red);
+      border-radius: 50%;
+    }
+
+    .old-roads-road::before {
+      left: -3px;
+    }
+
+    .old-roads-road::after {
+      right: -3px;
+    }
+
+    /* Wishes poster */
+    .poster-wishes {
+      background: linear-gradient(160deg, #fff9f0 0%, #ffe8d6 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 6px;
+      padding: 12px;
+    }
+
+    .poster-wishes .pw-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 13px;
+      font-style: italic;
+      color: var(--mid-gray);
+      text-align: center;
+    }
+
+    .wish-star {
+      font-size: 24px;
+      color: var(--gold);
+    }
+
+    .poster-wishes .pw-sub {
+      font-family: 'Space Mono', monospace;
+      font-size: 8px;
+      letter-spacing: 2px;
+      color: var(--mid-gray);
+      text-transform: uppercase;
+      text-align: center;
+    }
+
+    /* ===== FOOTER / CONTACT ===== */
+    .footer-section {
+      background: var(--black);
+      color: var(--white);
+      padding: 0px 20px 40px;
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-masthead {
+      text-align: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+      padding-bottom: 24px;
+      margin-bottom: 32px;
+    }
+
+    .footer-masthead h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(18px, 3vw, 28px);
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    .footer-masthead .sub {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 4px;
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .contact-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 14px;
+      color: var(--black);
+    }
+
+    .contact-item .info {
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .contact-item .info .label {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 2px;
+    }
+
+    .contact-item .info a {
+      color: var(--white);
+      text-decoration: none;
+      font-size: 12px;
+    }
+
+    .contact-item .info a:hover {
+      color: var(--gold);
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 20px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer-bottom .copy {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      color: rgba(255, 255, 255, 0.4);
+      letter-spacing: 1px;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 8px;
+    }
+
+    .footer-social a {
+      width: 30px;
+      height: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      text-decoration: none;
+      font-size: 11px;
+      transition: border-color 0.2s, background 0.2s;
+      font-family: 'Space Mono', monospace;
+    }
+
+    .footer-social a:hover {
+      border-color: var(--gold);
+      background: rgba(201, 168, 76, 0.15);
+      color: var(--gold);
+    }
+
+    /* ===== SKILLS ROW ===== */
+    .skills-bar {
+      background: var(--cream);
+      border-top: 2px solid var(--black);
+      border-bottom: 2px solid var(--black);
+      padding: 20px 0;
+      overflow: hidden;
+    }
+
+    .skills-scroll {
+      display: flex;
+      gap: 0;
+      animation: skills-slide 30s linear infinite;
+      width: max-content;
+    }
+
+    @keyframes skills-slide {
+      0% {
+        transform: translateX(0);
+      }
+
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+
+    .skill-item {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 700;
+      font-style: italic;
+      padding: 0 28px;
+      white-space: nowrap;
+      color: var(--black);
+    }
+
+    .skill-item.accent {
+      color: #a00000;
+    }
+
+    .skill-sep {
+      font-size: 22px;
+      color: var(--gold);
+      padding: 0 4px;
+      font-family: 'Space Mono', monospace;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .about-section {
+        grid-template-columns: 1fr;
+      }
+
+      .about-left {
+        border-right: none;
+        border-bottom: 2px solid var(--black);
+        padding-right: 0;
+      }
+
+      .spotlight-section {
+        padding: 28px 0;
+      }
+
+      .cases-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .case-card {
+        border-right: none;
+      }
+
+      .posters-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .header-nav {
+        flex-wrap: wrap;
+      }
+
+      .header-nav a {
+        padding: 8px 14px;
+        font-size: 10px;
+      }
+    }
+
+    /* ===== ENTRY ANIMATIONS ===== */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
 </head>
+
 <body>
 
-<!-- HEADER -->
-<header class="site-header">
-  <div class="header-ticker">
-    <div class="ticker-inner">
-      <span class="ticker-item">✦ UI/UX ✦ WEB DESIGN ✦ BRANDING ✦ PROTOTYPING ✦ WIREFRAMING ✦ VISUAL DESIGN ✦ POSTER DESIGN ✦ PRESENTATION DESIGN ✦ USER RESEARCH ✦ AI IN DESIGN ✦</span>
-      <span class="ticker-item">✦ UI/UX ✦ WEB DESIGN ✦ BRANDING ✦ PROTOTYPING ✦ WIREFRAMING ✦ VISUAL DESIGN ✦ POSTER DESIGN ✦ PRESENTATION DESIGN ✦ USER RESEARCH ✦ AI IN DESIGN ✦</span>
-    </div>
-  </div>
-
-  <div class="header-masthead">
-    <div class="paper-name">✦ The Design Times ✦</div>
-    <div class="hero-wrapper">
-      <div class="hero-name">
-        <span>Gandlapalli</span>
-        <span>Monesha</span>
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="header-ticker">
+      <div class="ticker-inner">
+        <span class="ticker-item">✦ UI/UX ✦ WEB DESIGN ✦ BRANDING ✦ PROTOTYPING ✦ WIREFRAMING ✦ VISUAL DESIGN ✦ POSTER
+          DESIGN ✦ PRESENTATION DESIGN ✦ USER RESEARCH ✦ AI IN DESIGN ✦</span>
+        <span class="ticker-item">✦ UI/UX ✦ WEB DESIGN ✦ BRANDING ✦ PROTOTYPING ✦ WIREFRAMING ✦ VISUAL DESIGN ✦ POSTER
+          DESIGN ✦ PRESENTATION DESIGN ✦ USER RESEARCH ✦ AI IN DESIGN ✦</span>
       </div>
-      <img src="chennai-badge.png" alt="Chennai badge" class="hero-badge" />
     </div>
-    <div class="welcome-tag">✦ Welcome To My Portfolio ✦</div>
-  </div>
 
-  <nav class="header-nav">
-    <a href="#about">About Me</a>
-    <a href="#work">My Work</a>
-    <a href="#contact">Get In Touch</a>
-  </nav>
-</header>
-
-<div class="section-divider"></div>
-
-<!-- SKILLS BAR -->
-<div class="skills-bar">
-  <div class="skills-scroll">
-    <span class="skill-item">Figma</span><span class="skill-sep">✦</span>
-    <span class="skill-item accent">Canva</span><span class="skill-sep">✦</span>
-    <span class="skill-item">UI Design</span><span class="skill-sep">✦</span>
-    <span class="skill-item accent">UX Research</span><span class="skill-sep">✦</span>
-    <span class="skill-item">Graphic Design</span><span class="skill-sep">✦</span>
-    <span class="skill-item accent">AI & ML</span><span class="skill-sep">✦</span>
-    <span class="skill-item">Branding</span><span class="skill-sep">✦</span>
-    <span class="skill-item accent">Web Design</span><span class="skill-sep">✦</span>
-    <span class="skill-item">Illustration</span><span class="skill-sep">✦</span>
-    <span class="skill-item accent">Typography</span><span class="skill-sep">✦</span>
-    <!-- Duplicate for seamless loop -->
-    <span class="skill-item">Figma</span><span class="skill-sep">✦</span>
-    <span class="skill-item accent">Canva</span><span class="skill-sep">✦</span>
-    <span class="skill-item">UI Design</span><span class="skill-sep">✦</span>
-    <span class="skill-item accent">UX Research</span><span class="skill-sep">✦</span>
-    <span class="skill-item">Graphic Design</span><span class="skill-sep">✦</span>
-    <span class="skill-item accent">AI & ML</span><span class="skill-sep">✦</span>
-    <span class="skill-item">Branding</span><span class="skill-sep">✦</span>
-    <span class="skill-item accent">Web Design</span><span class="skill-sep">✦</span>
-    <span class="skill-item">Illustration</span><span class="skill-sep">✦</span>
-    <span class="skill-item accent">Typography</span><span class="skill-sep">✦</span>
-  </div>
-</div>
-
-<div class="section-divider"></div>
-
-<!-- ABOUT + SPOTLIGHT -->
-<div class="page-content">
-  <section class="about-section" id="about">
-
-    <div class="about-left fade-up">
-      <div class="column-label">About Me</div>
-      <div class="about-photo-placeholder"></div>
-      <div class="about-info">
-        <p><strong>Gandlapalli Monesha</strong> is a second-year B.Tech student studying <strong>Artificial Intelligence &amp; Machine Learning</strong>, steadily carving out her identity as a designer at the intersection of creativity and code.</p>
-        <p>Born in <strong>Hyderabad</strong>, currently thriving in <strong>Chennai</strong>.</p>
-        <div class="about-tags">
-          <span class="tag red">Chennai</span>
-          <span class="tag">AI/ML</span>
-          <span class="tag outline">UI/UX</span>
-          <span class="tag outline">Figma</span>
-          <span class="tag outline">Canva</span>
-          <span class="tag">Design</span>
-          <span class="tag outline">Telugu</span>
-          <span class="tag outline">English</span>
-          <span class="tag outline">Tamil</span>
-          <span class="tag outline">Hindi</span>
+    <div class="header-masthead">
+      <div class="paper-name">✦ The Design Times ✦</div>
+      <div class="hero-wrapper">
+        <div class="hero-name">
+          <span>Gandlapalli</span>
+          <span>Monesha</span>
         </div>
+        <img src="chennai-badge.png" alt="Chennai badge" class="hero-badge" />
       </div>
+      <div class="welcome-tag">Welcome To My Portfolio</div>
     </div>
 
-    <div class="spotlight-section fade-up" id="spotlight">
-      <div class="column-label">Student Spotlight</div>
-      <h2>Blending <em>Creativity</em><br/>with Code</h2>
-      <div class="subhead">— A designer's origin story</div>
+    <nav class="header-nav">
+      <a href="#about">About Me</a>
+      <a href="#work">My Work</a>
+      <a href="#contact">Get In Touch</a>
+    </nav>
+  </header>
 
-      <p>In the bustling corridors of her college, <strong>Gandlapalli Monesha</strong>, a second-year B.Tech student studying <strong>Artificial Intelligence &amp; Machine Learning</strong>, is steadily carving out her identity as a designer who doesn't fit neatly into any single box. Her portfolio spans <strong>UI/UX design, graphic design, web development, cybersecurity</strong>, and collaborative ventures.</p>
+  <div class="section-divider"></div>
 
-      <p>Her involvement in six different student clubs — from a product development cell to sustainability forums — is testament to the truth that great design requires absorbing life from every direction. <em>"Clubs are where ideas meet execution,"</em> she reflects.</p>
-
-      <p>Beyond the classroom, Monesha is a familiar face at <strong>hackathons and ideathons</strong>. For her, these events are more than competitions — they are laboratories of empathy. By building prototypes under deadline with diverse teams, she gains exposure to practical problems that require learning to adapt quickly.</p>
-
-      <div class="pull-quote">
-        <p>"Design lets me narrate technology. It becomes a problem solver and a team player — the perfect intersection of creativity and technology."</p>
-      </div>
-
-      <p>Her creative journey, however, began long before college. During the pandemic in 9th grade, reading became her refuge. From <strong>online reader communities, friend circles</strong>, and various platforms, Monesha first discovered how technology could transform raw feeling into design.</p>
-
-      <p>Born in Hyderabad, she now calls Chennai home. She completed her schooling here and is fluent in <strong>Telugu, Tamil, English</strong>, with a working understanding of Hindi. Monesha finds balance in cooking — not just as a hobby, but as a mirror to her approach to technology: experimenting, blending unexpected ingredients, and trusting the process of making.</p>
-
-      <p>Versatile and deeply curious, Monesha continues to build her portfolio out as a design student at AI/ML. She is not a creator who bridges logic with imagination. Her journey is a testament to how passion, persistence, and curiosity can shape a future designer.</p>
+  <!-- SKILLS BAR -->
+  <div class="skills-bar">
+    <div class="skills-scroll">
+      <span class="skill-item">Figma</span><span class="skill-sep">✦</span>
+      <span class="skill-item accent">Canva</span><span class="skill-sep">✦</span>
+      <span class="skill-item">UI Design</span><span class="skill-sep">✦</span>
+      <span class="skill-item accent">UX Research</span><span class="skill-sep">✦</span>
+      <span class="skill-item">Graphic Design</span><span class="skill-sep">✦</span>
+      <span class="skill-item accent">AI & ML</span><span class="skill-sep">✦</span>
+      <span class="skill-item">Branding</span><span class="skill-sep">✦</span>
+      <span class="skill-item accent">Web Design</span><span class="skill-sep">✦</span>
+      <span class="skill-item">Illustration</span><span class="skill-sep">✦</span>
+      <span class="skill-item accent">Typography</span><span class="skill-sep">✦</span>
+      <!-- Duplicate for seamless loop -->
+      <span class="skill-item">Figma</span><span class="skill-sep">✦</span>
+      <span class="skill-item accent">Canva</span><span class="skill-sep">✦</span>
+      <span class="skill-item">UI Design</span><span class="skill-sep">✦</span>
+      <span class="skill-item accent">UX Research</span><span class="skill-sep">✦</span>
+      <span class="skill-item">Graphic Design</span><span class="skill-sep">✦</span>
+      <span class="skill-item accent">AI & ML</span><span class="skill-sep">✦</span>
+      <span class="skill-item">Branding</span><span class="skill-sep">✦</span>
+      <span class="skill-item accent">Web Design</span><span class="skill-sep">✦</span>
+      <span class="skill-item">Illustration</span><span class="skill-sep">✦</span>
+      <span class="skill-item accent">Typography</span><span class="skill-sep">✦</span>
     </div>
-
-  </section>
-</div>
-
-<div class="section-divider"></div>
-
-<!-- MY WORK -->
-<div id="work">
-  <div class="section-masthead">
-    <div class="sub">— Featured Projects —</div>
-    <h2>The Design Desk: Stories Told in Figma &amp; Canva</h2>
   </div>
 
   <div class="section-divider"></div>
 
+  <!-- ABOUT + SPOTLIGHT -->
   <div class="page-content">
-    <div class="cases-grid">
+    <section class="about-section" id="about">
 
-      <!-- Card 1: Microsoft SRM -->
-      <div class="case-card fade-up">
-        <div class="case-number">01</div>
-        <div class="category">Mobile UX · Onboarding</div>
-        <h3>Microsoft Student Ambassadors, SRM: Mobile Onboarding Design</h3>
-        <div class="card-preview">
-          <div class="card-ui-msrm">
-            <div class="nav-dots">
-              <span></span><span></span><span></span>
-            </div>
-            <div style="font-size:9px;font-weight:700;margin-bottom:4px;letter-spacing:1px;">MSA ONBOARDING</div>
-            <div style="display:flex;gap:6px;align-items:center;margin-bottom:3px;">
-              <div style="width:8px;height:8px;background:#3366cc;border-radius:50%;flex-shrink:0;"></div>
-              <div style="height:3px;flex:1;background:rgba(126,179,255,0.3);"></div>
-            </div>
-            <div style="display:flex;gap:6px;align-items:center;margin-bottom:3px;">
-              <div style="width:8px;height:8px;background:rgba(51,102,204,0.4);border-radius:50%;flex-shrink:0;"></div>
-              <div style="height:3px;flex:1;background:rgba(126,179,255,0.2);"></div>
-            </div>
-            <div style="margin-top:6px;height:16px;background:#3366cc;border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:7px;letter-spacing:1px;">GET STARTED</div>
+      <div class="about-left fade-up">
+        <div class="column-label">About Me</div>
+        <div class="about-photo-placeholder"></div>
+        <div class="about-info">
+          <p><strong>Gandlapalli Monesha</strong> is a second-year B.Tech student studying <strong>Artificial
+              Intelligence &amp; Machine Learning</strong>, steadily carving out her identity as a designer at the
+            intersection of creativity and code.</p>
+          <p>Born in <strong>Hyderabad</strong>, currently thriving in <strong>Chennai</strong>.</p>
+          <div class="about-tags">
+            <span class="tag red">Chennai</span>
+            <span class="tag">AI/ML</span>
+            <span class="tag outline">UI/UX</span>
+            <span class="tag outline">Figma</span>
+            <span class="tag outline">Canva</span>
+            <span class="tag">Design</span>
+            <span class="tag outline">Telugu</span>
+            <span class="tag outline">English</span>
+            <span class="tag outline">Tamil</span>
+            <span class="tag outline">Hindi</span>
           </div>
         </div>
-        <p>When the MSA Association SRM sought a mobile onboarding experience, the challenge matched the task with precision and purpose. The desktop website lacked the micro-interactions and emotional warmth that matched the experience. Using Lottie files and GIFs, she added subtle animations that made the experience feel alive and engaging.</p>
       </div>
 
-      <!-- Card 2: Cherry's Community -->
-      <div class="case-card fade-up">
-        <div class="case-number">02</div>
-        <div class="category">Event Design · Web Redesign</div>
-        <h3>Cherry's Community, SRM: Events Pages Redesign</h3>
-        <div class="card-preview">
-          <div class="card-ui-cherry">
-            <div style="font-size:10px;font-weight:700;color:#a00000;margin-bottom:6px;letter-spacing:1px;">CHERRY'S COMMUNITY</div>
-            <div class="event-row">
-              <div class="dot"></div>
-              <div style="font-size:7px;color:#4a4a4a;">Workshop — Design Thinking</div>
-            </div>
-            <div class="event-row">
-              <div class="dot" style="background:rgba(230,51,41,0.4);"></div>
-              <div style="font-size:7px;color:#4a4a4a;">Talk — Community Building</div>
-            </div>
-            <div class="event-row">
-              <div class="dot" style="background:rgba(230,51,41,0.2);"></div>
-              <div style="font-size:7px;color:#4a4a4a;">Mixer — Creative Networking</div>
-            </div>
-          </div>
+      <div class="spotlight-section fade-up" id="spotlight">
+        <div class="column-label">Student Spotlight</div>
+        <h2>Blending <em>Creativity</em><br />with Code</h2>
+        <div class="subhead">— A designer's origin story</div>
+
+        <p>In the bustling corridors of her college, <strong>Gandlapalli Monesha</strong>, a second-year B.Tech student
+          studying <strong>Artificial Intelligence &amp; Machine Learning</strong>, is steadily carving out her identity
+          as a designer who doesn't fit neatly into any single box. Her portfolio spans <strong>UI/UX design, graphic
+            design, web development, cybersecurity</strong>, and collaborative ventures.</p>
+
+        <p>Her involvement in six different student clubs — from a product development cell to sustainability forums —
+          is testament to the truth that great design requires absorbing life from every direction. <em>"Clubs are where
+            ideas meet execution,"</em> she reflects.</p>
+
+        <p>Beyond the classroom, Monesha is a familiar face at <strong>hackathons and ideathons</strong>. For her, these
+          events are more than competitions — they are laboratories of empathy. By building prototypes under deadline
+          with diverse teams, she gains exposure to practical problems that require learning to adapt quickly.</p>
+
+        <div class="pull-quote">
+          <p>"Design lets me narrate technology. It becomes a problem solver and a team player — the perfect
+            intersection of creativity and technology."</p>
         </div>
-        <p>For Cherry's Community, Monesha took on the challenge of redesigning the branding experience for their 2023 branding. She transformed dry event listings into immersive journeys. The redesign allows members to explore upcoming events and browse past sessions in a cinematic style — vivid event posters, richly colored stills, descriptions, and layered details that feel like a magazine editorial.</p>
+
+        <p>Her creative journey, however, began long before college. During the pandemic in 9th grade, reading became
+          her refuge. From <strong>online reader communities, friend circles</strong>, and various platforms, Monesha
+          first discovered how technology could transform raw feeling into design.</p>
+
+        <p>Born in Hyderabad, she now calls Chennai home. She completed her schooling here and is fluent in
+          <strong>Telugu, Tamil, English</strong>, with a working understanding of Hindi. Monesha finds balance in
+          cooking — not just as a hobby, but as a mirror to her approach to technology: experimenting, blending
+          unexpected ingredients, and trusting the process of making.
+        </p>
+
+        <p>Versatile and deeply curious, Monesha continues to build her portfolio out as a design student at AI/ML. She
+          is not a creator who bridges logic with imagination. Her journey is a testament to how passion, persistence,
+          and curiosity can shape a future designer.</p>
       </div>
 
-      <!-- Card 3: Prada Landing Page -->
-      <div class="case-card fade-up">
-        <div class="case-number">03</div>
-        <div class="category">Luxury Brand · Landing Page</div>
-        <h3>Prada: Landing Page Redesign</h3>
-        <div class="card-preview">
-          <div class="card-ui-prada">
-            <div class="logo-line">PRADA</div>
-            <div style="height:1px;background:#999;margin-bottom:6px;"></div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;">
-              <div style="height:30px;background:#e8e4dc;border:1px solid #ccc;"></div>
-              <div style="height:30px;background:#e8e4dc;border:1px solid #ccc;"></div>
-            </div>
-            <div style="margin-top:5px;font-size:6px;letter-spacing:2px;color:#666;text-align:center;">NEW COLLECTION 2024</div>
-            <div style="margin-top:4px;height:12px;background:#1a1a1a;display:flex;align-items:center;justify-content:center;font-size:6px;color:#fff;letter-spacing:2px;">EXPLORE</div>
-          </div>
-        </div>
-        <p>Prada: a stock market analysis and consulting business inspired by the iconic fashion house. Monesha mapped the company's strategies and visual choices against the luxury brand ethos that conveyed professionalism while adding vibrancy. The result is an editorial landing page that speaks both to logic and elegance.</p>
-      </div>
-
-      <!-- Card 4: Suzanne Collins -->
-      <div class="case-card fade-up">
-        <div class="case-number">04</div>
-        <div class="category">Author · Website Redesign</div>
-        <h3>Suzanne Collins — Author Website Redesign</h3>
-        <div class="card-preview">
-          <div class="card-ui-suzanne">
-            <div class="book-cover">THE HUNGER GAMES</div>
-            <div style="font-size:7px;letter-spacing:1px;color:#c9a84c;margin-bottom:4px;">SUZANNE COLLINS</div>
-            <div style="height:2px;background:#333;margin-bottom:5px;"></div>
-            <div style="font-size:6px;color:#888;line-height:1.5;">
-              New York Times<br/>Bestselling Author
-            </div>
-          </div>
-        </div>
-        <p>When Monesha encountered Suzanne Collins' existing webpage, she noticed its lack of emotional appeal — a surprising gap for such a renowned author. She overhauled the site with clarity and cohesion, organizing content into well-structured sections that guided users seamlessly. She added collages of fan artwork, creating a vibrant showcase of the author's stories.</p>
-      </div>
-
-      <!-- Card 5: CodeNex -->
-      <div class="case-card fade-up">
-        <div class="case-number">05</div>
-        <div class="category">Tech Club · Website Redesign</div>
-        <h3>CodeNex — Website Redesign</h3>
-        <div class="card-preview">
-          <div class="card-ui-codenex">
-            <div style="font-size:10px;font-weight:700;color:#4af0b0;margin-bottom:6px;letter-spacing:2px;">CODENEX</div>
-            <div class="stat-row">
-              <div class="stat-pill">50+ Projects</div>
-              <div class="stat-pill">10+ Awards</div>
-            </div>
-            <div class="stat-row" style="margin-top:4px;">
-              <div class="stat-pill">300+ Members</div>
-              <div class="stat-pill">20+ Events</div>
-            </div>
-            <div style="margin-top:6px;height:1px;background:rgba(74,240,176,0.2);"></div>
-            <div style="margin-top:5px;font-size:7px;color:rgba(74,240,176,0.7);">JOIN THE REVOLUTION →</div>
-          </div>
-        </div>
-        <p>The CodeNex website was a Bandhan Inspiration work with originality. Monesha restructured it with their unique brand identity. Her redesign emphasised clean hierarchy, striking tech aesthetics, and bold statistics front-and-center — reflecting the club's forward-thinking ethos. She integrated visuals from platforms like Vecteezy and Freepik, ensuring the digital presence felt both professional and grounded.</p>
-      </div>
-
-      <!-- Card 6: Nocturne App -->
-      <div class="case-card fade-up">
-        <div class="case-number">06</div>
-        <div class="category">Personal App · Journal Design</div>
-        <h3>Nocturne App — Personal Project</h3>
-        <div class="card-preview">
-          <div class="card-ui-nocturne">
-            <div style="font-size:12px;font-weight:700;color:#c9a0dc;letter-spacing:3px;margin-bottom:4px;">NOCTURNE</div>
-            <div style="font-size:7px;color:rgba(201,160,220,0.6);letter-spacing:1px;margin-bottom:8px;">A JOURNAL APP</div>
-            <div class="journal-lines">
-              <div class="journal-line filled"></div>
-              <div class="journal-line" style="width:50%;"></div>
-              <div class="journal-line filled" style="width:85%;"></div>
-              <div class="journal-line" style="width:30%;"></div>
-              <div class="journal-line filled" style="width:95%;"></div>
-            </div>
-            <div style="margin-top:8px;display:flex;gap:4px;">
-              <div style="width:16px;height:16px;background:rgba(201,160,220,0.2);border-radius:3px;border:1px solid rgba(201,160,220,0.3);"></div>
-              <div style="width:16px;height:16px;background:rgba(201,160,220,0.2);border-radius:3px;border:1px solid rgba(201,160,220,0.3);"></div>
-              <div style="width:16px;height:16px;background:rgba(201,160,220,0.4);border-radius:3px;border:1px solid rgba(201,160,220,0.5);"></div>
-            </div>
-          </div>
-        </div>
-        <p>Nocturne is Monesha's personal exploration into journaling apps. It's a journal concept built with structured pages, encouraging introspection at its core. The app features guiding prompts and pages, arranged in layered layouts that encourage curiosity and deep reflection. Monesha stands as a designer who continues learning through iteration and building from the ground up.</p>
-      </div>
-
-    </div><!-- /cases-grid -->
-  </div><!-- /page-content -->
-</div>
-
-<div class="section-divider"></div>
-
-<!-- CREATIVE WORK -->
-<div>
-  <div class="section-masthead">
-    <div class="sub">— Design &amp; More —</div>
-    <h2>Creative Footnotes: Posters, Stories &amp; More</h2>
+    </section>
   </div>
 
   <div class="section-divider"></div>
 
-  <div class="page-content">
-    <div class="creative-section">
-      <p style="font-size:14px; color: var(--mid-gray); max-width:700px; line-height:1.8; margin-bottom:32px;">
-        Beyond major projects, Monesha has contributed to a variety of smaller design tasks that showcase her adaptability. Her background includes social media graphics, event posters, thematic illustrations, and college hacks — all crafted with the same care she brings to her growing portfolio, demonstrating her versatility and commitment to design in all its forms.
-      </p>
+  <!-- MY WORK -->
+  <div id="work">
+    <div class="section-masthead">
+      <div class="sub">— Featured Projects —</div>
+      <h2>The Design Desk: Stories Told in Figma &amp; Canva</h2>
+    </div>
 
-      <div class="posters-grid">
+    <div class="section-divider"></div>
 
-        <!-- Halloween -->
-        <div class="poster-card fade-up">
-          <div class="poster-halloween">
-            <div class="jack-o-lantern"></div>
-            <div class="ph-title">Hackoween<br/>2023</div>
-            <div class="tagline">From The Hive</div>
-          </div>
-        </div>
+    <div class="page-content">
+      <div class="cases-grid">
 
-        <!-- Diwali -->
-        <div class="poster-card fade-up">
-          <div class="poster-diwali">
-            <div class="rangoli">
-              <span></span><span></span><span></span><span></span><span></span>
-              <span></span><span></span><span></span><span></span><span></span>
-              <span></span><span></span><span></span><span></span><span></span>
+        <!-- Card 1: Microsoft SRM -->
+        <div class="case-card fade-up">
+          <div class="case-number">01</div>
+          <div class="category">Mobile UX · Onboarding</div>
+          <h3>Microsoft Student Ambassadors, SRM: Mobile Onboarding Design</h3>
+          <div class="card-preview">
+            <div class="card-ui-msrm">
+              <div class="nav-dots">
+                <span></span><span></span><span></span>
+              </div>
+              <div style="font-size:9px;font-weight:700;margin-bottom:4px;letter-spacing:1px;">MSA ONBOARDING</div>
+              <div style="display:flex;gap:6px;align-items:center;margin-bottom:3px;">
+                <div style="width:8px;height:8px;background:#3366cc;border-radius:50%;flex-shrink:0;"></div>
+                <div style="height:3px;flex:1;background:rgba(126,179,255,0.3);"></div>
+              </div>
+              <div style="display:flex;gap:6px;align-items:center;margin-bottom:3px;">
+                <div style="width:8px;height:8px;background:rgba(51,102,204,0.4);border-radius:50%;flex-shrink:0;">
+                </div>
+                <div style="height:3px;flex:1;background:rgba(126,179,255,0.2);"></div>
+              </div>
+              <div
+                style="margin-top:6px;height:16px;background:#3366cc;border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:7px;letter-spacing:1px;">
+                GET STARTED</div>
             </div>
-            <div class="diya"></div>
-            <div class="pd-title">Happy<br/>Diwali</div>
-            <div class="pd-sub">✦ Festival of Lights ✦</div>
           </div>
+          <p>When the MSA Association SRM sought a mobile onboarding experience, the challenge matched the task with
+            precision and purpose. The desktop website lacked the micro-interactions and emotional warmth that matched
+            the experience. Using Lottie files and GIFs, she added subtle animations that made the experience feel alive
+            and engaging.</p>
         </div>
 
-        <!-- Old Roads -->
-        <div class="poster-card fade-up">
-          <div class="poster-oldroads">
-            <div class="or-num">∞</div>
-            <div class="or-title">Old<br/>Roads</div>
-            <div class="old-roads-road"></div>
-            <div style="font-family:'Space Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--mid-gray);text-align:center;text-transform:uppercase;margin-top:4px;">New Destinations</div>
+        <!-- Card 2: Cherry's Community -->
+        <div class="case-card fade-up">
+          <div class="case-number">02</div>
+          <div class="category">Event Design · Web Redesign</div>
+          <h3>Cherry's Community, SRM: Events Pages Redesign</h3>
+          <div class="card-preview">
+            <div class="card-ui-cherry">
+              <div style="font-size:10px;font-weight:700;color:#a00000;margin-bottom:6px;letter-spacing:1px;">CHERRY'S
+                COMMUNITY</div>
+              <div class="event-row">
+                <div class="dot"></div>
+                <div style="font-size:7px;color:#4a4a4a;">Workshop — Design Thinking</div>
+              </div>
+              <div class="event-row">
+                <div class="dot" style="background:rgba(230,51,41,0.4);"></div>
+                <div style="font-size:7px;color:#4a4a4a;">Talk — Community Building</div>
+              </div>
+              <div class="event-row">
+                <div class="dot" style="background:rgba(230,51,41,0.2);"></div>
+                <div style="font-size:7px;color:#4a4a4a;">Mixer — Creative Networking</div>
+              </div>
+            </div>
           </div>
+          <p>For Cherry's Community, Monesha took on the challenge of redesigning the branding experience for their 2023
+            branding. She transformed dry event listings into immersive journeys. The redesign allows members to explore
+            upcoming events and browse past sessions in a cinematic style — vivid event posters, richly colored stills,
+            descriptions, and layered details that feel like a magazine editorial.</p>
         </div>
 
-        <!-- Wishes -->
-        <div class="poster-card fade-up">
-          <div class="poster-wishes">
-            <div class="wish-star">✦</div>
-            <div class="pw-title">Wishing You<br/>All the Best</div>
-            <div style="width:40px;height:1px;background:var(--gold);margin:6px auto;"></div>
-            <div class="pw-sub">Warmth &amp;<br/>Celebration</div>
-            <div class="wish-star" style="font-size:16px;">✦ ✦ ✦</div>
+        <!-- Card 3: Prada Landing Page -->
+        <div class="case-card fade-up">
+          <div class="case-number">03</div>
+          <div class="category">Luxury Brand · Landing Page</div>
+          <h3>Prada: Landing Page Redesign</h3>
+          <div class="card-preview">
+            <div class="card-ui-prada">
+              <div class="logo-line">PRADA</div>
+              <div style="height:1px;background:#999;margin-bottom:6px;"></div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;">
+                <div style="height:30px;background:#e8e4dc;border:1px solid #ccc;"></div>
+                <div style="height:30px;background:#e8e4dc;border:1px solid #ccc;"></div>
+              </div>
+              <div style="margin-top:5px;font-size:6px;letter-spacing:2px;color:#666;text-align:center;">NEW COLLECTION
+                2024</div>
+              <div
+                style="margin-top:4px;height:12px;background:#1a1a1a;display:flex;align-items:center;justify-content:center;font-size:6px;color:#fff;letter-spacing:2px;">
+                EXPLORE</div>
+            </div>
           </div>
+          <p>Prada: a stock market analysis and consulting business inspired by the iconic fashion house. Monesha mapped
+            the company's strategies and visual choices against the luxury brand ethos that conveyed professionalism
+            while adding vibrancy. The result is an editorial landing page that speaks both to logic and elegance.</p>
         </div>
 
+        <!-- Card 4: Suzanne Collins -->
+        <div class="case-card fade-up">
+          <div class="case-number">04</div>
+          <div class="category">Author · Website Redesign</div>
+          <h3>Suzanne Collins — Author Website Redesign</h3>
+          <div class="card-preview">
+            <div class="card-ui-suzanne">
+              <div class="book-cover">THE HUNGER GAMES</div>
+              <div style="font-size:7px;letter-spacing:1px;color:#c9a84c;margin-bottom:4px;">SUZANNE COLLINS</div>
+              <div style="height:2px;background:#333;margin-bottom:5px;"></div>
+              <div style="font-size:6px;color:#888;line-height:1.5;">
+                New York Times<br />Bestselling Author
+              </div>
+            </div>
+          </div>
+          <p>When Monesha encountered Suzanne Collins' existing webpage, she noticed its lack of emotional appeal — a
+            surprising gap for such a renowned author. She overhauled the site with clarity and cohesion, organizing
+            content into well-structured sections that guided users seamlessly. She added collages of fan artwork,
+            creating a vibrant showcase of the author's stories.</p>
+        </div>
+
+        <!-- Card 5: CodeNex -->
+        <div class="case-card fade-up">
+          <div class="case-number">05</div>
+          <div class="category">Tech Club · Website Redesign</div>
+          <h3>CodeNex — Website Redesign</h3>
+          <div class="card-preview">
+            <div class="card-ui-codenex">
+              <div style="font-size:10px;font-weight:700;color:#4af0b0;margin-bottom:6px;letter-spacing:2px;">CODENEX
+              </div>
+              <div class="stat-row">
+                <div class="stat-pill">50+ Projects</div>
+                <div class="stat-pill">10+ Awards</div>
+              </div>
+              <div class="stat-row" style="margin-top:4px;">
+                <div class="stat-pill">300+ Members</div>
+                <div class="stat-pill">20+ Events</div>
+              </div>
+              <div style="margin-top:6px;height:1px;background:rgba(74,240,176,0.2);"></div>
+              <div style="margin-top:5px;font-size:7px;color:rgba(74,240,176,0.7);">JOIN THE REVOLUTION →</div>
+            </div>
+          </div>
+          <p>The CodeNex website was a Bandhan Inspiration work with originality. Monesha restructured it with their
+            unique brand identity. Her redesign emphasised clean hierarchy, striking tech aesthetics, and bold
+            statistics front-and-center — reflecting the club's forward-thinking ethos. She integrated visuals from
+            platforms like Vecteezy and Freepik, ensuring the digital presence felt both professional and grounded.</p>
+        </div>
+
+        <!-- Card 6: Nocturne App -->
+        <div class="case-card fade-up">
+          <div class="case-number">06</div>
+          <div class="category">Personal App · Journal Design</div>
+          <h3>Nocturne App — Personal Project</h3>
+          <div class="card-preview">
+            <div class="card-ui-nocturne">
+              <div style="font-size:12px;font-weight:700;color:#c9a0dc;letter-spacing:3px;margin-bottom:4px;">NOCTURNE
+              </div>
+              <div style="font-size:7px;color:rgba(201,160,220,0.6);letter-spacing:1px;margin-bottom:8px;">A JOURNAL APP
+              </div>
+              <div class="journal-lines">
+                <div class="journal-line filled"></div>
+                <div class="journal-line" style="width:50%;"></div>
+                <div class="journal-line filled" style="width:85%;"></div>
+                <div class="journal-line" style="width:30%;"></div>
+                <div class="journal-line filled" style="width:95%;"></div>
+              </div>
+              <div style="margin-top:8px;display:flex;gap:4px;">
+                <div
+                  style="width:16px;height:16px;background:rgba(201,160,220,0.2);border-radius:3px;border:1px solid rgba(201,160,220,0.3);">
+                </div>
+                <div
+                  style="width:16px;height:16px;background:rgba(201,160,220,0.2);border-radius:3px;border:1px solid rgba(201,160,220,0.3);">
+                </div>
+                <div
+                  style="width:16px;height:16px;background:rgba(201,160,220,0.4);border-radius:3px;border:1px solid rgba(201,160,220,0.5);">
+                </div>
+              </div>
+            </div>
+          </div>
+          <p>Nocturne is Monesha's personal exploration into journaling apps. It's a journal concept built with
+            structured pages, encouraging introspection at its core. The app features guiding prompts and pages,
+            arranged in layered layouts that encourage curiosity and deep reflection. Monesha stands as a designer who
+            continues learning through iteration and building from the ground up.</p>
+        </div>
+
+      </div><!-- /cases-grid -->
+    </div><!-- /page-content -->
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- CREATIVE WORK -->
+  <div>
+    <div class="section-masthead">
+      <div class="sub">— Design &amp; More —</div>
+      <h2>Creative Footnotes: Posters, Stories &amp; More</h2>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <div class="page-content">
+      <div class="creative-section">
+        <p style="font-size:14px; color: var(--mid-gray); max-width:700px; line-height:1.8; margin-bottom:32px;">
+          Beyond major projects, Monesha has contributed to a variety of smaller design tasks that showcase her
+          adaptability. Her background includes social media graphics, event posters, thematic illustrations, and
+          college hacks — all crafted with the same care she brings to her growing portfolio, demonstrating her
+          versatility and commitment to design in all its forms.
+        </p>
+
+        <div class="posters-grid">
+
+          <!-- Halloween -->
+          <div class="poster-card fade-up">
+            <div class="poster-halloween">
+              <div class="jack-o-lantern"></div>
+              <div class="ph-title">Hackoween<br />2023</div>
+              <div class="tagline">From The Hive</div>
+            </div>
+          </div>
+
+          <!-- Diwali -->
+          <div class="poster-card fade-up">
+            <div class="poster-diwali">
+              <div class="rangoli">
+                <span></span><span></span><span></span><span></span><span></span>
+                <span></span><span></span><span></span><span></span><span></span>
+                <span></span><span></span><span></span><span></span><span></span>
+              </div>
+              <div class="diya"></div>
+              <div class="pd-title">Happy<br />Diwali</div>
+              <div class="pd-sub">✦ Festival of Lights ✦</div>
+            </div>
+          </div>
+
+          <!-- Old Roads -->
+          <div class="poster-card fade-up">
+            <div class="poster-oldroads">
+              <div class="or-num">∞</div>
+              <div class="or-title">Old<br />Roads</div>
+              <div class="old-roads-road"></div>
+              <div
+                style="font-family:'Space Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--mid-gray);text-align:center;text-transform:uppercase;margin-top:4px;">
+                New Destinations</div>
+            </div>
+          </div>
+
+          <!-- Wishes -->
+          <div class="poster-card fade-up">
+            <div class="poster-wishes">
+              <div class="wish-star">✦</div>
+              <div class="pw-title">Wishing You<br />All the Best</div>
+              <div style="width:40px;height:1px;background:var(--gold);margin:6px auto;"></div>
+              <div class="pw-sub">Warmth &amp;<br />Celebration</div>
+              <div class="wish-star" style="font-size:16px;">✦ ✦ ✦</div>
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<div class="section-divider"></div>
+  <div class="section-divider"></div>
 
-<div class="section-divider no-reel"></div>
+  <div class="section-divider no-reel"></div>
 
-<!-- FOOTER / CONTACT -->
-<footer class="footer-section" id="contact">
-  <div class="footer-inner">
-    <div class="footer-masthead">
-      <div class="sub">✦ Let's Connect ✦</div>
-      <h2>Bylines &amp; Beyond</h2>
+  <!-- FOOTER / CONTACT -->
+  <footer class="footer-section" id="contact">
+    <div class="footer-inner">
+      <div class="footer-masthead">
+        <div class="sub">✦ Let's Connect ✦</div>
+        <h2>Bylines &amp; Beyond</h2>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-item">
+          <div class="contact-icon">📞</div>
+          <div class="info">
+            <div class="label">Phone</div>
+            <a href="tel:+918048182224">+91 8048182224</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">✉️</div>
+          <div class="info">
+            <div class="label">Email</div>
+            <a href="mailto:thegandlapallimonesha@gmail.com">thegandlapallimonesha<br />@gmail.com</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">in</div>
+          <div class="info">
+            <div class="label">LinkedIn</div>
+            <a href="https://linkedin.com/in/gandlapalli-monesha"
+              target="_blank">linkedin.com/in/<br />gandlapalli-monesha</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">🐦</div>
+          <div class="info">
+            <div class="label">Twitter / X</div>
+            <a href="https://twitter.com/Gandlapalli_Monesha" target="_blank">@Gandlapalli_Monesha</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">▶</div>
+          <div class="info">
+            <div class="label">Behance</div>
+            <a href="https://behance.net/thegandlapallimonesha"
+              target="_blank">behance.net/<br />thegandlapallimonesha</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">🎵</div>
+          <div class="info">
+            <div class="label">Dribbble</div>
+            <a href="https://dribbble.com/TheDesignTimes" target="_blank">dribbble.com/<br />TheDesignTimes</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="copy">© 2024 Gandlapalli Monesha — All Rights Reserved</div>
+        <div class="footer-social">
+          <a href="#" title="Twitter">𝕏</a>
+          <a href="#" title="LinkedIn">in</a>
+          <a href="#" title="Behance">Be</a>
+          <a href="#" title="Dribbble">Dr</a>
+        </div>
+      </div>
     </div>
+  </footer>
 
-    <div class="contact-grid">
-      <div class="contact-item">
-        <div class="contact-icon">📞</div>
-        <div class="info">
-          <div class="label">Phone</div>
-          <a href="tel:+918048182224">+91 8048182224</a>
-        </div>
-      </div>
-      <div class="contact-item">
-        <div class="contact-icon">✉️</div>
-        <div class="info">
-          <div class="label">Email</div>
-          <a href="mailto:thegandlapallimonesha@gmail.com">thegandlapallimonesha<br/>@gmail.com</a>
-        </div>
-      </div>
-      <div class="contact-item">
-        <div class="contact-icon">in</div>
-        <div class="info">
-          <div class="label">LinkedIn</div>
-          <a href="https://linkedin.com/in/gandlapalli-monesha" target="_blank">linkedin.com/in/<br/>gandlapalli-monesha</a>
-        </div>
-      </div>
-      <div class="contact-item">
-        <div class="contact-icon">🐦</div>
-        <div class="info">
-          <div class="label">Twitter / X</div>
-          <a href="https://twitter.com/Gandlapalli_Monesha" target="_blank">@Gandlapalli_Monesha</a>
-        </div>
-      </div>
-      <div class="contact-item">
-        <div class="contact-icon">▶</div>
-        <div class="info">
-          <div class="label">Behance</div>
-          <a href="https://behance.net/thegandlapallimonesha" target="_blank">behance.net/<br/>thegandlapallimonesha</a>
-        </div>
-      </div>
-      <div class="contact-item">
-        <div class="contact-icon">🎵</div>
-        <div class="info">
-          <div class="label">Dribbble</div>
-          <a href="https://dribbble.com/TheDesignTimes" target="_blank">dribbble.com/<br/>TheDesignTimes</a>
-        </div>
-      </div>
-    </div>
+  <script>
+    // Intersection Observer for fade-up animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
 
-    <div class="footer-bottom">
-      <div class="copy">© 2024 Gandlapalli Monesha — All Rights Reserved</div>
-      <div class="footer-social">
-        <a href="#" title="Twitter">𝕏</a>
-        <a href="#" title="LinkedIn">in</a>
-        <a href="#" title="Behance">Be</a>
-        <a href="#" title="Dribbble">Dr</a>
-      </div>
-    </div>
-  </div>
-</footer>
-
-<script>
-  // Intersection Observer for fade-up animations
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        observer.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.12 });
-
-  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
-</script>
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  </script>
 </body>
+
 </html>
