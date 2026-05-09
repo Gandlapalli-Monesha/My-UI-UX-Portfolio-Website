@@ -251,14 +251,16 @@
       display: flex;
       flex-direction: column;
       gap: 0;
+      align-self: start;
     }
 
     .column-label {
-      font-family: 'Space Mono', monospace;
-      font-size: 10px;
+      font-family: 'Courier Prime', monospace;
+      font-weight: 700;
+      font-size: 14px;
       letter-spacing: 3px;
       text-transform: uppercase;
-      color: var(--mid-gray);
+      color: var(--black);
       border-bottom: 1px solid var(--black);
       padding-bottom: 6px;
       margin-bottom: 14px;
@@ -282,8 +284,9 @@
     .record-header {
       background: var(--black);
       color: var(--white);
-      font-family: 'Space Mono', monospace;
-      font-size: 8.5px;
+      font-family: 'Courier Prime', monospace;
+      font-weight: 700;
+      font-size: 12px;
       letter-spacing: 3px;
       text-transform: uppercase;
       padding: 5px 12px;
@@ -301,13 +304,14 @@
       align-items: baseline;
       border-bottom: 1px dashed rgba(0,0,0,0.13);
       padding: 5px 0;
-      gap: 8px;
+      gap: 24px;
     }
     .record-row:last-child { border-bottom: none; }
 
     .rec-label {
       font-family: 'Space Mono', monospace;
-      font-size: 8px;
+      font-weight: 700;
+      font-size: 10px;
       letter-spacing: 1px;
       text-transform: uppercase;
       color: var(--mid-gray);
@@ -384,8 +388,9 @@
     }
 
     .spotlight-section .subhead {
-      font-family: 'Space Mono', monospace;
-      font-size: 11px;
+      font-family: 'Courier Prime', monospace;
+      font-weight: 700;
+      font-size: 14px;
       letter-spacing: 2px;
       text-transform: uppercase;
       color: var(--gold);
@@ -434,7 +439,8 @@
 
     .tl-date {
       font-family: 'Space Mono', monospace;
-      font-size: 9px;
+      font-weight: 700;
+      font-size: 11px;
       letter-spacing: 1px;
       color: var(--mid-gray);
       width: 72px;
@@ -472,7 +478,7 @@
 
     .tl-title {
       font-family: 'Playfair Display', serif;
-      font-size: 14px;
+      font-size: 16px;
       font-weight: 700;
       line-height: 1.2;
       margin-bottom: 3px;
@@ -480,24 +486,26 @@
     }
 
     .tl-desc {
-      font-size: 11.5px;
+      font-size: 13px;
       color: var(--mid-gray);
       line-height: 1.6;
     }
 
     .pull-quote {
       border-left: 4px solid #a00000;
-      padding: 10px 16px;
+      padding: 16px 24px;
       margin: 4px 0 0;
       background: var(--cream);
+      max-width: fit-content;
     }
 
     .pull-quote p {
       font-family: 'Playfair Display', serif;
-      font-size: 15px;
+      font-size: 42px;
       font-style: italic;
       color: var(--black) !important;
       line-height: 1.5;
+      letter-spacing: 1px;
       margin: 0 !important;
     }
 
@@ -1482,7 +1490,7 @@
             </div>
             <div class="record-row">
               <span class="rec-label">Experience</span>
-              <span class="rec-value">1+ Years in Design</span>
+              <span class="rec-value">1+ Years</span>
             </div>
             <div class="record-row">
               <span class="rec-label">Clubs</span>
@@ -1510,7 +1518,7 @@
           </div>
 
           <div class="tl-item">
-            <div class="tl-date">2020<br/>Grade 9</div>
+            <div class="tl-date">2021</div>
             <div class="tl-node-wrap">
               <div class="tl-dot" style="color:#a00000; background:#a00000;"></div>
             </div>
@@ -1521,7 +1529,7 @@
           </div>
 
           <div class="tl-item">
-            <div class="tl-date">2021<br/>Grade 10</div>
+            <div class="tl-date">2022</div>
             <div class="tl-node-wrap">
               <div class="tl-dot" style="color:#c9a84c; background:#c9a84c;"></div>
             </div>
@@ -1532,7 +1540,7 @@
           </div>
 
           <div class="tl-item">
-            <div class="tl-date">2022<br/>Grade 11</div>
+            <div class="tl-date">2023</div>
             <div class="tl-node-wrap">
               <div class="tl-dot" style="color:#2d6a8a; background:#2d6a8a;"></div>
             </div>
@@ -1543,7 +1551,7 @@
           </div>
 
           <div class="tl-item">
-            <div class="tl-date">2023<br/>Year 1</div>
+            <div class="tl-date">2024</div>
             <div class="tl-node-wrap">
               <div class="tl-dot" style="color:#5a7a3a; background:#5a7a3a;"></div>
             </div>
@@ -1554,7 +1562,7 @@
           </div>
 
           <div class="tl-item">
-            <div class="tl-date">2024<br/>Year 2</div>
+            <div class="tl-date">2025</div>
             <div class="tl-node-wrap">
               <div class="tl-dot" style="color:#8a4a6a; background:#8a4a6a;"></div>
             </div>
@@ -1565,7 +1573,7 @@
           </div>
 
           <div class="tl-item">
-            <div class="tl-date">Now<br/>Present</div>
+            <div class="tl-date">2026</div>
             <div class="tl-node-wrap">
               <div class="tl-dot" style="color:#a00000; background:#a00000; width:13px; height:13px;"></div>
             </div>
@@ -1578,7 +1586,7 @@
         </div><!-- /timeline -->
 
         <div class="pull-quote">
-          <p>"Design lets me narrate technology — the perfect intersection of creativity and code."</p>
+          <p>"Design is where science and art break even." — Robin Matthew</p>
         </div>
       </div>
 
