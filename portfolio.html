@@ -556,90 +556,282 @@
     }
 
     /* ===== CASE STUDIES GRID ===== */
-    .cases-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 0;
+    /* ===== DECK SLIDESHOW ===== */
+    .deck-section {
       position: relative;
-      padding-top: 24px;
-      overflow: visible;
-    }
-
-    .cases-grid::before {
-      display: none;
-    }
-
-    .cases-grid::after {
-      display: none;
-    }
-
-    .case-card {
-      border-right: 2px solid var(--black);
-      border-bottom: 2px solid var(--black);
-      padding: 28px 24px;
-      position: relative;
+      background: var(--black);
       overflow: hidden;
-      transition: background 0.25s;
-      cursor: default;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
 
-    .case-card:nth-child(even) {
-      border-right: none;
+    .deck-stage {
+      position: relative;
+      flex: 1;
+      overflow: hidden;
+      min-height: 82vh;
     }
 
-    .case-card:nth-last-child(-n+2) {
-      border-bottom: none;
-    }
-
-    .case-card:hover {
-      background: var(--cream);
-    }
-
-    .case-card .case-number {
-      font-family: 'Playfair Display', serif;
-      font-size: 72px;
-      font-weight: 900;
-      color: var(--light-gray);
+    /* Each slide */
+    .deck-slide {
       position: absolute;
-      top: -10px;
-      right: 16px;
-      line-height: 1;
-      user-select: none;
+      inset: 0;
+      display: grid;
+      grid-template-columns: 1.8fr 1fr;
+      opacity: 0;
+      pointer-events: none;
+      transition: none;
     }
 
-    .case-card .category {
-      font-family: 'Space Mono', monospace;
-      font-size: 9px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: #a00000;
-      margin-bottom: 6px;
+    .deck-slide.active {
+      opacity: 1;
+      pointer-events: all;
     }
 
-    .case-card h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(16px, 2.2vw, 22px);
-      font-weight: 700;
-      line-height: 1.2;
-      margin-bottom: 10px;
+    /* Slide enter/exit animations */
+    .deck-slide.enter-from-right {
+      animation: slideInRight 0.65s cubic-bezier(.77,0,.18,1) forwards;
+    }
+    .deck-slide.exit-to-left {
+      animation: slideOutLeft 0.65s cubic-bezier(.77,0,.18,1) forwards;
+    }
+    .deck-slide.enter-from-left {
+      animation: slideInLeft 0.65s cubic-bezier(.77,0,.18,1) forwards;
+    }
+    .deck-slide.exit-to-right {
+      animation: slideOutRight 0.65s cubic-bezier(.77,0,.18,1) forwards;
     }
 
-    .case-card .card-preview {
-      width: 100%;
-      height: 160px;
-      background: var(--dark-gray);
-      margin-bottom: 14px;
+    @keyframes slideInRight {
+      from { transform: translateX(100%); opacity: 0; }
+      to   { transform: translateX(0);    opacity: 1; }
+    }
+    @keyframes slideOutLeft {
+      from { transform: translateX(0);     opacity: 1; }
+      to   { transform: translateX(-100%); opacity: 0; }
+    }
+    @keyframes slideInLeft {
+      from { transform: translateX(-100%); opacity: 0; }
+      to   { transform: translateX(0);     opacity: 1; }
+    }
+    @keyframes slideOutRight {
+      from { transform: translateX(0);    opacity: 1; }
+      to   { transform: translateX(100%); opacity: 0; }
+    }
+
+    /* Left panel — the visual mock */
+    .deck-visual {
       position: relative;
-      overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
+      padding: 48px 40px;
+      overflow: hidden;
     }
 
-    .case-card p {
-      font-size: 12.5px;
-      color: var(--mid-gray);
-      line-height: 1.65;
+    .deck-visual-bg {
+      position: absolute;
+      inset: 0;
+      opacity: 0.07;
+      background-size: 28px 28px;
+      background-image:
+        linear-gradient(to right, #fff 1px, transparent 1px),
+        linear-gradient(to bottom, #fff 1px, transparent 1px);
+    }
+
+    .deck-mock-frame {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 340px;
+      background: var(--white);
+      border: 2px solid rgba(255,255,255,0.12);
+      box-shadow: 0 32px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.06);
+      overflow: hidden;
+      transform: perspective(900px) rotateY(4deg) rotateX(2deg);
+      transition: transform 0.4s ease;
+    }
+    .deck-mock-frame:hover {
+      transform: perspective(900px) rotateY(0deg) rotateX(0deg) scale(1.02);
+    }
+
+    .deck-mock-bar {
+      height: 28px;
+      display: flex;
+      align-items: center;
+      padding: 0 12px;
+      gap: 6px;
+    }
+    .deck-mock-bar span {
+      width: 8px; height: 8px; border-radius: 50%;
+    }
+    .deck-mock-inner {
+      padding: 16px;
+      min-height: 260px;
+    }
+
+    /* slide accent line */
+    .deck-accent-line {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+    }
+
+    /* Right panel — info */
+    .deck-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 52px 52px 52px 44px;
+      border-left: 1px solid rgba(255,255,255,0.08);
+      position: relative;
+    }
+
+    .deck-index {
+      font-family: 'Playfair Display', serif;
+      font-size: 96px;
+      font-weight: 900;
+      line-height: 1;
+      color: rgba(255,255,255,0.05);
+      position: absolute;
+      top: 24px;
+      right: 32px;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    .deck-category {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .deck-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(22px, 2.8vw, 34px);
+      font-weight: 900;
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+
+    .deck-divider {
+      width: 48px;
+      height: 2px;
+      margin-bottom: 20px;
+    }
+
+    .deck-desc {
+      font-size: 13.5px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.75;
+      max-width: 400px;
+      margin-bottom: 32px;
+    }
+
+    .deck-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .deck-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border: 1px solid rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.5);
+    }
+    .deck-tag.filled {
+      color: var(--black);
+      border-color: transparent;
+    }
+
+    /* ===== DECK CONTROLS ===== */
+    .deck-controls {
+      background: var(--black);
+      border-top: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 40px;
+      gap: 24px;
+    }
+
+    .deck-dots {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .deck-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      padding: 0;
+    }
+    .deck-dot.active {
+      width: 24px;
+      border-radius: 3px;
+      background: var(--white);
+    }
+
+    .deck-nav-btns {
+      display: flex;
+      gap: 10px;
+    }
+
+    .deck-btn {
+      width: 44px; height: 44px;
+      border: 1px solid rgba(255,255,255,0.2);
+      background: transparent;
+      color: var(--white);
+      font-size: 18px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s, border-color 0.2s;
+      font-family: 'Space Mono', monospace;
+    }
+    .deck-btn:hover {
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.5);
+    }
+    .deck-btn:disabled {
+      opacity: 0.25;
+      cursor: default;
+    }
+
+    .deck-counter {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      color: rgba(255,255,255,0.35);
+      letter-spacing: 2px;
+      min-width: 60px;
+      text-align: center;
+    }
+
+    .deck-progress {
+      flex: 1;
+      height: 2px;
+      background: rgba(255,255,255,0.08);
+      position: relative;
+      max-width: 220px;
+    }
+    .deck-progress-fill {
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      background: var(--white);
+      transition: width 0.5s cubic-bezier(.4,0,.2,1);
     }
 
     /* Mock UI inside cards */
@@ -892,15 +1084,54 @@
     .posters-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
+      gap: 20px;
+    }
+
+    .poster-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
     }
 
     .poster-card {
-      aspect-ratio: 3/4;
+      aspect-ratio: 2/3;
       position: relative;
       overflow: hidden;
       border: 2px solid var(--black);
       cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .poster-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.15);
+    }
+
+    .poster-caption {
+      border: 2px solid var(--black);
+      border-top: none;
+      padding: 14px 16px;
+      background: var(--white);
+    }
+    .poster-caption .pc-category {
+      font-family: 'Space Mono', monospace;
+      font-size: 8.5px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #a00000;
+      margin-bottom: 4px;
+    }
+    .poster-caption .pc-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--black);
+      margin-bottom: 5px;
+      line-height: 1.2;
+    }
+    .poster-caption .pc-desc {
+      font-size: 11.5px;
+      color: var(--mid-gray);
+      line-height: 1.6;
     }
 
     /* Halloween poster */
@@ -1124,7 +1355,7 @@
     .footer-section {
       background: var(--black);
       color: var(--white);
-      padding: 0px 20px 40px;
+      padding: 0px 20px 0px;
     }
 
     .footer-inner {
@@ -1155,11 +1386,188 @@
       text-transform: uppercase;
     }
 
+    /* connect layout: message left, form right */
+    .connect-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 40px;
+      align-items: start;
+    }
+
+    .connect-message {
+      padding-right: 16px;
+      border-right: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .connect-message .cm-eyebrow {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+
+    .connect-message h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(22px, 2.5vw, 32px);
+      font-weight: 900;
+      line-height: 1.15;
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+    .connect-message h3 em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .connect-message p {
+      font-size: 13px;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.8;
+      margin-bottom: 24px;
+    }
+
+    .connect-links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .connect-link-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .connect-link-row .cl-icon {
+      width: 28px;
+      height: 28px;
+      background: rgba(201,168,76,0.12);
+      border: 1px solid rgba(201,168,76,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      color: var(--gold);
+      flex-shrink: 0;
+      font-family: 'Space Mono', monospace;
+    }
+
+    .connect-link-row a {
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      font-size: 11.5px;
+      transition: color 0.2s;
+    }
+    .connect-link-row a:hover { color: var(--gold); }
+
+    /* newspaper contact form */
+    .connect-form-wrap {
+      position: relative;
+    }
+
+    .connect-form-wrap .cf-heading {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .connect-form-wrap .cf-heading::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(255,255,255,0.1);
+    }
+
+    .connect-form {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .cf-field {
+      display: flex;
+      flex-direction: column;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding: 10px 0;
+    }
+
+    .cf-field label {
+      font-family: 'Space Mono', monospace;
+      font-size: 8px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      margin-bottom: 6px;
+    }
+
+    .cf-field input,
+    .cf-field textarea {
+      background: transparent;
+      border: none;
+      outline: none;
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      resize: none;
+      caret-color: var(--gold);
+    }
+
+    .cf-field input::placeholder,
+    .cf-field textarea::placeholder {
+      color: rgba(255,255,255,0.2);
+      font-style: italic;
+    }
+
+    .cf-field textarea {
+      min-height: 64px;
+      line-height: 1.6;
+    }
+
+    .cf-submit {
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      gap: 0;
+    }
+
+    .cf-submit button {
+      background: var(--gold);
+      color: var(--black);
+      border: none;
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 12px 28px;
+      cursor: pointer;
+      transition: background 0.2s;
+      font-weight: 700;
+    }
+    .cf-submit button:hover { background: #e0be5a; }
+
+    .cf-submit .cf-note {
+      font-family: 'Space Mono', monospace;
+      font-size: 8px;
+      color: rgba(255,255,255,0.2);
+      letter-spacing: 1px;
+      margin-left: 16px;
+      line-height: 1.5;
+    }
+
+    /* contact grid below form */
     .contact-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 24px;
-      margin-bottom: 32px;
+      margin-bottom: 24px;
     }
 
     .contact-item {
@@ -1206,13 +1614,10 @@
     }
 
     .footer-bottom {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
       border-top: 1px solid rgba(255, 255, 255, 0.1);
-      padding-top: 20px;
-      flex-wrap: wrap;
-      gap: 12px;
+      padding: 12px 0 12px;
+      display: flex;
+      justify-content: center;
     }
 
     .footer-bottom .copy {
@@ -1220,31 +1625,6 @@
       font-size: 10px;
       color: rgba(255, 255, 255, 0.4);
       letter-spacing: 1px;
-    }
-
-    .footer-social {
-      display: flex;
-      gap: 8px;
-    }
-
-    .footer-social a {
-      width: 30px;
-      height: 30px;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--white);
-      text-decoration: none;
-      font-size: 11px;
-      transition: border-color 0.2s, background 0.2s;
-      font-family: 'Space Mono', monospace;
-    }
-
-    .footer-social a:hover {
-      border-color: var(--gold);
-      background: rgba(201, 168, 76, 0.15);
-      color: var(--gold);
     }
 
     /* ===== SKILLS ROW ===== */
@@ -1609,196 +1989,342 @@
 
   <div class="section-divider"></div>
 
-  <!-- MY WORK -->
+  <!-- MY WORK — DECK SLIDESHOW -->
   <div id="work">
     <div class="section-masthead">
       <div class="sub">— Featured Projects —</div>
-      <h2>The Design Desk: Stories Told in Figma &amp; Canva</h2>
+      <h2>The Design Deck: Stories Told in Figma &amp; Canva</h2>
     </div>
 
     <div class="section-divider"></div>
 
-    <div class="page-content">
-      <div class="cases-grid">
+    <div class="deck-section">
+      <div class="deck-stage" id="deckStage">
 
-        <!-- Card 1: Microsoft SRM -->
-        <div class="case-card fade-up">
-          <div class="case-number">01</div>
-          <div class="category">Mobile UX · Onboarding</div>
-          <h3>Microsoft Student Ambassadors, SRM: Mobile Onboarding Design</h3>
-          <div class="card-preview">
-            <div class="card-ui-msrm">
-              <div class="nav-dots">
-                <span></span><span></span><span></span>
+        <!-- SLIDE 01: Microsoft SRM -->
+        <div class="deck-slide active" data-index="0">
+          <div class="deck-visual" style="background:#0a1628;">
+            <div class="deck-visual-bg"></div>
+            <div class="deck-mock-frame">
+              <div class="deck-mock-bar" style="background:#1a2a4a;">
+                <span style="background:#e85050;"></span>
+                <span style="background:#f0b429;"></span>
+                <span style="background:#4caf7d;"></span>
               </div>
-              <div style="font-size:9px;font-weight:700;margin-bottom:4px;letter-spacing:1px;">MSA ONBOARDING</div>
-              <div style="display:flex;gap:6px;align-items:center;margin-bottom:3px;">
-                <div style="width:8px;height:8px;background:#3366cc;border-radius:50%;flex-shrink:0;"></div>
-                <div style="height:3px;flex:1;background:rgba(126,179,255,0.3);"></div>
-              </div>
-              <div style="display:flex;gap:6px;align-items:center;margin-bottom:3px;">
-                <div style="width:8px;height:8px;background:rgba(51,102,204,0.4);border-radius:50%;flex-shrink:0;">
+              <div class="deck-mock-inner" style="background:#0d1e3d; padding:20px;">
+                <div style="border-top:3px solid #3366cc; padding-top:10px; margin-bottom:16px;">
+                  <div style="font-family:'Space Mono',monospace; font-size:8px; letter-spacing:2px; color:#7eb3ff; margin-bottom:6px;">MSA — SRM INSTITUTE</div>
+                  <div style="font-family:'Playfair Display',serif; font-size:16px; font-weight:700; color:#fff; line-height:1.2;">Mobile Onboarding<br/>Experience</div>
                 </div>
-                <div style="height:3px;flex:1;background:rgba(126,179,255,0.2);"></div>
-              </div>
-              <div
-                style="margin-top:6px;height:16px;background:#3366cc;border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:7px;letter-spacing:1px;">
-                GET STARTED</div>
-            </div>
-          </div>
-          <p>When the MSA Association SRM sought a mobile onboarding experience, the challenge matched the task with
-            precision and purpose. The desktop website lacked the micro-interactions and emotional warmth that matched
-            the experience. Using Lottie files and GIFs, she added subtle animations that made the experience feel alive
-            and engaging.</p>
-        </div>
-
-        <!-- Card 2: Cherry's Community -->
-        <div class="case-card fade-up">
-          <div class="case-number">02</div>
-          <div class="category">Event Design · Web Redesign</div>
-          <h3>Cherry's Community, SRM: Events Pages Redesign</h3>
-          <div class="card-preview">
-            <div class="card-ui-cherry">
-              <div style="font-size:10px;font-weight:700;color:#a00000;margin-bottom:6px;letter-spacing:1px;">CHERRY'S
-                COMMUNITY</div>
-              <div class="event-row">
-                <div class="dot"></div>
-                <div style="font-size:7px;color:#4a4a4a;">Workshop — Design Thinking</div>
-              </div>
-              <div class="event-row">
-                <div class="dot" style="background:rgba(230,51,41,0.4);"></div>
-                <div style="font-size:7px;color:#4a4a4a;">Talk — Community Building</div>
-              </div>
-              <div class="event-row">
-                <div class="dot" style="background:rgba(230,51,41,0.2);"></div>
-                <div style="font-size:7px;color:#4a4a4a;">Mixer — Creative Networking</div>
-              </div>
-            </div>
-          </div>
-          <p>For Cherry's Community, Monesha took on the challenge of redesigning the branding experience for their 2023
-            branding. She transformed dry event listings into immersive journeys. The redesign allows members to explore
-            upcoming events and browse past sessions in a cinematic style — vivid event posters, richly colored stills,
-            descriptions, and layered details that feel like a magazine editorial.</p>
-        </div>
-
-        <!-- Card 3: Prada Landing Page -->
-        <div class="case-card fade-up">
-          <div class="case-number">03</div>
-          <div class="category">Luxury Brand · Landing Page</div>
-          <h3>Prada: Landing Page Redesign</h3>
-          <div class="card-preview">
-            <div class="card-ui-prada">
-              <div class="logo-line">PRADA</div>
-              <div style="height:1px;background:#999;margin-bottom:6px;"></div>
-              <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;">
-                <div style="height:30px;background:#e8e4dc;border:1px solid #ccc;"></div>
-                <div style="height:30px;background:#e8e4dc;border:1px solid #ccc;"></div>
-              </div>
-              <div style="margin-top:5px;font-size:6px;letter-spacing:2px;color:#666;text-align:center;">NEW COLLECTION
-                2024</div>
-              <div
-                style="margin-top:4px;height:12px;background:#1a1a1a;display:flex;align-items:center;justify-content:center;font-size:6px;color:#fff;letter-spacing:2px;">
-                EXPLORE</div>
-            </div>
-          </div>
-          <p>Prada: a stock market analysis and consulting business inspired by the iconic fashion house. Monesha mapped
-            the company's strategies and visual choices against the luxury brand ethos that conveyed professionalism
-            while adding vibrancy. The result is an editorial landing page that speaks both to logic and elegance.</p>
-        </div>
-
-        <!-- Card 4: Suzanne Collins -->
-        <div class="case-card fade-up">
-          <div class="case-number">04</div>
-          <div class="category">Author · Website Redesign</div>
-          <h3>Suzanne Collins — Author Website Redesign</h3>
-          <div class="card-preview">
-            <div class="card-ui-suzanne">
-              <div class="book-cover">THE HUNGER GAMES</div>
-              <div style="font-size:7px;letter-spacing:1px;color:#c9a84c;margin-bottom:4px;">SUZANNE COLLINS</div>
-              <div style="height:2px;background:#333;margin-bottom:5px;"></div>
-              <div style="font-size:6px;color:#888;line-height:1.5;">
-                New York Times<br />Bestselling Author
-              </div>
-            </div>
-          </div>
-          <p>When Monesha encountered Suzanne Collins' existing webpage, she noticed its lack of emotional appeal — a
-            surprising gap for such a renowned author. She overhauled the site with clarity and cohesion, organizing
-            content into well-structured sections that guided users seamlessly. She added collages of fan artwork,
-            creating a vibrant showcase of the author's stories.</p>
-        </div>
-
-        <!-- Card 5: CodeNex -->
-        <div class="case-card fade-up">
-          <div class="case-number">05</div>
-          <div class="category">Tech Club · Website Redesign</div>
-          <h3>CodeNex — Website Redesign</h3>
-          <div class="card-preview">
-            <div class="card-ui-codenex">
-              <div style="font-size:10px;font-weight:700;color:#4af0b0;margin-bottom:6px;letter-spacing:2px;">CODENEX
-              </div>
-              <div class="stat-row">
-                <div class="stat-pill">50+ Projects</div>
-                <div class="stat-pill">10+ Awards</div>
-              </div>
-              <div class="stat-row" style="margin-top:4px;">
-                <div class="stat-pill">300+ Members</div>
-                <div class="stat-pill">20+ Events</div>
-              </div>
-              <div style="margin-top:6px;height:1px;background:rgba(74,240,176,0.2);"></div>
-              <div style="margin-top:5px;font-size:7px;color:rgba(74,240,176,0.7);">JOIN THE REVOLUTION →</div>
-            </div>
-          </div>
-          <p>The CodeNex website was a Bandhan Inspiration work with originality. Monesha restructured it with their
-            unique brand identity. Her redesign emphasised clean hierarchy, striking tech aesthetics, and bold
-            statistics front-and-center — reflecting the club's forward-thinking ethos. She integrated visuals from
-            platforms like Vecteezy and Freepik, ensuring the digital presence felt both professional and grounded.</p>
-        </div>
-
-        <!-- Card 6: Nocturne App -->
-        <div class="case-card fade-up">
-          <div class="case-number">06</div>
-          <div class="category">Personal App · Journal Design</div>
-          <h3>Nocturne App — Personal Project</h3>
-          <div class="card-preview">
-            <div class="card-ui-nocturne">
-              <div style="font-size:12px;font-weight:700;color:#c9a0dc;letter-spacing:3px;margin-bottom:4px;">NOCTURNE
-              </div>
-              <div style="font-size:7px;color:rgba(201,160,220,0.6);letter-spacing:1px;margin-bottom:8px;">A JOURNAL APP
-              </div>
-              <div class="journal-lines">
-                <div class="journal-line filled"></div>
-                <div class="journal-line" style="width:50%;"></div>
-                <div class="journal-line filled" style="width:85%;"></div>
-                <div class="journal-line" style="width:30%;"></div>
-                <div class="journal-line filled" style="width:95%;"></div>
-              </div>
-              <div style="margin-top:8px;display:flex;gap:4px;">
-                <div
-                  style="width:16px;height:16px;background:rgba(201,160,220,0.2);border-radius:3px;border:1px solid rgba(201,160,220,0.3);">
+                <div style="display:flex; flex-direction:column; gap:8px;">
+                  <div style="display:flex; align-items:center; gap:10px;">
+                    <div style="width:32px;height:32px;background:#1e3a6e;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;color:#7eb3ff;flex-shrink:0;">01</div>
+                    <div>
+                      <div style="font-size:8px;color:#7eb3ff;font-family:'Space Mono',monospace;letter-spacing:1px;">WELCOME</div>
+                      <div style="height:3px;background:rgba(126,179,255,0.3);margin-top:3px;width:100px;"></div>
+                    </div>
+                  </div>
+                  <div style="display:flex; align-items:center; gap:10px; opacity:0.5;">
+                    <div style="width:32px;height:32px;background:#0d1e3d;border:1px solid #1e3a6e;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;color:#3a5a9e;flex-shrink:0;">02</div>
+                    <div>
+                      <div style="font-size:8px;color:#3a5a9e;font-family:'Space Mono',monospace;letter-spacing:1px;">PROFILE</div>
+                      <div style="height:3px;background:rgba(126,179,255,0.1);margin-top:3px;width:70px;"></div>
+                    </div>
+                  </div>
+                  <div style="display:flex; align-items:center; gap:10px; opacity:0.3;">
+                    <div style="width:32px;height:32px;background:#0d1e3d;border:1px solid #1e3a6e;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;color:#3a5a9e;flex-shrink:0;">03</div>
+                    <div>
+                      <div style="font-size:8px;color:#3a5a9e;font-family:'Space Mono',monospace;letter-spacing:1px;">EXPLORE</div>
+                      <div style="height:3px;background:rgba(126,179,255,0.1);margin-top:3px;width:55px;"></div>
+                    </div>
+                  </div>
                 </div>
-                <div
-                  style="width:16px;height:16px;background:rgba(201,160,220,0.2);border-radius:3px;border:1px solid rgba(201,160,220,0.3);">
+                <div style="margin-top:20px;height:28px;background:#3366cc;display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-size:8px;letter-spacing:2px;color:#fff;">GET STARTED →</div>
+              </div>
+            </div>
+            <div class="deck-accent-line" style="background: linear-gradient(90deg, #3366cc, #7eb3ff);"></div>
+          </div>
+          <div class="deck-info">
+            <div class="deck-index">01</div>
+            <div class="deck-category" style="color:#7eb3ff;">Mobile UX · Onboarding</div>
+            <div class="deck-title">Microsoft Student<br/>Ambassadors, SRM</div>
+            <div class="deck-divider" style="background:#3366cc;"></div>
+            <div class="deck-desc">The MSA Association SRM needed a mobile onboarding experience that matched the warmth of the community. The desktop site lacked micro-interactions and emotional depth — using Lottie files and layered GIFs, the redesign made every step feel alive and intentional.</div>
+            <div class="deck-tags">
+              <span class="deck-tag filled" style="background:#3366cc;">Figma</span>
+              <span class="deck-tag filled" style="background:#1e3a6e;">Mobile UX</span>
+              <span class="deck-tag">Lottie Animation</span>
+              <span class="deck-tag">Onboarding Flow</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- SLIDE 02: Cherry's Community -->
+        <div class="deck-slide" data-index="1">
+          <div class="deck-visual" style="background:#1a0505;">
+            <div class="deck-visual-bg"></div>
+            <div class="deck-mock-frame">
+              <div class="deck-mock-bar" style="background:#2a0808;">
+                <span style="background:#e85050;"></span>
+                <span style="background:#f0b429;"></span>
+                <span style="background:#4caf7d;"></span>
+              </div>
+              <div class="deck-mock-inner" style="background:#fff; padding:16px;">
+                <div style="border-bottom:2px solid #a00000; padding-bottom:8px; margin-bottom:12px; display:flex; justify-content:space-between; align-items:center;">
+                  <div style="font-family:'Playfair Display',serif; font-size:14px; font-weight:900; color:#a00000; letter-spacing:1px;">Cherry's</div>
+                  <div style="font-family:'Space Mono',monospace; font-size:7px; letter-spacing:1px; color:#999;">COMMUNITY</div>
                 </div>
-                <div
-                  style="width:16px;height:16px;background:rgba(201,160,220,0.4);border-radius:3px;border:1px solid rgba(201,160,220,0.5);">
+                <div style="display:flex; flex-direction:column; gap:8px;">
+                  <div style="border:1px solid #f0d0d0; padding:8px; position:relative; overflow:hidden;">
+                    <div style="position:absolute;top:0;left:0;width:3px;height:100%;background:#a00000;"></div>
+                    <div style="font-size:8px;color:#a00000;font-family:'Space Mono',monospace;letter-spacing:1px;margin-left:8px;">WORKSHOP</div>
+                    <div style="font-size:10px;color:#1a1a1a;font-weight:600;margin-left:8px;margin-top:2px;">Design Thinking</div>
+                  </div>
+                  <div style="border:1px solid #f0d0d0; padding:8px; position:relative; overflow:hidden; opacity:0.7;">
+                    <div style="position:absolute;top:0;left:0;width:3px;height:100%;background:#e85050;"></div>
+                    <div style="font-size:8px;color:#e85050;font-family:'Space Mono',monospace;letter-spacing:1px;margin-left:8px;">TALK</div>
+                    <div style="font-size:10px;color:#1a1a1a;font-weight:600;margin-left:8px;margin-top:2px;">Community Building</div>
+                  </div>
+                  <div style="border:1px solid #f0d0d0; padding:8px; position:relative; overflow:hidden; opacity:0.4;">
+                    <div style="position:absolute;top:0;left:0;width:3px;height:100%;background:#f0a0a0;"></div>
+                    <div style="font-size:8px;color:#f0a0a0;font-family:'Space Mono',monospace;letter-spacing:1px;margin-left:8px;">MIXER</div>
+                    <div style="font-size:10px;color:#1a1a1a;font-weight:600;margin-left:8px;margin-top:2px;">Creative Networking</div>
+                  </div>
                 </div>
               </div>
             </div>
+            <div class="deck-accent-line" style="background: linear-gradient(90deg, #a00000, #e85050);"></div>
           </div>
-          <p>Nocturne is Monesha's personal exploration into journaling apps. It's a journal concept built with
-            structured pages, encouraging introspection at its core. The app features guiding prompts and pages,
-            arranged in layered layouts that encourage curiosity and deep reflection. Monesha stands as a designer who
-            continues learning through iteration and building from the ground up.</p>
+          <div class="deck-info">
+            <div class="deck-index">02</div>
+            <div class="deck-category" style="color:#e85050;">Event Design · Web Redesign</div>
+            <div class="deck-title">Cherry's Community,<br/>SRM Events Pages</div>
+            <div class="deck-divider" style="background:#a00000;"></div>
+            <div class="deck-desc">Dry event listings transformed into immersive editorial journeys. The redesign lets members explore upcoming events and browse past sessions through vivid posters, richly colored stills, and layered details that feel like a magazine — not a calendar.</div>
+            <div class="deck-tags">
+              <span class="deck-tag filled" style="background:#a00000;">Canva</span>
+              <span class="deck-tag filled" style="background:#6a0000;">Event Design</span>
+              <span class="deck-tag">Web Redesign</span>
+              <span class="deck-tag">Editorial</span>
+            </div>
+          </div>
         </div>
 
-      </div><!-- /cases-grid -->
-    </div><!-- /page-content -->
+        <!-- SLIDE 03: Prada -->
+        <div class="deck-slide" data-index="2">
+          <div class="deck-visual" style="background:#0f0f0d;">
+            <div class="deck-visual-bg"></div>
+            <div class="deck-mock-frame">
+              <div class="deck-mock-bar" style="background:#1a1a18;">
+                <span style="background:#e85050;"></span>
+                <span style="background:#f0b429;"></span>
+                <span style="background:#4caf7d;"></span>
+              </div>
+              <div class="deck-mock-inner" style="background:#f5f0e8; padding:20px;">
+                <div style="text-align:center; margin-bottom:16px;">
+                  <div style="font-family:'Playfair Display',serif; font-size:22px; font-weight:900; letter-spacing:8px; color:#0f0f0d;">PRADA</div>
+                  <div style="height:1px; background:#999; margin:6px 0;"></div>
+                  <div style="font-family:'Space Mono',monospace; font-size:7px; letter-spacing:3px; color:#666;">CONSULTING — STRATEGY</div>
+                </div>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-bottom:12px;">
+                  <div style="height:50px; background:#e8e4dc; border:1px solid #ccc; display:flex;align-items:flex-end;padding:4px;">
+                    <div style="font-size:6px;letter-spacing:1px;color:#666;font-family:'Space Mono',monospace;">STRATEGY</div>
+                  </div>
+                  <div style="height:50px; background:#d8d0c0; border:1px solid #bbb; display:flex;align-items:flex-end;padding:4px;">
+                    <div style="font-size:6px;letter-spacing:1px;color:#666;font-family:'Space Mono',monospace;">MARKET</div>
+                  </div>
+                </div>
+                <div style="height:20px;background:#0f0f0d;display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-size:7px;letter-spacing:3px;color:#f5f0e8;">EXPLORE →</div>
+              </div>
+            </div>
+            <div class="deck-accent-line" style="background: linear-gradient(90deg, #c9a84c, #f5f0e8);"></div>
+          </div>
+          <div class="deck-info">
+            <div class="deck-index">03</div>
+            <div class="deck-category" style="color:#c9a84c;">Luxury Brand · Landing Page</div>
+            <div class="deck-title">Prada: Landing<br/>Page Redesign</div>
+            <div class="deck-divider" style="background:#c9a84c;"></div>
+            <div class="deck-desc">A consulting business inspired by the iconic fashion house. The design maps strategy and data against a luxury editorial aesthetic — professional credibility wrapped in the visual language of high fashion. Logic and elegance, coexisting.</div>
+            <div class="deck-tags">
+              <span class="deck-tag filled" style="background:#c9a84c; color:#000;">Figma</span>
+              <span class="deck-tag filled" style="background:#8a6f20; color:#fff;">Landing Page</span>
+              <span class="deck-tag">Brand Strategy</span>
+              <span class="deck-tag">Editorial Layout</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- SLIDE 04: Suzanne Collins -->
+        <div class="deck-slide" data-index="3">
+          <div class="deck-visual" style="background:#080808;">
+            <div class="deck-visual-bg"></div>
+            <div class="deck-mock-frame">
+              <div class="deck-mock-bar" style="background:#111;">
+                <span style="background:#e85050;"></span>
+                <span style="background:#f0b429;"></span>
+                <span style="background:#4caf7d;"></span>
+              </div>
+              <div class="deck-mock-inner" style="background:#0d0d0d; padding:20px; display:flex; gap:14px;">
+                <div style="flex-shrink:0;">
+                  <div style="width:56px;height:80px;background:linear-gradient(160deg,#c9a84c,#8a6f20);display:flex;align-items:center;justify-content:center;padding:5px;text-align:center;">
+                    <div style="font-family:'Space Mono',monospace;font-size:6px;font-weight:700;color:#000;letter-spacing:0.5px;line-height:1.3;">THE<br/>HUNGER<br/>GAMES</div>
+                  </div>
+                  <div style="width:56px;height:2px;background:#c9a84c;margin-top:4px;"></div>
+                </div>
+                <div style="flex:1;">
+                  <div style="font-family:'Playfair Display',serif;font-size:13px;font-weight:900;color:#fff;margin-bottom:4px;">Suzanne Collins</div>
+                  <div style="font-family:'Space Mono',monospace;font-size:7px;letter-spacing:1px;color:#c9a84c;margin-bottom:10px;">BESTSELLING AUTHOR</div>
+                  <div style="height:2px;background:#222;margin-bottom:8px;"></div>
+                  <div style="display:flex;flex-direction:column;gap:3px;">
+                    <div style="height:2px;background:#333;width:90%;"></div>
+                    <div style="height:2px;background:#333;width:70%;"></div>
+                    <div style="height:2px;background:#333;width:80%;"></div>
+                    <div style="height:2px;background:#333;width:55%;"></div>
+                  </div>
+                  <div style="margin-top:10px;font-family:'Space Mono',monospace;font-size:7px;letter-spacing:1px;color:#c9a84c;">EXPLORE BOOKS →</div>
+                </div>
+              </div>
+            </div>
+            <div class="deck-accent-line" style="background: linear-gradient(90deg, #c9a84c, #fff3c0);"></div>
+          </div>
+          <div class="deck-info">
+            <div class="deck-index">04</div>
+            <div class="deck-category" style="color:#c9a84c;">Author · Website Redesign</div>
+            <div class="deck-title">Suzanne Collins —<br/>Author Website</div>
+            <div class="deck-divider" style="background:#c9a84c;"></div>
+            <div class="deck-desc">The original site lacked emotional depth for such a celebrated author. The redesign overhauled the experience with clear structure, cohesive sections, and fan artwork collages — creating a site worthy of the worlds Collins built.</div>
+            <div class="deck-tags">
+              <span class="deck-tag filled" style="background:#c9a84c; color:#000;">Figma</span>
+              <span class="deck-tag filled" style="background:#5a4a10; color:#fff;">Web Redesign</span>
+              <span class="deck-tag">Author Branding</span>
+              <span class="deck-tag">Visual Storytelling</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- SLIDE 05: CodeNex -->
+        <div class="deck-slide" data-index="4">
+          <div class="deck-visual" style="background:#030d0a;">
+            <div class="deck-visual-bg"></div>
+            <div class="deck-mock-frame">
+              <div class="deck-mock-bar" style="background:#041410;">
+                <span style="background:#e85050;"></span>
+                <span style="background:#f0b429;"></span>
+                <span style="background:#4caf7d;"></span>
+              </div>
+              <div class="deck-mock-inner" style="background:#0a1f18; padding:16px;">
+                <div style="border-left:3px solid #4af0b0;padding-left:10px;margin-bottom:14px;">
+                  <div style="font-family:'Space Mono',monospace;font-size:14px;font-weight:700;color:#4af0b0;letter-spacing:2px;">CODENEX</div>
+                  <div style="font-family:'Space Mono',monospace;font-size:7px;color:rgba(74,240,176,0.5);letter-spacing:1px;margin-top:2px;">TECH COMMUNITY</div>
+                </div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px;">
+                  <div style="background:rgba(74,240,176,0.08);border:1px solid rgba(74,240,176,0.2);padding:8px;text-align:center;">
+                    <div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:900;color:#4af0b0;">50+</div>
+                    <div style="font-size:7px;color:rgba(74,240,176,0.5);font-family:'Space Mono',monospace;letter-spacing:1px;">PROJECTS</div>
+                  </div>
+                  <div style="background:rgba(74,240,176,0.08);border:1px solid rgba(74,240,176,0.2);padding:8px;text-align:center;">
+                    <div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:900;color:#4af0b0;">300+</div>
+                    <div style="font-size:7px;color:rgba(74,240,176,0.5);font-family:'Space Mono',monospace;letter-spacing:1px;">MEMBERS</div>
+                  </div>
+                </div>
+                <div style="height:1px;background:rgba(74,240,176,0.15);margin-bottom:8px;"></div>
+                <div style="font-family:'Space Mono',monospace;font-size:8px;color:rgba(74,240,176,0.6);letter-spacing:1px;">JOIN THE REVOLUTION →</div>
+              </div>
+            </div>
+            <div class="deck-accent-line" style="background: linear-gradient(90deg, #4af0b0, #00c8a0);"></div>
+          </div>
+          <div class="deck-info">
+            <div class="deck-index">05</div>
+            <div class="deck-category" style="color:#4af0b0;">Tech Club · Website Redesign</div>
+            <div class="deck-title">CodeNex —<br/>Website Redesign</div>
+            <div class="deck-divider" style="background:#4af0b0;"></div>
+            <div class="deck-desc">A bold restructure of a college tech club's digital presence. Clean hierarchy, striking stats front-and-center, and a visual identity that reflects the club's forward-thinking spirit — professional without losing the community energy.</div>
+            <div class="deck-tags">
+              <span class="deck-tag filled" style="background:#4af0b0; color:#000;">Canva</span>
+              <span class="deck-tag filled" style="background:#0a5a3a; color:#4af0b0;">Web Design</span>
+              <span class="deck-tag">Club Branding</span>
+              <span class="deck-tag">Visual Identity</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- SLIDE 06: Nocturne -->
+        <div class="deck-slide" data-index="5">
+          <div class="deck-visual" style="background:#0d0818;">
+            <div class="deck-visual-bg"></div>
+            <div class="deck-mock-frame">
+              <div class="deck-mock-bar" style="background:#160d24;">
+                <span style="background:#e85050;"></span>
+                <span style="background:#f0b429;"></span>
+                <span style="background:#4caf7d;"></span>
+              </div>
+              <div class="deck-mock-inner" style="background:#1a0a2e; padding:20px;">
+                <div style="text-align:center;margin-bottom:16px;">
+                  <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:900;letter-spacing:4px;color:#c9a0dc;">NOCTURNE</div>
+                  <div style="font-family:'Space Mono',monospace;font-size:7px;letter-spacing:2px;color:rgba(201,160,220,0.5);margin-top:3px;">A PERSONAL JOURNAL APP</div>
+                  <div style="width:32px;height:1px;background:rgba(201,160,220,0.3);margin:8px auto;"></div>
+                </div>
+                <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,160,220,0.15);padding:10px;margin-bottom:8px;">
+                  <div style="font-size:8px;color:rgba(201,160,220,0.4);font-family:'Space Mono',monospace;letter-spacing:1px;margin-bottom:6px;">TODAY'S ENTRY</div>
+                  <div style="display:flex;flex-direction:column;gap:4px;">
+                    <div style="height:2px;background:rgba(201,160,220,0.3);width:90%;border-radius:1px;"></div>
+                    <div style="height:2px;background:rgba(201,160,220,0.2);width:70%;border-radius:1px;"></div>
+                    <div style="height:2px;background:rgba(201,160,220,0.25);width:85%;border-radius:1px;"></div>
+                    <div style="height:2px;background:rgba(201,160,220,0.15);width:50%;border-radius:1px;"></div>
+                  </div>
+                </div>
+                <div style="display:flex;justify-content:space-between;padding:0 2px;">
+                  <div style="width:28px;height:28px;background:rgba(201,160,220,0.1);border:1px solid rgba(201,160,220,0.2);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:10px;color:#c9a0dc;">✦</div>
+                  <div style="width:28px;height:28px;background:rgba(201,160,220,0.1);border:1px solid rgba(201,160,220,0.2);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:10px;color:#c9a0dc;">☽</div>
+                  <div style="width:28px;height:28px;background:rgba(201,160,220,0.3);border:1px solid rgba(201,160,220,0.4);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:10px;color:#c9a0dc;">+</div>
+                </div>
+              </div>
+            </div>
+            <div class="deck-accent-line" style="background: linear-gradient(90deg, #8a4a9a, #c9a0dc);"></div>
+          </div>
+          <div class="deck-info">
+            <div class="deck-index">06</div>
+            <div class="deck-category" style="color:#c9a0dc;">Personal App · Journal Design</div>
+            <div class="deck-title">Nocturne —<br/>Personal Project</div>
+            <div class="deck-divider" style="background:#8a4a9a;"></div>
+            <div class="deck-desc">A personal journaling app concept built entirely from introspection. Structured prompts, layered layouts, and a deep-night visual language encourage reflection. Nocturne is as much a design experiment as it is a product — building from curiosity outward.</div>
+            <div class="deck-tags">
+              <span class="deck-tag filled" style="background:#8a4a9a;">Figma</span>
+              <span class="deck-tag filled" style="background:#4a1a5a;">App Design</span>
+              <span class="deck-tag">UX Concept</span>
+              <span class="deck-tag">Personal Project</span>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /deck-stage -->
+
+      <!-- Controls -->
+      <div class="deck-controls">
+        <div class="deck-nav-btns">
+          <button class="deck-btn" id="deckPrev" onclick="deckNav(-1)">←</button>
+          <button class="deck-btn" id="deckNext" onclick="deckNav(1)">→</button>
+        </div>
+        <div class="deck-dots" id="deckDots">
+          <button class="deck-dot active" onclick="deckGoTo(0)"></button>
+          <button class="deck-dot" onclick="deckGoTo(1)"></button>
+          <button class="deck-dot" onclick="deckGoTo(2)"></button>
+          <button class="deck-dot" onclick="deckGoTo(3)"></button>
+          <button class="deck-dot" onclick="deckGoTo(4)"></button>
+          <button class="deck-dot" onclick="deckGoTo(5)"></button>
+        </div>
+        <div class="deck-progress">
+          <div class="deck-progress-fill" id="deckProgressFill" style="width:16.6%;"></div>
+        </div>
+        <div class="deck-counter" id="deckCounter">01 / 06</div>
+      </div>
+    </div><!-- /deck-section -->
   </div>
 
   <div class="section-divider"></div>
 
   <!-- CREATIVE WORK -->
-  <div>
+  <div id="creative">
     <div class="section-masthead">
       <div class="sub">— Design &amp; More —</div>
       <h2>Creative Footnotes: Posters, Stories &amp; More</h2>
@@ -1808,58 +2334,78 @@
 
     <div class="page-content">
       <div class="creative-section">
-        <p style="font-size:14px; color: var(--mid-gray); max-width:700px; line-height:1.8; margin-bottom:32px;">
-          Beyond major projects, Monesha has contributed to a variety of smaller design tasks that showcase her
-          adaptability. Her background includes social media graphics, event posters, thematic illustrations, and
-          college hacks — all crafted with the same care she brings to her growing portfolio, demonstrating her
-          versatility and commitment to design in all its forms.
-        </p>
 
         <div class="posters-grid">
 
           <!-- Halloween -->
-          <div class="poster-card fade-up">
-            <div class="poster-halloween">
-              <div class="jack-o-lantern"></div>
-              <div class="ph-title">Hackoween<br />2023</div>
-              <div class="tagline">From The Hive</div>
+          <div class="poster-item fade-up">
+            <div class="poster-card">
+              <div class="poster-halloween" style="height:100%;">
+                <div class="jack-o-lantern"></div>
+                <div class="ph-title">Hackoween<br />2023</div>
+                <div class="tagline">From The Hive</div>
+              </div>
+            </div>
+            <div class="poster-caption">
+              <div class="pc-category">Event Poster · Hackathon</div>
+              <div class="pc-title">Hackoween 2023</div>
+              <div class="pc-desc">A Halloween-themed hackathon poster for The Hive. Dark palette, bold typography, and seasonal motifs blended to make the event feel both exciting and spooky.</div>
             </div>
           </div>
 
           <!-- Diwali -->
-          <div class="poster-card fade-up">
-            <div class="poster-diwali">
-              <div class="rangoli">
-                <span></span><span></span><span></span><span></span><span></span>
-                <span></span><span></span><span></span><span></span><span></span>
-                <span></span><span></span><span></span><span></span><span></span>
+          <div class="poster-item fade-up">
+            <div class="poster-card">
+              <div class="poster-diwali" style="height:100%;">
+                <div class="rangoli">
+                  <span></span><span></span><span></span><span></span><span></span>
+                  <span></span><span></span><span></span><span></span><span></span>
+                  <span></span><span></span><span></span><span></span><span></span>
+                </div>
+                <div class="diya"></div>
+                <div class="pd-title">Happy<br />Diwali</div>
+                <div class="pd-sub">✦ Festival of Lights ✦</div>
               </div>
-              <div class="diya"></div>
-              <div class="pd-title">Happy<br />Diwali</div>
-              <div class="pd-sub">✦ Festival of Lights ✦</div>
+            </div>
+            <div class="poster-caption">
+              <div class="pc-category">Festival Poster · Social Media</div>
+              <div class="pc-title">Happy Diwali</div>
+              <div class="pc-desc">A festive Diwali greeting poster with warm tones, rangoli-inspired geometric patterns, and traditional motifs — designed for club and community social channels.</div>
             </div>
           </div>
 
           <!-- Old Roads -->
-          <div class="poster-card fade-up">
-            <div class="poster-oldroads">
-              <div class="or-num">∞</div>
-              <div class="or-title">Old<br />Roads</div>
-              <div class="old-roads-road"></div>
-              <div
-                style="font-family:'Space Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--mid-gray);text-align:center;text-transform:uppercase;margin-top:4px;">
-                New Destinations</div>
+          <div class="poster-item fade-up">
+            <div class="poster-card">
+              <div class="poster-oldroads" style="height:100%;">
+                <div class="or-num">∞</div>
+                <div class="or-title">Old<br />Roads</div>
+                <div class="old-roads-road"></div>
+                <div style="font-family:'Space Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--mid-gray);text-align:center;text-transform:uppercase;margin-top:4px;">New Destinations</div>
+              </div>
+            </div>
+            <div class="poster-caption">
+              <div class="pc-category">Graphic Design · Editorial</div>
+              <div class="pc-title">Old Roads, New Destinations</div>
+              <div class="pc-desc">A minimalist editorial poster exploring the theme of journeys and change. Clean lines, muted cream tones, and restrained type — letting the concept breathe.</div>
             </div>
           </div>
 
           <!-- Wishes -->
-          <div class="poster-card fade-up">
-            <div class="poster-wishes">
-              <div class="wish-star">✦</div>
-              <div class="pw-title">Wishing You<br />All the Best</div>
-              <div style="width:40px;height:1px;background:var(--gold);margin:6px auto;"></div>
-              <div class="pw-sub">Warmth &amp;<br />Celebration</div>
-              <div class="wish-star" style="font-size:16px;">✦ ✦ ✦</div>
+          <div class="poster-item fade-up">
+            <div class="poster-card">
+              <div class="poster-wishes" style="height:100%;">
+                <div class="wish-star">✦</div>
+                <div class="pw-title">Wishing You<br />All the Best</div>
+                <div style="width:40px;height:1px;background:var(--gold);margin:6px auto;"></div>
+                <div class="pw-sub">Warmth &amp;<br />Celebration</div>
+                <div class="wish-star" style="font-size:16px;">✦ ✦ ✦</div>
+              </div>
+            </div>
+            <div class="poster-caption">
+              <div class="pc-category">Greeting Design · Social Media</div>
+              <div class="pc-title">Wishing You All the Best</div>
+              <div class="pc-desc">A warm celebration graphic with gold star motifs and soft gradients. Designed for occasions and community sharing — friendly, uplifting, and adaptable.</div>
             </div>
           </div>
 
@@ -1875,71 +2421,90 @@
   <!-- FOOTER / CONTACT -->
   <footer class="footer-section" id="contact">
     <div class="footer-inner">
+
       <div class="footer-masthead">
         <div class="sub">✦ Let's Connect ✦</div>
         <h2>Bylines &amp; Beyond</h2>
       </div>
 
-      <div class="contact-grid">
-        <div class="contact-item">
-          <div class="contact-icon">📞</div>
-          <div class="info">
-            <div class="label">Phone</div>
-            <a href="tel:+918048182224">+91 8048182224</a>
+      <!-- Connect layout: message + form side by side -->
+      <div class="connect-layout">
+
+        <!-- Left: personal message + links -->
+        <div class="connect-message">
+          <div class="cm-eyebrow">— A note from Monesha</div>
+          <h3>Every great design<br/>starts with a <em>conversation.</em></h3>
+          <p>Whether you're a fellow designer, a club looking for a creative collaborator, or just someone who wants to talk about type and color at 2am — I'm genuinely happy to hear from you. Drop me a message, and let's make something worth looking at.</p>
+
+          <div class="connect-links">
+            <div class="connect-link-row">
+              <div class="cl-icon">✉</div>
+              <a href="mailto:thegandlapallimonesha@gmail.com">thegandlapallimonesha@gmail.com</a>
+            </div>
+            <div class="connect-link-row">
+              <div class="cl-icon">in</div>
+              <a href="https://linkedin.com/in/gandlapalli-monesha" target="_blank">linkedin.com/in/gandlapalli-monesha</a>
+            </div>
+            <div class="connect-link-row">
+              <div class="cl-icon">◉</div>
+              <a href="https://instagram.com/gandlapalli.monesha" target="_blank">@gandlapalli.monesha</a>
+            </div>
+            <div class="connect-link-row">
+              <div class="cl-icon">Be</div>
+              <a href="https://behance.net/thegandlapallimonesha" target="_blank">behance.net/thegandlapallimonesha</a>
+            </div>
+            <div class="connect-link-row">
+              <div class="cl-icon">Dr</div>
+              <a href="https://dribbble.com/TheDesignTimes" target="_blank">dribbble.com/TheDesignTimes</a>
+            </div>
           </div>
         </div>
-        <div class="contact-item">
-          <div class="contact-icon">✉️</div>
-          <div class="info">
-            <div class="label">Email</div>
-            <a href="mailto:thegandlapallimonesha@gmail.com">thegandlapallimonesha<br />@gmail.com</a>
-          </div>
+
+        <!-- Right: contact form -->
+        <div class="connect-form-wrap">
+          <div class="cf-heading">Send a Dispatch</div>
+          <form class="connect-form" onsubmit="handleFormSubmit(event)">
+            <div class="cf-field">
+              <label>Your Name</label>
+              <input type="text" placeholder="Who's writing in?" required />
+            </div>
+            <div class="cf-field">
+              <label>Email Address</label>
+              <input type="email" placeholder="Where can I write back?" required />
+            </div>
+            <div class="cf-field">
+              <label>Subject</label>
+              <input type="text" placeholder="What's on your mind?" />
+            </div>
+            <div class="cf-field">
+              <label>Message</label>
+              <textarea placeholder="Tell me everything — or just the good parts." rows="4"></textarea>
+            </div>
+            <div class="cf-submit">
+              <button type="submit">Send</button>
+              <span class="cf-note">I read every<br/>message personally.</span>
+            </div>
+            <div id="cf-success" style="display:none; margin-top:14px; font-family:'Space Mono',monospace; font-size:10px; color:var(--gold); letter-spacing:1px;">✦ Message received — I'll be in touch soon.</div>
+          </form>
         </div>
-        <div class="contact-item">
-          <div class="contact-icon">in</div>
-          <div class="info">
-            <div class="label">LinkedIn</div>
-            <a href="https://linkedin.com/in/gandlapalli-monesha"
-              target="_blank">linkedin.com/in/<br />gandlapalli-monesha</a>
-          </div>
-        </div>
-        <div class="contact-item">
-          <div class="contact-icon">🐦</div>
-          <div class="info">
-            <div class="label">Twitter / X</div>
-            <a href="https://twitter.com/Gandlapalli_Monesha" target="_blank">@Gandlapalli_Monesha</a>
-          </div>
-        </div>
-        <div class="contact-item">
-          <div class="contact-icon">▶</div>
-          <div class="info">
-            <div class="label">Behance</div>
-            <a href="https://behance.net/thegandlapallimonesha"
-              target="_blank">behance.net/<br />thegandlapallimonesha</a>
-          </div>
-        </div>
-        <div class="contact-item">
-          <div class="contact-icon">🎵</div>
-          <div class="info">
-            <div class="label">Dribbble</div>
-            <a href="https://dribbble.com/TheDesignTimes" target="_blank">dribbble.com/<br />TheDesignTimes</a>
-          </div>
-        </div>
-      </div>
+
+      </div><!-- /connect-layout -->
 
       <div class="footer-bottom">
-        <div class="copy">© 2024 Gandlapalli Monesha — All Rights Reserved</div>
-        <div class="footer-social">
-          <a href="#" title="Twitter">𝕏</a>
-          <a href="#" title="LinkedIn">in</a>
-          <a href="#" title="Behance">Be</a>
-          <a href="#" title="Dribbble">Dr</a>
-        </div>
+        <div class="copy">© 2025 Gandlapalli Monesha — All Rights Reserved</div>
       </div>
+
     </div>
   </footer>
 
   <script>
+    // Form submit
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      document.getElementById('cf-success').style.display = 'block';
+      e.target.reset();
+    }
+
     // Intersection Observer for fade-up animations
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(e => {
@@ -1952,7 +2517,72 @@
 
     document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
-    // Timeline animation
+    // ===== DECK SLIDESHOW =====
+    let deckCurrent = 0;
+    const deckTotal = 6;
+    const slides = document.querySelectorAll('.deck-slide');
+    const dots = document.querySelectorAll('.deck-dot');
+    const counter = document.getElementById('deckCounter');
+    const progressFill = document.getElementById('deckProgressFill');
+    const prevBtn = document.getElementById('deckPrev');
+    const nextBtn = document.getElementById('deckNext');
+
+    function deckUpdate() {
+      dots.forEach((d, i) => d.classList.toggle('active', i === deckCurrent));
+      counter.textContent = String(deckCurrent + 1).padStart(2,'0') + ' / ' + String(deckTotal).padStart(2,'0');
+      progressFill.style.width = ((deckCurrent + 1) / deckTotal * 100) + '%';
+      prevBtn.disabled = false;
+      nextBtn.disabled = false;
+    }
+
+    function deckNav(dir) {
+      let next = deckCurrent + dir;
+      if (next >= deckTotal) next = 0;
+      if (next < 0) next = deckTotal - 1;
+      deckGoTo(next, dir);
+    }
+
+    function deckGoTo(next, dir) {
+      if (next === deckCurrent) return;
+      const direction = dir !== undefined ? dir : (next > deckCurrent ? 1 : -1);
+      const current = slides[deckCurrent];
+      const incoming = slides[next];
+
+      // Set initial position of incoming
+      incoming.style.opacity = '1';
+      incoming.style.pointerEvents = 'none';
+
+      // Animate out current
+      current.classList.add(direction > 0 ? 'exit-to-left' : 'exit-to-right');
+      // Animate in next
+      incoming.classList.add(direction > 0 ? 'enter-from-right' : 'enter-from-left');
+      incoming.classList.add('active');
+
+      setTimeout(() => {
+        current.classList.remove('active', 'exit-to-left', 'exit-to-right');
+        current.style.opacity = '';
+        incoming.classList.remove('enter-from-right', 'enter-from-left');
+        incoming.style.pointerEvents = '';
+        deckCurrent = next;
+        deckUpdate();
+      }, 650);
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight') deckNav(1);
+      if (e.key === 'ArrowLeft') deckNav(-1);
+    });
+
+    // Swipe support
+    let touchStartX = 0;
+    document.getElementById('deckStage').addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; });
+    document.getElementById('deckStage').addEventListener('touchend', e => {
+      const diff = touchStartX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 50) deckNav(diff > 0 ? 1 : -1);
+    });
+
+    deckUpdate();
     const timelineEl = document.getElementById('timeline');
     const spineFill = document.getElementById('tl-spine-fill');
     const tlItems = document.querySelectorAll('.tl-item');
