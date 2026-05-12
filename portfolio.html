@@ -548,8 +548,9 @@
     }
 
     .section-masthead .sub {
-      font-family: 'Space Mono', monospace;
-      font-size: 10px;
+      font-family: 'Courier Prime', monospace;
+      font-size: 14px;
+      font-weight: 700;
       letter-spacing: 4px;
       color: var(--gold);
       text-transform: uppercase;
@@ -1097,8 +1098,9 @@
     }
 
     .footer-masthead .sub {
-      font-family: 'Space Mono', monospace;
-      font-size: 10px;
+      font-family: 'Courier Prime', monospace;
+      font-size: 14px;
+      font-weight: 700;
       letter-spacing: 4px;
       color: var(--gold);
       text-transform: uppercase;
@@ -1119,8 +1121,9 @@
     }
 
     .connect-message .cm-eyebrow {
-      font-family: 'Space Mono', monospace;
-      font-size: 9px;
+      font-family: 'Courier Prime', monospace;
+      font-size: 14px;
+      font-weight: 700;
       letter-spacing: 3px;
       text-transform: uppercase;
       color: var(--gold);
@@ -1177,6 +1180,7 @@
       color: rgba(255,255,255,0.6);
       text-decoration: none;
       font-size: 11.5px;
+      font-style: italic;
       transition: color 0.2s;
     }
     .connect-link-row a:hover { color: var(--gold); }
@@ -1187,8 +1191,9 @@
     }
 
     .connect-form-wrap .cf-heading {
-      font-family: 'Space Mono', monospace;
-      font-size: 9px;
+      font-family: 'Courier Prime', monospace;
+      font-size: 14px;
+      font-weight: 700;
       letter-spacing: 3px;
       text-transform: uppercase;
       color: var(--gold);
@@ -1202,6 +1207,10 @@
       flex: 1;
       height: 1px;
       background: rgba(255,255,255,0.1);
+    }
+
+    .connect-form-wrap .cf-submit button {
+      font-family: 'Courier Prime', monospace;
     }
 
     .connect-form {
@@ -1260,16 +1269,19 @@
       background: var(--gold);
       color: var(--black);
       border: none;
-      font-family: 'Space Mono', monospace;
-      font-size: 10px;
+      font-family: 'Courier Prime', monospace;
+      font-size: 11px;
       letter-spacing: 2px;
       text-transform: uppercase;
-      padding: 12px 28px;
+      padding: 12px 24px;
       cursor: pointer;
-      transition: background 0.2s;
-      font-weight: 700;
+      transition: background 0.2s, color 0.2s;
+      font-weight: 900;
     }
-    .cf-submit button:hover { background: #e0be5a; }
+    .cf-submit button:hover {
+      background: var(--black);
+      color: var(--gold);
+    }
 
     .cf-submit .cf-note {
       font-family: 'Space Mono', monospace;
@@ -2028,7 +2040,6 @@
             </div>
             <div class="cf-submit">
               <button type="submit">Send</button>
-              <span class="cf-note">I read every<br/>message personally.</span>
             </div>
             <div id="cf-success" style="display:none; margin-top:14px; font-family:'Space Mono',monospace; font-size:10px; color:var(--gold); letter-spacing:1px;">✦ Message received — I'll be in touch soon.</div>
           </form>
@@ -2047,8 +2058,16 @@
     // Form submit
     function handleFormSubmit(e) {
       e.preventDefault();
+      const form = e.target;
+      const submitBtn = form.querySelector('button[type="submit"]');
+      submitBtn.textContent = 'Message Sent';
+      submitBtn.disabled = true;
       document.getElementById('cf-success').style.display = 'block';
-      e.target.reset();
+      form.reset();
+      setTimeout(() => {
+        submitBtn.textContent = 'Send';
+        submitBtn.disabled = false;
+      }, 2000);
     }
 
     // Intersection Observer for fade-up animations
