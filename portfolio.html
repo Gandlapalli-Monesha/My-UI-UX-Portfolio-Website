@@ -581,6 +581,8 @@
       position: relative;
       overflow: hidden;
       min-height: 88vh;
+      perspective: 1400px;
+      perspective-origin: 50% 42%;
     }
 
     /* Each slide = a full newspaper spread */
@@ -592,42 +594,56 @@
       background: var(--white);
       opacity: 0;
       pointer-events: none;
+      transform-style: preserve-3d;
+      backface-visibility: hidden;
+      transform: translateZ(0);
+      z-index: 0;
     }
 
     .deck-slide.active {
       opacity: 1;
       pointer-events: all;
+      z-index: 1;
     }
 
-    /* TRANSITIONS — paper-flip feel */
+    /* Flipbook-style page turn */
     .deck-slide.enter-from-right {
-      animation: paperInRight 0.55s cubic-bezier(.4,0,.2,1) forwards;
+      animation: deckFlipInRight 0.65s cubic-bezier(.45, 0, .2, 1) forwards;
     }
     .deck-slide.exit-to-left {
-      animation: paperOutLeft 0.55s cubic-bezier(.4,0,.2,1) forwards;
+      animation: deckFlipOutLeft 0.65s cubic-bezier(.45, 0, .2, 1) forwards;
     }
     .deck-slide.enter-from-left {
-      animation: paperInLeft 0.55s cubic-bezier(.4,0,.2,1) forwards;
+      animation: deckFlipInLeft 0.65s cubic-bezier(.45, 0, .2, 1) forwards;
     }
     .deck-slide.exit-to-right {
-      animation: paperOutRight 0.55s cubic-bezier(.4,0,.2,1) forwards;
+      animation: deckFlipOutRight 0.65s cubic-bezier(.45, 0, .2, 1) forwards;
     }
 
-    @keyframes paperInRight {
-      from { transform: translateX(6%) scale(0.98); opacity: 0; }
-      to   { transform: translateX(0) scale(1);     opacity: 1; }
+    @keyframes deckFlipOutLeft {
+      from { transform: rotateY(0deg); opacity: 1; }
+      to   { transform: rotateY(-52deg); opacity: 0; }
     }
-    @keyframes paperOutLeft {
-      from { transform: translateX(0) scale(1);      opacity: 1; }
-      to   { transform: translateX(-6%) scale(0.98); opacity: 0; }
+    @keyframes deckFlipInRight {
+      from { transform: rotateY(52deg); opacity: 0; }
+      to   { transform: rotateY(0deg); opacity: 1; }
     }
-    @keyframes paperInLeft {
-      from { transform: translateX(-6%) scale(0.98); opacity: 0; }
-      to   { transform: translateX(0) scale(1);      opacity: 1; }
+    @keyframes deckFlipOutRight {
+      from { transform: rotateY(0deg); opacity: 1; }
+      to   { transform: rotateY(52deg); opacity: 0; }
     }
-    @keyframes paperOutRight {
-      from { transform: translateX(0) scale(1);     opacity: 1; }
-      to   { transform: translateX(6%) scale(0.98); opacity: 0; }
+    @keyframes deckFlipInLeft {
+      from { transform: rotateY(-52deg); opacity: 0; }
+      to   { transform: rotateY(0deg); opacity: 1; }
+    }
+
+    .deck-slide.exit-to-left,
+    .deck-slide.enter-from-right {
+      transform-origin: left center;
+    }
+    .deck-slide.exit-to-right,
+    .deck-slide.enter-from-left {
+      transform-origin: right center;
     }
 
     /* LEFT: image panel */
@@ -650,63 +666,47 @@
       transform: scale(1.03);
     }
 
-    /* accent line at bottom of image */
-    .deck-accent-line {
-      position: absolute;
-      bottom: 0; left: 0;
-      height: 4px;
-      width: 0;
-      transition: width 0.7s 0.2s cubic-bezier(.4,0,.2,1);
-    }
-    .deck-slide.active .deck-accent-line {
-      width: 100%;
-    }
-
-    /* RIGHT: editorial info panel */
+    /* RIGHT: editorial info panel — centered column */
     .deck-info {
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      padding: 40px 36px 32px 36px;
+      justify-content: center;
+      align-items: flex-start;
+      text-align: left;
+      padding: 28px 32px 36px;
       position: relative;
       background: var(--white);
       border-left: none;
     }
 
-    /* ghost issue number */
+    /* Watermark index — top corner so it never collides with tags */
     .deck-index {
       font-family: 'Playfair Display', serif;
-      font-size: 110px;
+      font-size: clamp(64px, 10vw, 100px);
       font-weight: 900;
       line-height: 1;
       color: var(--light-gray);
       position: absolute;
-      bottom: 24px;
-      right: 20px;
+      top: 12px;
+      right: 16px;
+      bottom: auto;
       user-select: none;
       pointer-events: none;
       z-index: 0;
     }
 
-    .deck-info-top {
-      position: relative;
-      z-index: 1;
-    }
-
-    .deck-info-bottom {
-      position: relative;
-      z-index: 1;
-    }
-
     .deck-category {
       font-family: 'Courier Prime', monospace;
-      font-size: 9.5px;
+      font-size: 10px;
       letter-spacing: 3px;
       text-transform: uppercase;
       margin-bottom: 10px;
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: 8px;
+      position: relative;
+      z-index: 1;
     }
     .deck-category::before {
       content: '';
@@ -719,39 +719,46 @@
 
     .deck-title {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(20px, 2.4vw, 30px);
+      font-size: clamp(22px, 2.6vw, 32px);
       font-weight: 900;
       color: var(--black);
-      line-height: 1.1;
-      margin-bottom: 16px;
+      line-height: 1.12;
+      margin-bottom: 14px;
+      max-width: 22ch;
+      position: relative;
+      z-index: 1;
     }
 
     .deck-divider {
       width: 40px;
       height: 2.5px;
-      margin-bottom: 16px;
+      margin: 0 0 14px;
+      align-self: flex-start;
     }
 
     .deck-desc {
-      font-size: 12.5px;
+      font-size: 14.5px;
       color: var(--mid-gray);
-      line-height: 1.75;
-      margin-bottom: 24px;
+      line-height: 1.7;
+      margin-bottom: 18px;
+      max-width: 38ch;
     }
 
     .deck-tags {
       display: flex;
       flex-wrap: wrap;
-      gap: 5px;
-      margin-bottom: 20px;
+      gap: 8px;
+      justify-content: flex-start;
+      margin-bottom: 0;
+      max-width: 400px;
     }
 
     .deck-tag {
       font-family: 'Courier Prime', monospace;
-      font-size: 8.5px;
-      letter-spacing: 1px;
+      font-size: 10px;
+      letter-spacing: 0.8px;
       text-transform: uppercase;
-      padding: 4px 10px;
+      padding: 6px 12px;
       border: 1.5px solid var(--black);
       color: var(--black);
       background: transparent;
@@ -761,92 +768,41 @@
       color: var(--white);
     }
 
-    /* ===== DECK CONTROLS — newspaper footer bar ===== */
-    .deck-controls {
+    /* Side nav — stays on the spread */
+    .deck-nav-side {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 12;
+      width: 40px;
+      height: 40px;
+      border: none;
+      border-radius: 50%;
       background: var(--black);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 12px 36px;
-      gap: 20px;
-      border-top: 3px solid var(--black);
-    }
-
-    .deck-nav-btns {
-      display: flex;
-      gap: 0;
-    }
-
-    .deck-btn {
-      width: 40px; height: 40px;
-      border: 1.5px solid rgba(255,255,255,0.25);
-      background: transparent;
       color: var(--white);
-      font-size: 16px;
+      font-size: 18px;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: background 0.2s, color 0.2s;
+      transition: width 0.3s ease, height 0.3s ease, background 0.2s, color 0.2s;
       font-family: 'Space Mono', monospace;
-    }
-    .deck-btn:first-child { border-right: none; }
-    .deck-btn:hover {
-      background: var(--gold);
-      color: var(--black);
-      border-color: var(--gold);
-    }
-
-    .deck-dots {
-      display: flex;
-      gap: 6px;
-      align-items: center;
-    }
-
-    .deck-dot {
-      width: 5px; height: 5px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.25);
-      border: none;
-      cursor: pointer;
       padding: 0;
-      transition: all 0.3s ease;
+      box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.15);
     }
-    .deck-dot.active {
-      width: 20px;
-      border-radius: 2px;
-      background: var(--gold);
+    .deck-nav-side:hover {
+      width: 50px;
+      height: 50px;
+      background: var(--black);
+      color: var(--white);
     }
+    .deck-nav-side:focus-visible {
+      outline: 2px solid #a00000;
+      outline-offset: 2px;
+    }
+    .deck-nav-prev { left: 10px; }
+    .deck-nav-next { right: 10px; }
 
-    .deck-counter {
-      font-family: 'Courier Prime', monospace;
-      font-size: 11px;
-      color: rgba(255,255,255,0.4);
-      letter-spacing: 3px;
-    }
-
-    .deck-progress {
-      flex: 1;
-      height: 1.5px;
-      background: rgba(255,255,255,0.12);
-      position: relative;
-      max-width: 180px;
-    }
-    .deck-progress-fill {
-      position: absolute;
-      left: 0; top: 0; bottom: 0;
-      background: var(--gold);
-      transition: width 0.5s cubic-bezier(.4,0,.2,1);
-    }
-
-    /* keyboard hint */
-    .deck-hint {
-      font-family: 'Courier Prime', monospace;
-      font-size: 8.5px;
-      color: rgba(255,255,255,0.2);
-      letter-spacing: 1px;
-      text-transform: uppercase;
-    }
 
     /* Mock UI styles removed — design images used instead */
 
@@ -996,9 +952,72 @@
       width: 70%;
     }
 
-    /* ===== CREATIVE SECTION ===== */
+    /* ===== CREATIVE SECTION (cream “extra sheet” after deck) ===== */
+    .creative-wrap {
+      background: var(--cream);
+      border-top: 3px solid var(--black);
+      padding: 0 0 48px;
+    }
+
+    .creative-intro {
+      text-align: center;
+      padding: 28px 24px 24px;
+      margin: 0 auto;
+      max-width: none;
+    }
+
+    .creative-intro .creative-kicker {
+      font-family: 'Courier Prime', monospace;
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #a00000;
+      margin-bottom: 12px;
+    }
+
+    .creative-intro .creative-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 4.5vw, 44px);
+      font-weight: 900;
+      color: var(--black);
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+
+    .creative-intro .creative-lede {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      color: var(--mid-gray);
+      line-height: 1.65;
+      font-style: italic;
+      white-space: nowrap;
+      overflow: visible;
+    }
+
+    .creative-intro .creative-rule {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin-top: 22px;
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--mid-gray);
+    }
+
+    .creative-intro .creative-rule::before,
+    .creative-intro .creative-rule::after {
+      content: '';
+      height: 1px;
+      width: min(80px, 18vw);
+      background: linear-gradient(90deg, transparent, rgba(13, 13, 13, 0.35), transparent);
+    }
+
     .creative-section {
-      padding: 58px 0 40px;
+      padding: 24px 0 0;
       position: relative;
       overflow: visible;
     }
@@ -1130,6 +1149,7 @@
       border-bottom: 1px solid rgba(255, 255, 255, 0.15);
       padding-bottom: 24px;
       margin-bottom: 32px;
+      padding-top: 25px;
     }
 
     .footer-masthead h2 {
@@ -1487,6 +1507,25 @@
         padding: 8px 14px;
         font-size: 10px;
       }
+
+      .deck-slide {
+        grid-template-columns: 1fr;
+        grid-template-rows: minmax(220px, 42vh) auto;
+      }
+
+      .deck-visual {
+        border-right: none;
+        border-bottom: 3px solid var(--black);
+      }
+
+      .deck-nav-side {
+        width: 38px;
+        height: 72px;
+        font-size: 15px;
+      }
+
+      .deck-nav-prev { left: 6px; }
+      .deck-nav-next { right: 6px; }
     }
 
     /* ===== ENTRY ANIMATIONS ===== */
@@ -1577,6 +1616,7 @@
     <nav class="header-nav">
       <a href="#about">About Me</a>
       <a href="#work">My Work</a>
+      <a href="#creative">Footnotes</a>
       <a href="#contact">Get In Touch</a>
     </nav>
   </header>
@@ -1765,7 +1805,6 @@
   <!-- MY WORK — DECK SLIDESHOW -->
   <div id="work">
     <div class="section-masthead">
-      <div class="sub">— Featured Projects —</div>
       <h2>The Design Deck: Stories Told in Figma &amp; Canva</h2>
     </div>
 
@@ -1777,7 +1816,6 @@
           <div class="deck-visual">
             <!-- Replace src with your MSA / Microsoft SRM design screenshot -->
             <img class="deck-design-img" src="MSA Design.png" alt="Microsoft Student Ambassadors SRM — Mobile Onboarding Design" />
-            <div class="deck-accent-line" style="background: linear-gradient(90deg, #3366cc, #7eb3ff);"></div>
           </div>
           <div class="deck-info">
             <div class="deck-index">01</div>
@@ -1800,7 +1838,6 @@
           <div class="deck-visual">
             <!-- Replace src with your Cherry's Community design screenshot -->
             <img class="deck-design-img" src="Cherry Design.png" alt="Cherry's Community SRM — Events Page Redesign" />
-            <div class="deck-accent-line" style="background: linear-gradient(90deg, #a00000, #e85050);"></div>
           </div>
           <div class="deck-info">
             <div class="deck-index">02</div>
@@ -1820,7 +1857,6 @@
           <div class="deck-visual">
             <!-- Replace src with your Tradzo landing page design screenshot -->
             <img class="deck-design-img" src="Tradzo Design.png" alt="Tradzo Landing Page Redesign" />
-            <div class="deck-accent-line" style="background: linear-gradient(90deg, #3fcf1a, #f5f0e8);"></div>
           </div>
           <div class="deck-info">
             <div class="deck-index">03</div>
@@ -1840,7 +1876,6 @@
           <div class="deck-visual">
             <!-- Replace src with your Suzanne Collins author website design screenshot -->
             <img class="deck-design-img" src="Author Design.png" alt="Suzanne Collins Author Website Redesign" />
-            <div class="deck-accent-line" style="background: linear-gradient(90deg, #7dcbfb, hsl(49, 16%, 87%));"></div>
           </div>
           <div class="deck-info">
             <div class="deck-index">04</div>
@@ -1861,7 +1896,6 @@
           <div class="deck-visual">
             <!-- Replace src with your CodeNex website redesign screenshot -->
             <img class="deck-design-img" src="CodeNex Design.png" alt="CodeNex Website Redesign" />
-            <div class="deck-accent-line" style="background: linear-gradient(90deg, #2c87c4, #fafafa);"></div>
           </div>
           <div class="deck-info">
             <div class="deck-index">05</div>
@@ -1882,7 +1916,6 @@
           <div class="deck-visual">
             <!-- Replace src with your Nocturne journal app design screenshot -->
             <img class="deck-design-img" src="Nocturne Design.png" alt="Nocturne Personal Journal App Design" />
-            <div class="deck-accent-line" style="background: linear-gradient(90deg, #c9a84c, #e8d080);"></div>
           </div>
           <div class="deck-info">
             <div class="deck-index">06</div>
@@ -1900,28 +1933,85 @@
 
       </div><!-- /deck-stage -->
 
-      <!-- Controls — newspaper footer bar -->
-      <div class="deck-controls">
-        <div class="deck-nav-btns">
-          <button class="deck-btn" id="deckPrev" onclick="deckNav(-1)">←</button>
-          <button class="deck-btn" id="deckNext" onclick="deckNav(1)">→</button>
-        </div>
-        <div class="deck-dots" id="deckDots">
-          <button class="deck-dot active" onclick="deckGoTo(0)"></button>
-          <button class="deck-dot" onclick="deckGoTo(1)"></button>
-          <button class="deck-dot" onclick="deckGoTo(2)"></button>
-          <button class="deck-dot" onclick="deckGoTo(3)"></button>
-          <button class="deck-dot" onclick="deckGoTo(4)"></button>
-          <button class="deck-dot" onclick="deckGoTo(5)"></button>
-        </div>
-        <div class="deck-progress">
-          <div class="deck-progress-fill" id="deckProgressFill" style="width:16.6%;"></div>
-        </div>
-        <div class="deck-counter" id="deckCounter">01 / 06</div>
-      </div>
+      <button type="button" class="deck-nav-side deck-nav-prev" id="deckPrev" onclick="deckNav(-1)" aria-label="Previous project">◀</button>
+      <button type="button" class="deck-nav-side deck-nav-next" id="deckNext" onclick="deckNav(1)" aria-label="Next project">▶</button>
     </div><!-- /deck-section -->
   </div>
 
+
+  <div class="section-divider"></div>
+
+  <!-- CREATIVE FOOTNOTES — cream sheet (not a black masthead) -->
+  <div id="creative" class="creative-wrap">
+    <div class="page-content">
+      <header class="creative-intro">
+        <h2 class="creative-title">Creative Footnotes</h2>
+        <p class="creative-lede">Posters, stories, and side-of-desk experiments — the work that does not always land in a case study deck.</p>
+      </header>
+
+      <div class="creative-section">
+        <div class="posters-grid">
+
+          <div class="poster-item fade-up">
+            <div class="poster-card">
+              <div class="poster-placeholder">
+                <div class="ph-icon">🎃</div>
+                <div class="ph-label">Hackoween 2023<br/>Add your poster image here</div>
+              </div>
+            </div>
+            <div class="poster-caption">
+              <div class="pc-category">Event Poster · Hackathon</div>
+              <div class="pc-title">Hackoween 2023</div>
+              <div class="pc-desc">A Halloween-themed hackathon poster for The Hive. Dark palette, bold typography, and seasonal motifs blended to make the event feel both exciting and spooky.</div>
+            </div>
+          </div>
+
+          <div class="poster-item fade-up">
+            <div class="poster-card">
+              <div class="poster-placeholder">
+                <div class="ph-icon">🪔</div>
+                <div class="ph-label">Happy Diwali<br/>Add your poster image here</div>
+              </div>
+            </div>
+            <div class="poster-caption">
+              <div class="pc-category">Festival Poster · Social Media</div>
+              <div class="pc-title">Happy Diwali</div>
+              <div class="pc-desc">A festive Diwali greeting poster with warm tones, rangoli-inspired geometric patterns, and traditional motifs — designed for club and community social channels.</div>
+            </div>
+          </div>
+
+          <div class="poster-item fade-up">
+            <div class="poster-card">
+              <div class="poster-placeholder">
+                <div class="ph-icon">∞</div>
+                <div class="ph-label">Old Roads, New Destinations<br/>Add your poster image here</div>
+              </div>
+            </div>
+            <div class="poster-caption">
+              <div class="pc-category">Graphic Design · Editorial</div>
+              <div class="pc-title">Old Roads, New Destinations</div>
+              <div class="pc-desc">A minimalist editorial poster exploring the theme of journeys and change. Clean lines, muted cream tones, and restrained type — letting the concept breathe.</div>
+            </div>
+          </div>
+
+          <div class="poster-item fade-up">
+            <div class="poster-card">
+              <div class="poster-placeholder">
+                <div class="ph-icon">✦</div>
+                <div class="ph-label">Wishing You All the Best<br/>Add your poster image here</div>
+              </div>
+            </div>
+            <div class="poster-caption">
+              <div class="pc-category">Greeting Design · Social Media</div>
+              <div class="pc-title">Wishing You All the Best</div>
+              <div class="pc-desc">A warm celebration graphic with gold star motifs and soft gradients. Designed for occasions and community sharing — friendly, uplifting, and adaptable.</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
 
   <div class="section-divider"></div>
 
@@ -2036,26 +2126,12 @@
     let deckCurrent = 0;
     const deckTotal = 6;
     const slides = document.querySelectorAll('.deck-slide');
-    const dots = document.querySelectorAll('.deck-dot');
-    const counter = document.getElementById('deckCounter');
-    const progressFill = document.getElementById('deckProgressFill');
     const prevBtn = document.getElementById('deckPrev');
     const nextBtn = document.getElementById('deckNext');
 
     function deckUpdate() {
-      dots.forEach((d, i) => d.classList.toggle('active', i === deckCurrent));
-      counter.textContent = String(deckCurrent + 1).padStart(2,'0') + ' / ' + String(deckTotal).padStart(2,'0');
-      progressFill.style.width = ((deckCurrent + 1) / deckTotal * 100) + '%';
-      prevBtn.disabled = false;
-      nextBtn.disabled = false;
-
-      // Animate accent line: reset all, then grow the active one
-      document.querySelectorAll('.deck-accent-line').forEach(line => line.classList.remove('line-active'));
-      const activeLine = slides[deckCurrent].querySelector('.deck-accent-line');
-      if (activeLine) {
-        // Brief timeout lets the CSS transition fire properly after class removal
-        requestAnimationFrame(() => requestAnimationFrame(() => activeLine.classList.add('line-active')));
-      }
+      if (prevBtn) prevBtn.disabled = false;
+      if (nextBtn) nextBtn.disabled = false;
     }
 
     function deckNav(dir) {
@@ -2071,41 +2147,46 @@
       const current = slides[deckCurrent];
       const incoming = slides[next];
 
-      // Set initial position of incoming
       incoming.style.opacity = '1';
       incoming.style.pointerEvents = 'none';
+      incoming.style.zIndex = '8';
+      current.style.zIndex = '7';
 
-      // Animate out current
       current.classList.add(direction > 0 ? 'exit-to-left' : 'exit-to-right');
-      // Animate in next
       incoming.classList.add(direction > 0 ? 'enter-from-right' : 'enter-from-left');
       incoming.classList.add('active');
 
       setTimeout(() => {
         current.classList.remove('active', 'exit-to-left', 'exit-to-right');
         current.style.opacity = '';
+        current.style.zIndex = '';
         incoming.classList.remove('enter-from-right', 'enter-from-left');
         incoming.style.pointerEvents = '';
+        incoming.style.zIndex = '';
         deckCurrent = next;
         deckUpdate();
       }, 650);
     }
 
-    // Keyboard navigation
     document.addEventListener('keydown', e => {
+      const t = e.target;
+      if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA')) return;
       if (e.key === 'ArrowRight') deckNav(1);
       if (e.key === 'ArrowLeft') deckNav(-1);
     });
 
-    // Swipe support
-    let touchStartX = 0;
-    document.getElementById('deckStage').addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; });
-    document.getElementById('deckStage').addEventListener('touchend', e => {
-      const diff = touchStartX - e.changedTouches[0].clientX;
-      if (Math.abs(diff) > 50) deckNav(diff > 0 ? 1 : -1);
-    });
+    const deckStage = document.getElementById('deckStage');
+    if (deckStage) {
+      let touchStartX = 0;
+      deckStage.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; });
+      deckStage.addEventListener('touchend', e => {
+        const diff = touchStartX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 50) deckNav(diff > 0 ? 1 : -1);
+      });
+    }
 
     deckUpdate();
+
     const timelineEl = document.getElementById('timeline');
     const spineFill = document.getElementById('tl-spine-fill');
     const tlItems = document.querySelectorAll('.tl-item');
