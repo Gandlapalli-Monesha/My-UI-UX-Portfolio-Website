@@ -8,8 +8,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&family=Ballet:opsz@16..72&family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&family=UnifrakturMaguntia&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&family=Ballet:opsz@16..72&family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&family=UnifrakturMaguntia&family=Beth+Ellen&family=Passions+Conflict&display=swap"
     rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Intel+One+Mono:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
   <style>
     :root {
       --black: #0d0d0d;
@@ -22,6 +23,12 @@
       --mid-gray: #4a4a4a;
       --light-gray: #e8e4dc;
       --accent-green: #2d5a27;
+    }
+
+    .beth-ellen-regular {
+      font-family: "Beth Ellen", cursive;
+      font-weight: 400;
+      font-style: normal;
     }
 
     *,
@@ -388,13 +395,12 @@
     }
 
     .spotlight-section .subhead {
-      font-family: 'Courier Prime', monospace;
-      font-weight: 700;
-      font-size: 14px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
+      font-size: clamp(16px, 2.1vw, 22px);
+      letter-spacing: 0.5px;
+      text-transform: none;
       color: var(--gold);
       margin-bottom: 20px;
+      line-height: 1.15;
     }
 
     /* ===== TIMELINE ===== */
@@ -516,8 +522,11 @@
       max-width: 100%;
     }
     .pull-quote--sm p {
-      font-size: 14.5px !important;
-      letter-spacing: 0.6px;
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-style: italic;
+      font-size: clamp(13px, 1.65vw, 16px) !important;
+      letter-spacing: 0.02em;
       line-height: 1.55;
     }
 
@@ -581,11 +590,9 @@
       position: relative;
       overflow: hidden;
       min-height: 88vh;
-      perspective: 1400px;
-      perspective-origin: 50% 42%;
     }
 
-    /* Each slide = a full newspaper spread */
+    /* Each slide = a full newspaper spread (no whole-slide 3D — children animate separately) */
     .deck-slide {
       position: absolute;
       inset: 0;
@@ -594,8 +601,6 @@
       background: var(--white);
       opacity: 0;
       pointer-events: none;
-      transform-style: preserve-3d;
-      backface-visibility: hidden;
       transform: translateZ(0);
       z-index: 0;
     }
@@ -606,44 +611,54 @@
       z-index: 1;
     }
 
-    /* Flipbook-style page turn */
-    .deck-slide.enter-from-right {
-      animation: deckFlipInRight 0.65s cubic-bezier(.45, 0, .2, 1) forwards;
+    /* Image panel: light horizontal drift + fade (no scale snap here) */
+    .deck-slide.exit-to-left .deck-visual {
+      animation: deckImgOutL 0.58s ease forwards;
     }
-    .deck-slide.exit-to-left {
-      animation: deckFlipOutLeft 0.65s cubic-bezier(.45, 0, .2, 1) forwards;
+    .deck-slide.exit-to-right .deck-visual {
+      animation: deckImgOutR 0.58s ease forwards;
     }
-    .deck-slide.enter-from-left {
-      animation: deckFlipInLeft 0.65s cubic-bezier(.45, 0, .2, 1) forwards;
+    .deck-slide.enter-from-right .deck-visual {
+      animation: deckImgInR 0.58s ease forwards;
     }
-    .deck-slide.exit-to-right {
-      animation: deckFlipOutRight 0.65s cubic-bezier(.45, 0, .2, 1) forwards;
-    }
-
-    @keyframes deckFlipOutLeft {
-      from { transform: rotateY(0deg); opacity: 1; }
-      to   { transform: rotateY(-52deg); opacity: 0; }
-    }
-    @keyframes deckFlipInRight {
-      from { transform: rotateY(52deg); opacity: 0; }
-      to   { transform: rotateY(0deg); opacity: 1; }
-    }
-    @keyframes deckFlipOutRight {
-      from { transform: rotateY(0deg); opacity: 1; }
-      to   { transform: rotateY(52deg); opacity: 0; }
-    }
-    @keyframes deckFlipInLeft {
-      from { transform: rotateY(-52deg); opacity: 0; }
-      to   { transform: rotateY(0deg); opacity: 1; }
+    .deck-slide.enter-from-left .deck-visual {
+      animation: deckImgInL 0.58s ease forwards;
     }
 
-    .deck-slide.exit-to-left,
-    .deck-slide.enter-from-right {
-      transform-origin: left center;
+    @keyframes deckImgOutL {
+      from { opacity: 1; transform: translateX(0); }
+      to { opacity: 0; transform: translateX(-10px); }
     }
-    .deck-slide.exit-to-right,
-    .deck-slide.enter-from-left {
-      transform-origin: right center;
+    @keyframes deckImgOutR {
+      from { opacity: 1; transform: translateX(0); }
+      to { opacity: 0; transform: translateX(10px); }
+    }
+    @keyframes deckImgInR {
+      from { opacity: 0; transform: translateX(12px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes deckImgInL {
+      from { opacity: 0; transform: translateX(-12px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    /* Copy panel: subtle vertical fade only — not the same motion as the image */
+    .deck-slide.exit-to-left .deck-info,
+    .deck-slide.exit-to-right .deck-info {
+      animation: deckTextOut 0.48s ease forwards;
+    }
+    .deck-slide.enter-from-right .deck-info,
+    .deck-slide.enter-from-left .deck-info {
+      animation: deckTextIn 0.62s ease forwards;
+    }
+
+    @keyframes deckTextOut {
+      from { opacity: 1; transform: translateY(0); }
+      to { opacity: 0; transform: translateY(-6px); }
+    }
+    @keyframes deckTextIn {
+      from { opacity: 0; transform: translateY(7px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     /* LEFT: image panel */
@@ -654,16 +669,26 @@
       background: var(--cream);
     }
 
+    /* Very slow Ken Burns–style zoom only while this slide is active (no fast scale on change) */
     .deck-design-img {
       display: block;
       width: 100%;
       height: 100%;
       object-fit: cover;
       object-position: center top;
-      transition: transform 8s ease;
+      transform: scale(1);
+      transform-origin: center center;
     }
+
+    .deck-slide:not(.active) .deck-design-img {
+      transform: scale(1);
+      transition: none;
+    }
+
     .deck-slide.active .deck-design-img {
-      transform: scale(1.03);
+      transform: scale(1.065);
+      /* Start the slow zoom only after the slide handoff finishes */
+      transition: transform 48s cubic-bezier(0.18, 0.04, 0.22, 1) 0.65s;
     }
 
     /* RIGHT: editorial info panel — centered column */
@@ -961,7 +986,7 @@
 
     .creative-intro {
       text-align: center;
-      padding: 28px 24px 24px;
+      padding: 28px 24px 12px;
       margin: 0 auto;
       max-width: none;
     }
@@ -986,13 +1011,16 @@
     }
 
     .creative-intro .creative-lede {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 15px;
-      color: var(--mid-gray);
-      line-height: 1.65;
-      font-style: italic;
-      white-space: nowrap;
+      font-family: "Passions Conflict", cursive;
+      font-weight: 400;
+      font-style: normal;
+      font-size: clamp(20px, 10vw, 40px);
+      color: var(--black);
+      line-height: 1.45;
+      white-space: normal;
       overflow: visible;
+      text-align: center;
+      margin: 8px 0;
     }
 
     .creative-intro .creative-rule {
@@ -1017,7 +1045,7 @@
     }
 
     .creative-section {
-      padding: 24px 0 0;
+      padding: 4px 0 0;
       position: relative;
       overflow: visible;
     }
@@ -1055,81 +1083,77 @@
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 20px;
+      align-items: stretch;
     }
 
     .poster-item {
       display: flex;
       flex-direction: column;
       gap: 0;
+      height: 100%;
+      position: relative;
+      z-index: 0;
     }
 
+    .poster-item:has(.poster-card:hover) {
+      z-index: 30;
+    }
+
+    /* Art must stack above the caption where they overlap after scale — never the reverse */
     .poster-card {
       aspect-ratio: 2/3;
       position: relative;
-      overflow: hidden;
+      z-index: 2;
+      overflow: visible;
       border: 2px solid var(--black);
       cursor: pointer;
-      transition: transform 0.3s ease;
+      transition: transform 0.35s ease;
     }
     .poster-card:hover {
-      transform: scale(1.04);
+      z-index: 5;
+      transform: scale(1.06);
     }
 
     .poster-caption {
+      position: relative;
+      z-index: 1;
       border: 2px solid var(--black);
       border-top: none;
-      padding: 14px 16px;
-      background: var(--white);
+      padding: 24px 20px;
+      background: var(--black);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
     }
     .poster-caption .pc-category {
-      font-family: 'Space Mono', monospace;
-      font-size: 8.5px;
+      font-family: 'Courier Prime', monospace;
+      font-weight: 700;
+      font-size: 11px;
       letter-spacing: 2px;
       text-transform: uppercase;
-      color: #a00000;
-      margin-bottom: 4px;
+      color: var(--gold);
+      margin-bottom: 10px;
     }
     .poster-caption .pc-title {
       font-family: 'Playfair Display', serif;
-      font-size: 15px;
+      font-size: 20px;
       font-weight: 700;
-      color: var(--black);
-      margin-bottom: 5px;
+      color: var(--white);
+      margin-bottom: 12px;
       line-height: 1.2;
     }
     .poster-caption .pc-desc {
-      font-size: 11.5px;
-      color: var(--mid-gray);
+      font-size: 14px;
+      color: var(--white);
       line-height: 1.6;
     }
 
-    /* Poster placeholder — replace contents with your actual poster image */
-    .poster-placeholder {
+    /* Poster image */
+    .poster-image {
       width: 100%;
       height: 100%;
-      background: var(--cream);
-      border: 2px dashed rgba(0,0,0,0.18);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      box-sizing: border-box;
-    }
-    .poster-placeholder .ph-icon {
-      font-size: 28px;
-      opacity: 0.25;
-    }
-    .poster-placeholder .ph-label {
-      font-family: 'Space Mono', monospace;
-      font-size: 8px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--mid-gray);
-      text-align: center;
-      opacity: 0.55;
-      padding: 0 16px;
-      line-height: 1.6;
+      object-fit: cover;
+      display: block;
     }
 
     /* ===== FOOTER / CONTACT ===== */
@@ -1184,13 +1208,12 @@
     }
 
     .connect-message .cm-eyebrow {
-      font-family: 'Courier Prime', monospace;
-      font-size: 14px;
-      font-weight: 700;
-      letter-spacing: 3px;
-      text-transform: uppercase;
+      font-size: clamp(16px, 2.1vw, 22px);
+      letter-spacing: 0.5px;
+      text-transform: none;
       color: var(--gold);
       margin-bottom: 12px;
+      line-height: 1.15;
     }
 
     .connect-message h3 {
@@ -1207,7 +1230,7 @@
     }
 
     .connect-message p {
-      font-size: 13px;
+      font-size: 15px;
       color: rgba(255,255,255,0.55);
       line-height: 1.8;
       margin-bottom: 24px;
@@ -1219,10 +1242,20 @@
       gap: 10px;
     }
 
+    .connect-link-row,
+    .connect-link-row a,
+    .connect-link-row .cl-icon {
+      font-family: "Intel One Mono", monospace;
+      font-optical-sizing: auto;
+      font-style: normal;
+    }
+
     .connect-link-row {
       display: flex;
       align-items: center;
       gap: 10px;
+      font-size: 12px;
+      font-weight: 400;
     }
 
     .connect-link-row .cl-icon {
@@ -1236,14 +1269,14 @@
       font-size: 11px;
       color: var(--gold);
       flex-shrink: 0;
-      font-family: 'Space Mono', monospace;
+      font-weight: 400;
     }
 
     .connect-link-row a {
       color: rgba(255,255,255,0.6);
       text-decoration: none;
       font-size: 11.5px;
-      font-style: italic;
+      font-weight: 400;
       transition: color 0.2s;
     }
     .connect-link-row a:hover { color: var(--gold); }
@@ -1254,16 +1287,15 @@
     }
 
     .connect-form-wrap .cf-heading {
-      font-family: 'Courier Prime', monospace;
-      font-size: 14px;
-      font-weight: 700;
-      letter-spacing: 3px;
-      text-transform: uppercase;
+      font-size: clamp(16px, 2.1vw, 22px);
+      letter-spacing: 0.5px;
+      text-transform: none;
       color: var(--gold);
       margin-bottom: 16px;
       display: flex;
       align-items: center;
       gap: 10px;
+      line-height: 1.15;
     }
     .connect-form-wrap .cf-heading::after {
       content: '';
@@ -1615,8 +1647,8 @@
 
     <nav class="header-nav">
       <a href="#about">About Me</a>
-      <a href="#work">My Work</a>
-      <a href="#creative">Footnotes</a>
+      <a href="#work">My Designs</a>
+      <a href="#creative">Posters & Stories</a>
       <a href="#contact">Get In Touch</a>
     </nav>
   </header>
@@ -1663,7 +1695,6 @@
         <img src="portfolio-pic.jpeg" alt="Gandlapalli Monesha" class="about-photo-placeholder">
 
         <div class="record-card">
-          <div class="record-header">— PROFILE —</div>
           <div class="record-fields">
             <div class="record-row">
               <span class="rec-label">Name</span>
@@ -1711,16 +1742,16 @@
 
         <div style="margin-top: 25px;"></div>
         <div class="pull-quote pull-quote--sm">
-          <p style="font-size: 15px;">"Design is where science and art break even."<br/>— Robin Matthew</p>
+          <p>"Design is where science and art break even."<br/>— Robin Matthew</p>
         </div>
       </div>
 
       <!-- RIGHT: Spotlight + Timeline -->
       <div class="spotlight-section fade-up" id="spotlight">
-        <div class="column-label">Student Spotlight</div>
         <h2>Blending <em>Creativity</em><br/>with Code</h2>
-        <div class="subhead">— A designer's origin story</div>
-
+        <br>
+        <div class="subhead beth-ellen-regular">— A designer's origin story</div>
+        <br>
         <div class="timeline" id="timeline">
           <!-- Animated spine -->
           <div class="timeline-spine">
@@ -1811,14 +1842,33 @@
     <div class="deck-section">
       <div class="deck-stage" id="deckStage">
 
-        <!-- SLIDE 01: Microsoft SRM -->
+        <!-- SLIDE 01: Cherry's Community -->
         <div class="deck-slide active" data-index="0">
+          <div class="deck-visual">
+            <!-- Replace src with your Cherry's Community design screenshot -->
+            <img class="deck-design-img" src="Cherry Design.png" alt="Cherry's Community SRM — Events Page Redesign" />
+          </div>
+          <div class="deck-info">
+            <div class="deck-index">01</div>
+            <div class="deck-category" style="color:#a00000;">Event Design · Web Redesign</div>
+            <div class="deck-title">Cherry+ Network,<br/>SRM</div>
+            <div class="deck-divider" style="background:#a00000;"></div>
+            <div class="deck-desc">Redesigned the club’s Events page to match their Netflix‑inspired website theme. Developed layouts for event listings, registrations, and detailed views, blending Cherry+ branding with cinematic styling. The work demonstrated my ability to adapt design systems to thematic concepts and contributed to my recruitment into the club.</div>
+            <div class="deck-tags">
+              <span class="deck-tag filled" style="background:#a00000;">Figma</span>
+              <span class="deck-tag">Netflix Inspired</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- SLIDE 02: Microsoft SRM -->
+        <div class="deck-slide" data-index="1">
           <div class="deck-visual">
             <!-- Replace src with your MSA / Microsoft SRM design screenshot -->
             <img class="deck-design-img" src="MSA Design.png" alt="Microsoft Student Ambassadors SRM — Mobile Onboarding Design" />
           </div>
           <div class="deck-info">
-            <div class="deck-index">01</div>
+            <div class="deck-index">02</div>
             <div class="deck-category" style="color:#3366cc;">Mobile UX · Onboarding</div>
             <div class="deck-title">Microsoft Student<br/>Ambassadors, SRM</div>
             <div class="deck-divider" style="background:#3366cc;"></div>
@@ -1829,25 +1879,6 @@
               <div style="flex-basis: 100%;"></div>
               <span class="deck-tag">Gradient Animations</span>
               <span class="deck-tag">3D Visuals</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- SLIDE 02: Cherry's Community -->
-        <div class="deck-slide" data-index="1">
-          <div class="deck-visual">
-            <!-- Replace src with your Cherry's Community design screenshot -->
-            <img class="deck-design-img" src="Cherry Design.png" alt="Cherry's Community SRM — Events Page Redesign" />
-          </div>
-          <div class="deck-info">
-            <div class="deck-index">02</div>
-            <div class="deck-category" style="color:#a00000;">Event Design · Web Redesign</div>
-            <div class="deck-title">Cherry+ Network,<br/>SRM</div>
-            <div class="deck-divider" style="background:#a00000;"></div>
-            <div class="deck-desc">Redesigned the club’s Events page to match their Netflix‑inspired website theme. Developed layouts for event listings, registrations, and detailed views, blending Cherry+ branding with cinematic styling. The work demonstrated my ability to adapt design systems to thematic concepts and contributed to my recruitment into the club.</div>
-            <div class="deck-tags">
-              <span class="deck-tag filled" style="background:#a00000;">Figma</span>
-              <span class="deck-tag">Netflix Inspired</span>
             </div>
           </div>
         </div>
@@ -1954,57 +1985,45 @@
 
           <div class="poster-item fade-up">
             <div class="poster-card">
-              <div class="poster-placeholder">
-                <div class="ph-icon">🎃</div>
-                <div class="ph-label">Hackoween 2023<br/>Add your poster image here</div>
-              </div>
+              <img src="Hackoween Poster.png" alt="Hackoween 2025 Poster" class="poster-image">
             </div>
             <div class="poster-caption">
-              <div class="pc-category">Event Poster · Hackathon</div>
-              <div class="pc-title">Hackoween 2023</div>
-              <div class="pc-desc">A Halloween-themed hackathon poster for The Hive. Dark palette, bold typography, and seasonal motifs blended to make the event feel both exciting and spooky.</div>
+              <div class="pc-category" style="color: #61a974;"> <br>Event Poster · <br>Haloween Themed</div>
+              <div class="pc-title">Hackoween 2025</div>
+              <div class="pc-desc">A Halloween-themed CTF poster for a college club. Dark palette, bold typography, and seasonal motifs blended to make the event feel both exciting and spooky.</div>
             </div>
           </div>
 
           <div class="poster-item fade-up">
             <div class="poster-card">
-              <div class="poster-placeholder">
-                <div class="ph-icon">🪔</div>
-                <div class="ph-label">Happy Diwali<br/>Add your poster image here</div>
-              </div>
+              <img src="Diwali Story.png" alt="Diwali Poster" class="poster-image">
             </div>
             <div class="poster-caption">
-              <div class="pc-category">Festival Poster · Social Media</div>
-              <div class="pc-title">Happy Diwali</div>
-              <div class="pc-desc">A festive Diwali greeting poster with warm tones, rangoli-inspired geometric patterns, and traditional motifs — designed for club and community social channels.</div>
+              <div class="pc-category" style="color: #33418f;">Festival Poster · <br> Social Media</div>
+              <div class="pc-title">Diwali 2025</div>
+              <div class="pc-desc">A festive Diwali greeting poster with warm tones, rangoli-inspired geometric patterns, and traditional motifs — designed for club and its social channels.</div>
             </div>
           </div>
 
           <div class="poster-item fade-up">
             <div class="poster-card">
-              <div class="poster-placeholder">
-                <div class="ph-icon">∞</div>
-                <div class="ph-label">Old Roads, New Destinations<br/>Add your poster image here</div>
-              </div>
+              <img src="BlockTheChain Poster.png" alt="BlockTheChain Poster" class="poster-image">
             </div>
             <div class="poster-caption">
-              <div class="pc-category">Graphic Design · Editorial</div>
-              <div class="pc-title">Old Roads, New Destinations</div>
-              <div class="pc-desc">A minimalist editorial poster exploring the theme of journeys and change. Clean lines, muted cream tones, and restrained type — letting the concept breathe.</div>
+              <div class="pc-category" style="color: #d80028;"><br>  Workshop Poster · <br> Tron Themed</div>
+              <div class="pc-title">Block The Chain 2025</div>
+              <div class="pc-desc">Designed a futuristic Tron‑inspired poster for BlockTheChain, an industry workshop on AI and blockchain. Widely circulated for forwarding and C2C, it became the central visual identity of the event.</div>
             </div>
           </div>
 
           <div class="poster-item fade-up">
             <div class="poster-card">
-              <div class="poster-placeholder">
-                <div class="ph-icon">✦</div>
-                <div class="ph-label">Wishing You All the Best<br/>Add your poster image here</div>
-              </div>
+              <img src="Christmas Story.png" alt="Christmas Story" class="poster-image">
             </div>
             <div class="poster-caption">
-              <div class="pc-category">Greeting Design · Social Media</div>
-              <div class="pc-title">Wishing You All the Best</div>
-              <div class="pc-desc">A warm celebration graphic with gold star motifs and soft gradients. Designed for occasions and community sharing — friendly, uplifting, and adaptable.</div>
+              <div class="pc-category">Christmas Story · <br>Social Media</div>
+              <div class="pc-title">Christmas 2025</div>
+              <div class="pc-desc">Created a festive visual narrative using blue, red, and snowy elements to capture the holiday spirit.Blended storytelling with seasonal design motifs, making the piece both engaging and atmospheric.</div>
             </div>
           </div>
 
@@ -2030,8 +2049,8 @@
 
         <!-- Left: personal message + links -->
         <div class="connect-message">
-          <div class="cm-eyebrow">— A note from Monesha</div>
-          <h3>Design is a story <br/>best told <em>together.</em></h3>
+          <div class="cm-eyebrow beth-ellen-regular">— A note from Monesha</div>
+          <h3>Design is a story <br/>best told <em>together.</em></h3></h3>
           <p>Whether you’re looking for a designer to shape interfaces, a collaborator for creative work, or simply someone to exchange ideas with — I’d love to connect. Let’s turn concepts into experiences worth sharing.</p>
 
           <div class="connect-links">
@@ -2060,7 +2079,7 @@
 
         <!-- Right: contact form -->
         <div class="connect-form-wrap">
-          <div class="cf-heading">Send a Dispatch</div>
+          <div class="cf-heading beth-ellen-regular">Send a Dispatch</div>
           <form class="connect-form" onsubmit="handleFormSubmit(event)">
             <div class="cf-field">
               <label>Your Name</label>
@@ -2165,7 +2184,7 @@
         incoming.style.zIndex = '';
         deckCurrent = next;
         deckUpdate();
-      }, 650);
+      }, 680);
     }
 
     document.addEventListener('keydown', e => {
