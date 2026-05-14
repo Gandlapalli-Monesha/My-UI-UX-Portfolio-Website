@@ -556,33 +556,42 @@
       text-transform: uppercase;
     }
 
-    /* ===== CASE STUDIES GRID ===== */
-    /* ===== DECK SLIDESHOW ===== */
+    /* ===== WORK — EDITORIAL SPREADS ===== */
+    #work {
+      background: var(--white);
+    }
+
+    /* section header stays in newspaper language */
+    #work .section-masthead {
+      background: var(--black);
+      color: var(--white);
+      text-align: center;
+      padding: 20px;
+      border-bottom: 3px solid var(--black);
+    }
+
+    /* The paging container */
     .deck-section {
       position: relative;
-      background: var(--black);
+      background: var(--white);
       overflow: hidden;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
     }
 
     .deck-stage {
       position: relative;
-      flex: 1;
       overflow: hidden;
-      min-height: 82vh;
+      min-height: 88vh;
     }
 
-    /* Each slide */
+    /* Each slide = a full newspaper spread */
     .deck-slide {
       position: absolute;
       inset: 0;
       display: grid;
-      grid-template-columns: 1.8fr 1fr;
+      grid-template-columns: 1.65fr 1fr;
+      background: var(--white);
       opacity: 0;
       pointer-events: none;
-      transition: none;
     }
 
     .deck-slide.active {
@@ -590,219 +599,253 @@
       pointer-events: all;
     }
 
-    /* Slide enter/exit animations */
+    /* TRANSITIONS — paper-flip feel */
     .deck-slide.enter-from-right {
-      animation: slideInRight 0.65s cubic-bezier(.77,0,.18,1) forwards;
+      animation: paperInRight 0.55s cubic-bezier(.4,0,.2,1) forwards;
     }
     .deck-slide.exit-to-left {
-      animation: slideOutLeft 0.65s cubic-bezier(.77,0,.18,1) forwards;
+      animation: paperOutLeft 0.55s cubic-bezier(.4,0,.2,1) forwards;
     }
     .deck-slide.enter-from-left {
-      animation: slideInLeft 0.65s cubic-bezier(.77,0,.18,1) forwards;
+      animation: paperInLeft 0.55s cubic-bezier(.4,0,.2,1) forwards;
     }
     .deck-slide.exit-to-right {
-      animation: slideOutRight 0.65s cubic-bezier(.77,0,.18,1) forwards;
+      animation: paperOutRight 0.55s cubic-bezier(.4,0,.2,1) forwards;
     }
 
-    @keyframes slideInRight {
-      from { transform: translateX(100%); opacity: 0; }
-      to   { transform: translateX(0);    opacity: 1; }
+    @keyframes paperInRight {
+      from { transform: translateX(6%) scale(0.98); opacity: 0; }
+      to   { transform: translateX(0) scale(1);     opacity: 1; }
     }
-    @keyframes slideOutLeft {
-      from { transform: translateX(0);     opacity: 1; }
-      to   { transform: translateX(-100%); opacity: 0; }
+    @keyframes paperOutLeft {
+      from { transform: translateX(0) scale(1);      opacity: 1; }
+      to   { transform: translateX(-6%) scale(0.98); opacity: 0; }
     }
-    @keyframes slideInLeft {
-      from { transform: translateX(-100%); opacity: 0; }
-      to   { transform: translateX(0);     opacity: 1; }
+    @keyframes paperInLeft {
+      from { transform: translateX(-6%) scale(0.98); opacity: 0; }
+      to   { transform: translateX(0) scale(1);      opacity: 1; }
     }
-    @keyframes slideOutRight {
-      from { transform: translateX(0);    opacity: 1; }
-      to   { transform: translateX(100%); opacity: 0; }
+    @keyframes paperOutRight {
+      from { transform: translateX(0) scale(1);     opacity: 1; }
+      to   { transform: translateX(6%) scale(0.98); opacity: 0; }
     }
 
-    /* Left panel — design image fills the full panel */
+    /* LEFT: image panel */
     .deck-visual {
       position: relative;
       overflow: hidden;
-      padding: 0;
+      border-right: 3px solid var(--black);
+      background: var(--cream);
     }
 
-    /* Design image fills entire left panel */
     .deck-design-img {
       display: block;
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center;
+      object-position: center top;
+      transition: transform 8s ease;
+    }
+    .deck-slide.active .deck-design-img {
+      transform: scale(1.03);
     }
 
-    /* slide accent line — animates like the progress bar: 0→100% on slide enter */
+    /* accent line at bottom of image */
     .deck-accent-line {
       position: absolute;
       bottom: 0; left: 0;
-      height: 3px;
-      width: 0%;
-      transition: width 0.5s cubic-bezier(.4,0,.2,1);
+      height: 4px;
+      width: 0;
+      transition: width 0.7s 0.2s cubic-bezier(.4,0,.2,1);
     }
-    .deck-accent-line.line-active {
+    .deck-slide.active .deck-accent-line {
       width: 100%;
     }
 
-    /* Right panel — info */
+    /* RIGHT: editorial info panel */
     .deck-info {
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      padding: 52px 52px 52px 44px;
-      border-left: 1px solid rgba(255,255,255,0.08);
+      justify-content: space-between;
+      padding: 40px 36px 32px 36px;
       position: relative;
+      background: var(--white);
+      border-left: none;
     }
 
+    /* ghost issue number */
     .deck-index {
       font-family: 'Playfair Display', serif;
-      font-size: 96px;
+      font-size: 110px;
       font-weight: 900;
       line-height: 1;
-      color: rgba(255,255,255,0.05);
+      color: var(--light-gray);
       position: absolute;
-      top: 24px;
-      right: 32px;
+      bottom: 24px;
+      right: 20px;
       user-select: none;
       pointer-events: none;
+      z-index: 0;
+    }
+
+    .deck-info-top {
+      position: relative;
+      z-index: 1;
+    }
+
+    .deck-info-bottom {
+      position: relative;
+      z-index: 1;
     }
 
     .deck-category {
       font-family: 'Courier Prime', monospace;
-      font-size: 10px;
+      font-size: 9.5px;
       letter-spacing: 3px;
       text-transform: uppercase;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .deck-category::before {
+      content: '';
+      display: inline-block;
+      width: 20px;
+      height: 1.5px;
+      background: currentColor;
+      flex-shrink: 0;
     }
 
     .deck-title {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(22px, 2.8vw, 34px);
+      font-size: clamp(20px, 2.4vw, 30px);
       font-weight: 900;
-      color: var(--white);
-      line-height: 1.15;
-      margin-bottom: 20px;
+      color: var(--black);
+      line-height: 1.1;
+      margin-bottom: 16px;
     }
 
     .deck-divider {
-      width: 48px;
-      height: 2px;
-      margin-bottom: 20px;
+      width: 40px;
+      height: 2.5px;
+      margin-bottom: 16px;
     }
 
     .deck-desc {
-      font-size: 13.5px;
-      color: rgba(255,255,255,0.6);
+      font-size: 12.5px;
+      color: var(--mid-gray);
       line-height: 1.75;
-      max-width: 400px;
-      margin-bottom: 32px;
+      margin-bottom: 24px;
     }
 
     .deck-tags {
       display: flex;
       flex-wrap: wrap;
-      gap: 6px;
+      gap: 5px;
+      margin-bottom: 20px;
     }
 
     .deck-tag {
       font-family: 'Courier Prime', monospace;
-      font-size: 9px;
+      font-size: 8.5px;
       letter-spacing: 1px;
       text-transform: uppercase;
-      padding: 5px 12px;
-      border: 1px solid rgba(255,255,255,0.15);
-      color: rgba(255,255,255,0.5);
+      padding: 4px 10px;
+      border: 1.5px solid var(--black);
+      color: var(--black);
+      background: transparent;
     }
     .deck-tag.filled {
-      color: var(--black);
-      border-color: transparent;
+      background: var(--black);
+      color: var(--white);
     }
 
-    /* ===== DECK CONTROLS ===== */
+    /* ===== DECK CONTROLS — newspaper footer bar ===== */
     .deck-controls {
       background: var(--black);
-      border-top: 1px solid rgba(255,255,255,0.08);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 16px 40px;
-      gap: 24px;
-    }
-
-    .deck-dots {
-      display: flex;
-      gap: 8px;
-      align-items: center;
-    }
-
-    .deck-dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.2);
-      border: none;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      padding: 0;
-    }
-    .deck-dot.active {
-      width: 24px;
-      border-radius: 3px;
-      background: var(--white);
+      padding: 12px 36px;
+      gap: 20px;
+      border-top: 3px solid var(--black);
     }
 
     .deck-nav-btns {
       display: flex;
-      gap: 10px;
+      gap: 0;
     }
 
     .deck-btn {
-      width: 44px; height: 44px;
-      border: 1px solid rgba(255,255,255,0.2);
+      width: 40px; height: 40px;
+      border: 1.5px solid rgba(255,255,255,0.25);
       background: transparent;
       color: var(--white);
-      font-size: 18px;
+      font-size: 16px;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: background 0.2s, border-color 0.2s;
+      transition: background 0.2s, color 0.2s;
       font-family: 'Space Mono', monospace;
     }
+    .deck-btn:first-child { border-right: none; }
     .deck-btn:hover {
-      background: rgba(255,255,255,0.08);
-      border-color: rgba(255,255,255,0.5);
+      background: var(--gold);
+      color: var(--black);
+      border-color: var(--gold);
     }
-    .deck-btn:disabled {
-      opacity: 0.25;
-      cursor: default;
+
+    .deck-dots {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .deck-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.25);
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      transition: all 0.3s ease;
+    }
+    .deck-dot.active {
+      width: 20px;
+      border-radius: 2px;
+      background: var(--gold);
     }
 
     .deck-counter {
-      font-family: 'Space Mono', monospace;
+      font-family: 'Courier Prime', monospace;
       font-size: 11px;
-      color: rgba(255,255,255,0.35);
-      letter-spacing: 2px;
-      min-width: 60px;
-      text-align: center;
+      color: rgba(255,255,255,0.4);
+      letter-spacing: 3px;
     }
 
     .deck-progress {
       flex: 1;
-      height: 2px;
-      background: rgba(255,255,255,0.08);
+      height: 1.5px;
+      background: rgba(255,255,255,0.12);
       position: relative;
-      max-width: 220px;
+      max-width: 180px;
     }
     .deck-progress-fill {
       position: absolute;
       left: 0; top: 0; bottom: 0;
-      background: var(--white);
+      background: var(--gold);
       transition: width 0.5s cubic-bezier(.4,0,.2,1);
+    }
+
+    /* keyboard hint */
+    .deck-hint {
+      font-family: 'Courier Prime', monospace;
+      font-size: 8.5px;
+      color: rgba(255,255,255,0.2);
+      letter-spacing: 1px;
+      text-transform: uppercase;
     }
 
     /* Mock UI styles removed — design images used instead */
@@ -1738,7 +1781,7 @@
           </div>
           <div class="deck-info">
             <div class="deck-index">01</div>
-            <div class="deck-category" style="color:#7eb3ff;">Mobile UX · Onboarding</div>
+            <div class="deck-category" style="color:#3366cc;">Mobile UX · Onboarding</div>
             <div class="deck-title">Microsoft Student<br/>Ambassadors, SRM</div>
             <div class="deck-divider" style="background:#3366cc;"></div>
             <div class="deck-desc">Designed a mobile onboarding flow in Figma for the Microsoft Student Association at SRM, aligning with their established branding and color theme. Incorporated custom graphics, micro‑interactions, and Lottie animations to create a visually engaging and intuitive experience. This project was part of my recruitment task and led to my selection as a Creatives Domain Member.</div>
@@ -1761,7 +1804,7 @@
           </div>
           <div class="deck-info">
             <div class="deck-index">02</div>
-            <div class="deck-category" style="color:#e85050;">Event Design · Web Redesign</div>
+            <div class="deck-category" style="color:#a00000;">Event Design · Web Redesign</div>
             <div class="deck-title">Cherry+ Network,<br/>SRM</div>
             <div class="deck-divider" style="background:#a00000;"></div>
             <div class="deck-desc">Redesigned the club’s Events page to match their Netflix‑inspired website theme. Developed layouts for event listings, registrations, and detailed views, blending Cherry+ branding with cinematic styling. The work demonstrated my ability to adapt design systems to thematic concepts and contributed to my recruitment into the club.</div>
@@ -1781,7 +1824,7 @@
           </div>
           <div class="deck-info">
             <div class="deck-index">03</div>
-            <div class="deck-category" style="color:#3fcf1a;">Finance Consultancy · Landing Page</div>
+            <div class="deck-category" style="color:#2a9a10;">Finance Consultancy · Landing Page</div>
             <div class="deck-title">Tradzo: Landing<br/>Page Redesign</div>
             <div class="deck-divider" style="background:#3fcf1a;"></div>
             <div class="deck-desc">Created a redesigned landing page for a startup whose original site was AI‑generated. Built a fresh, original layout inspired by the company’s logo and brand identity, ensuring consistency and professionalism. This project showcased my ability to translate abstract branding into cohesive web design.</div>
@@ -1839,16 +1882,16 @@
           <div class="deck-visual">
             <!-- Replace src with your Nocturne journal app design screenshot -->
             <img class="deck-design-img" src="Nocturne Design.png" alt="Nocturne Personal Journal App Design" />
-            <div class="deck-accent-line" style="background: linear-gradient(90deg, #e2d67f, #ffffff);"></div>
+            <div class="deck-accent-line" style="background: linear-gradient(90deg, #c9a84c, #e8d080);"></div>
           </div>
           <div class="deck-info">
             <div class="deck-index">06</div>
-            <div class="deck-category" style="color:#e2d67f;">Personal App · Journal Design</div>
+            <div class="deck-category" style="color:#b08a20;">Personal App · Journal Design</div>
             <div class="deck-title">Nocturne App —<br/>A Personal Project</div>
-            <div class="deck-divider" style="background:#e2d67f;"></div>
+            <div class="deck-divider" style="background:#c9a84c;"></div>
             <div class="deck-desc">Initiated a personal project to design a UI for a dream tracker app. The concept aims to go beyond a simple journal, integrating unique features to analyze and visualize dream patterns. Currently in early stages, this project reflects my interest in combining design with development for meaningful personal tools.</div>
             <div class="deck-tags">
-              <span class="deck-tag filled" style="background:#d7c74a;">Figma</span>
+              <span class="deck-tag filled" style="background:#c9a84c; color:#000;">Figma</span>
               <span class="deck-tag">App Design</span>
               <span class="deck-tag">Personal Project</span>
             </div>
@@ -1857,7 +1900,7 @@
 
       </div><!-- /deck-stage -->
 
-      <!-- Controls -->
+      <!-- Controls — newspaper footer bar -->
       <div class="deck-controls">
         <div class="deck-nav-btns">
           <button class="deck-btn" id="deckPrev" onclick="deckNav(-1)">←</button>
@@ -1882,8 +1925,7 @@
 
   <div class="section-divider"></div>
 
-  <div class="section-divider no-reel"></div>
-
+  
   <!-- FOOTER / CONTACT -->
   <footer class="footer-section" id="contact">
     <div class="footer-inner">
