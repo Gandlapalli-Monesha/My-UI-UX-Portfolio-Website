@@ -588,7 +588,7 @@
       width: 100%;
       min-height: 0;
       background: none;
-      padding: 20px 0;
+      padding: 8px 0;
       border-radius: 0;
       position: relative;
       overflow: visible;
@@ -606,9 +606,10 @@
       z-index: 10;
       overflow: visible;
       line-height: 1.2;
-      font-size: clamp(32px, 5vw, 45px);
+      font-size: clamp(42px, 6vw, 60px);
       color: #faf8f3;
-      word-spacing: 8px;
+      letter-spacing: 4px;
+      word-spacing: 16px;
     }
 
     .section-masthead .sub {
@@ -1125,12 +1126,61 @@
     }
 
     .creative-intro .creative-title {
-      font-family: 'Playfair Display', serif;
+      font-family: 'UnifrakturMaguntia', cursive;
       font-size: clamp(28px, 4.5vw, 44px);
-      font-weight: 900;
+      font-weight: 400;
       color: var(--black);
       line-height: 1.1;
       margin-bottom: 12px;
+      text-transform: none;
+    }
+
+    /* Creative title stars */
+    .creative-title-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 12px;
+    }
+
+    .creative-title-wrapper .star-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .creative-title-wrapper .star {
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    .creative-title-wrapper .star-inner {
+      font-size: 36px;
+    }
+
+    .creative-title-wrapper .star-mid {
+      font-size: 30px;
+    }
+
+    .creative-title-wrapper .star-outer {
+      font-size: 24px;
+    }
+
+    .creative-title-wrapper .title-text {
+      font-family: 'UnifrakturMaguntia', cursive;
+      font-weight: 400;
+      font-size: clamp(36px, 5vw, 56px);
+      color: var(--black);
+      line-height: 1.1;
+      margin: 0 16px;
+      text-transform: none;
+    }
+
+    .creative-title-wrapper .line {
+      width: 100px;
+      height: 2px;
+      background: var(--black);
     }
 
     .creative-intro .creative-lede {
@@ -2150,9 +2200,21 @@
   <div id="creative" class="creative-wrap">
     <div class="page-content">
       <header class="creative-intro">
-        <h2 class="creative-title">Creative Footnotes</h2>
-        <p class="creative-lede">Posters, stories, and side-of-desk experiments — the work that does not always land in
-          a case study deck.</p>
+        <div class="creative-title-wrapper">
+          <div class="line"></div>
+          <div class="star-group">
+            <span class="star star-outer">✯</span>
+            <span class="star star-mid">✯</span>
+            <span class="star star-inner">✯</span>
+          </div>
+          <span class="title-text">Creative Footnotes</span>
+          <div class="star-group">
+            <span class="star star-inner">✯</span>
+            <span class="star star-mid">✯</span>
+            <span class="star star-outer">✯</span>
+          </div>
+          <div class="line"></div>
+        </div>
       </header>
 
       <div class="creative-section">
