@@ -13,6 +13,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Intel+One+Mono:ital,wght@0,300..700;1,300..700&display=swap"
     rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Manufacturing+Consent&display=swap" rel="stylesheet">
   <style>
     :root {
       --black: #0d0d0d;
@@ -29,6 +30,12 @@
 
     .beth-ellen-regular {
       font-family: "Beth Ellen", cursive;
+      font-weight: 400;
+      font-style: normal;
+    }
+
+    .manufacturing-consent-regular {
+      font-family: "Manufacturing Consent", system-ui;
       font-weight: 400;
       font-style: normal;
     }
@@ -597,8 +604,7 @@
     }
 
     .design-deck-title .title-text {
-      font-family: "Ballet", cursive;
-      font-weight: 400;
+      font-weight: 350;
       text-transform: none;
       margin: 0;
       padding: 0 40px;
@@ -608,10 +614,53 @@
       z-index: 10;
       overflow: visible;
       line-height: 1.2;
-      font-size: clamp(36px, 6vw, 30px);
-      color: #faf8f3;
+      font-size: clamp(36px, 6vw, 50px);
+      color: #feecd6;
       letter-spacing: 4px;
       word-spacing: 16px;
+    }
+
+    .deck-decoration-left,
+    .deck-decoration-right {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .deck-decoration-left {
+      margin-right: 20px;
+    }
+
+    .deck-decoration-right {
+      margin-left: 20px;
+    }
+
+    .deck-decoration-left .star,
+    .deck-decoration-right .star {
+      display: inline-block;
+      color: #feecd6;
+      line-height: 1;
+    }
+
+    .deck-decoration-left .star-large,
+    .deck-decoration-right .star-large {
+      font-size: clamp(24px, 3vw, 32px);
+    }
+
+    .deck-decoration-left .star-medium,
+    .deck-decoration-right .star-medium {
+      font-size: clamp(18px, 2.5vw, 26px);
+    }
+
+    .deck-decoration-left .star-small,
+    .deck-decoration-right .star-small {
+      font-size: clamp(14px, 2vw, 20px);
+    }
+
+    .deck-line {
+      width: 40px;
+      height: 1px;
+      background: #feecd6;
     }
 
     .section-masthead .sub {
@@ -2044,7 +2093,21 @@
   <!-- MY WORK — DECK SLIDESHOW -->
   <div id="work">
     <div class="section-masthead">
-      <h2 class="design-deck-title"><p class="title-text">The Design Deck</p></h2>
+      <h2 class="design-deck-title">
+        <div class="deck-decoration-left">
+          <span class="deck-line"></span>
+          <span class="star star-small">✴</span>
+          <span class="star star-medium">✴</span>
+          <span class="star star-large">✴</span>
+        </div>
+        <p class="title-text manufacturing-consent-regular">The Design Deck</p>
+        <div class="deck-decoration-right">
+          <span class="star star-large">✴</span>
+          <span class="star star-medium">✴</span>
+          <span class="star star-small">✴</span>
+          <span class="deck-line"></span>
+        </div>
+      </h2>
     </div>
 
     <div class="deck-section">
