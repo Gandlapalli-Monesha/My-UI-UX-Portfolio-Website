@@ -581,10 +581,17 @@
 
     /* Design deck title stars */
     .design-deck-title {
-      display: flex;
+      display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 20px;
+      margin: 0 auto;
+      width: auto;
+      min-height: 0;
+      background: none;
+      padding: 0;
+      border-radius: 0;
+      position: relative;
     }
 
     .design-deck-title .star {
@@ -646,11 +653,19 @@
 
     /* section header stays in newspaper language */
     #work .section-masthead {
-      background: var(--black);
+      background: url("TDD BG.png") center center / 100% 100% no-repeat;
       color: var(--white);
       text-align: center;
-      padding: 20px;
-      border-bottom: 3px solid var(--black);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      height: auto;
+      min-height: 120px;
+      width: 100%;
+      margin: 0;
+      border-bottom: none;
+      overflow: visible;
     }
 
     /* The paging container */
