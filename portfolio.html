@@ -7,13 +7,7 @@
   <title>Gandlapalli Monesha — Portfolio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&family=Ballet:opsz@16..72&family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&family=UnifrakturMaguntia&family=Beth+Ellen&family=Passions+Conflict&display=swap"
-    rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Intel+One+Mono:ital,wght@0,300..700;1,300..700&display=swap"
-    rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Manufacturing+Consent&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&family=Ballet:opsz@16..72&family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&family=UnifrakturMaguntia&family=Beth+Ellen&family=Passions+Conflict&family=Intel+One+Mono:ital,wght@0,300..700;1,300..700&family=Cormorant:ital,wght@0,300..700;1,300..700&family=Manufacturing+Consent&display=swap" rel="stylesheet">
   <style>
     :root {
       --black: #0d0d0d;
@@ -133,6 +127,7 @@
       line-height: 0.88;
       letter-spacing: 2px;
       text-transform: uppercase;
+      text-align: center;
     }
 
     .hero-name span {
@@ -149,10 +144,6 @@
       position: relative;
       margin: 18px auto 12px;
       width: fit-content;
-    }
-
-    .hero-name {
-      text-align: center;
     }
 
     .hero-badge {
@@ -185,7 +176,6 @@
       background: var(--gold);
       display: flex;
       justify-content: center;
-      gap: 0;
       margin-top: 10px;
     }
 
@@ -219,10 +209,6 @@
       height: 18px;
       background: var(--black);
       overflow: hidden;
-    }
-
-    .section-divider::before {
-      display: none;
     }
 
     .section-divider::after {
@@ -259,14 +245,12 @@
     .about-section {
       display: grid;
       grid-template-columns: 1fr 1.6fr;
-      gap: 0;
     }
 
     .about-left {
       padding: 32px 28px 32px 0;
       display: flex;
       flex-direction: column;
-      gap: 0;
       align-self: start;
     }
 
@@ -313,9 +297,7 @@
       padding: 8px 12px 4px;
       display: flex;
       flex-direction: column;
-    }
-
-    .record-row {
+    }    .record-row {
       display: flex;
       align-items: baseline;
       border-bottom: 1px dashed rgba(0, 0, 0, 0.13);
@@ -456,7 +438,6 @@
 
     .tl-item {
       display: flex;
-      gap: 0;
       align-items: flex-start;
       margin-bottom: 20px;
       position: relative;
@@ -480,7 +461,6 @@
       flex-shrink: 0;
       padding-top: 2px;
       text-align: right;
-      padding-right: 0;
       line-height: 1.3;
     }
 
@@ -537,10 +517,10 @@
       font-family: 'Playfair Display', serif;
       font-size: 40px;
       font-style: italic;
-      color: #c9a84c !important;
+      color: #c9a84c;
       line-height: 1.5;
       letter-spacing: 1px;
-      margin: 0 !important;
+      margin: 0;
     }
 
     .pull-quote--sm {
@@ -554,7 +534,7 @@
       font-family: 'Playfair Display', serif;
       font-weight: 700;
       font-style: italic;
-      font-size: clamp(13px, 1.65vw, 16px) !important;
+      font-size: clamp(13px, 1.65vw, 16px);
       letter-spacing: 0.02em;
       line-height: 1.55;
     }
@@ -681,18 +661,12 @@
     /* section header stays in newspaper language */
     #work .section-masthead {
       background: url("images/TDD-BG-OLD.png") center center / 100% 100% no-repeat;
-      color: var(--white);
-      text-align: center;
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 0;
-      height: auto;
       min-height: 80px;
       width: 100%;
-      margin: 0;
-      border-bottom: none;
-      overflow: visible;
     }
 
     /* The paging container */
@@ -988,8 +962,6 @@
     .deck-nav-side:hover {
       width: 50px;
       height: 50px;
-      background: var(--black);
-      color: var(--white);
     }
 
     .deck-nav-side:focus-visible {
@@ -1006,155 +978,6 @@
     }
 
 
-    /* Mock UI styles removed — design images used instead */
-
-    .mock-card-ui .mp {
-      width: 90%;
-      height: 3px;
-      background: rgba(201, 168, 76, 0.3);
-      margin-bottom: 3px;
-    }
-
-    .card-ui-msrm {
-      background: #1a2a4a;
-      color: #7eb3ff;
-      width: 90%;
-      padding: 10px;
-      font-size: 8px;
-      border-top: 2px solid #3366cc;
-    }
-
-    .card-ui-msrm .nav-dots {
-      display: flex;
-      gap: 4px;
-      margin-bottom: 6px;
-    }
-
-    .card-ui-msrm .nav-dots span {
-      width: 20px;
-      height: 3px;
-      background: #3366cc;
-    }
-
-    .card-ui-msrm .nav-dots span:first-child {
-      background: #7eb3ff;
-    }
-
-    .card-ui-cherry {
-      background: #feecd6;
-      color: #a00000;
-      width: 90%;
-      padding: 10px;
-      font-size: 8px;
-      border-bottom: 2px solid #e63329;
-    }
-
-    .card-ui-cherry .event-row {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      margin-bottom: 4px;
-    }
-
-    .card-ui-cherry .dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--red);
-    }
-
-    .card-ui-prada {
-      background: #f5f5f0;
-      color: #1a1a1a;
-      width: 90%;
-      padding: 10px;
-      font-size: 8px;
-      border: 1px solid #ccc;
-    }
-
-    .card-ui-prada .logo-line {
-      font-family: 'Playfair Display', serif;
-      font-size: 14px;
-      font-weight: 900;
-      letter-spacing: 4px;
-      margin-bottom: 6px;
-    }
-
-    .card-ui-suzanne {
-      background: #0d0d0d;
-      color: #feecd6;
-      width: 90%;
-      padding: 10px;
-      font-size: 8px;
-      border: 1px solid #333;
-    }
-
-    .card-ui-suzanne .book-cover {
-      width: 40px;
-      height: 55px;
-      background: #c9a84c;
-      margin-bottom: 6px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 6px;
-      color: #000;
-      text-align: center;
-      padding: 3px;
-      font-weight: 700;
-      letter-spacing: 1px;
-    }
-
-    .card-ui-codenex {
-      background: #0a0f1e;
-      color: #4af0b0;
-      width: 90%;
-      padding: 10px;
-      font-size: 8px;
-      border-left: 3px solid #4af0b0;
-    }
-
-    .stat-row {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
-    .stat-pill {
-      background: rgba(74, 240, 176, 0.15);
-      border: 1px solid #4af0b0;
-      padding: 3px 8px;
-      border-radius: 20px;
-      font-size: 8px;
-      color: #4af0b0;
-      font-family: 'Space Mono', monospace;
-    }
-
-    .card-ui-nocturne {
-      background: #1a0a2e;
-      color: #c9a0dc;
-      width: 90%;
-      padding: 10px;
-      font-size: 8px;
-      border-radius: 4px;
-    }
-
-    .journal-lines {
-      margin-top: 4px;
-    }
-
-    .journal-line {
-      height: 2px;
-      background: rgba(201, 160, 220, 0.25);
-      margin-bottom: 4px;
-    }
-
-    .journal-line.filled {
-      background: rgba(201, 160, 220, 0.6);
-      width: 70%;
-    }
-
-    /* ===== CREATIVE SECTION (cream “extra sheet” after deck) ===== */
     .creative-wrap {
       background: #feecd6;
       border-top: 3px solid var(--black);
@@ -1276,14 +1099,6 @@
       overflow: visible;
     }
 
-    .creative-section::before {
-      display: none;
-    }
-
-    .creative-section::after {
-      display: none;
-    }
-
     .creative-heading {
       display: flex;
       align-items: baseline;
@@ -1315,7 +1130,6 @@
     .poster-item {
       display: flex;
       flex-direction: column;
-      gap: 0;
       height: 100%;
       position: relative;
       z-index: 0;
@@ -1391,7 +1205,7 @@
     .footer-section {
       background: var(--black);
       color: var(--white);
-      padding: 0px 20px 0px;
+      padding: 0 20px;
     }
 
     .footer-inner {
@@ -1541,14 +1355,9 @@
       background: rgba(254, 236, 214, 0.1);
     }
 
-    .connect-form-wrap .cf-submit button {
-      font-family: 'Courier Prime', monospace;
-    }
-
     .connect-form {
       display: flex;
       flex-direction: column;
-      gap: 0;
     }
 
     .cf-field {
@@ -1594,7 +1403,6 @@
       margin-top: 20px;
       display: flex;
       align-items: center;
-      gap: 0;
     }
 
     .cf-submit button {
@@ -1625,60 +1433,9 @@
       line-height: 1.5;
     }
 
-    /* contact grid below form */
-    .contact-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      margin-bottom: 24px;
-    }
-
-    .contact-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-    }
-
-    .contact-icon {
-      width: 36px;
-      height: 36px;
-      background: var(--gold);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      font-size: 14px;
-      color: var(--black);
-    }
-
-    .contact-item .info {
-      font-size: 12px;
-      line-height: 1.6;
-    }
-
-    .contact-item .info .label {
-      font-family: 'Space Mono', monospace;
-      font-size: 9px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 2px;
-    }
-
-    .contact-item .info a {
-      color: var(--white);
-      text-decoration: none;
-      font-size: 12px;
-    }
-
-    .contact-item .info a:hover {
-      color: var(--gold);
-    }
-
     .footer-bottom {
       border-top: 1px solid rgba(254, 236, 214, 0.1);
-      padding: 12px 0 12px;
+      padding: 12px 0;
       display: flex;
       justify-content: center;
     }
@@ -1701,7 +1458,6 @@
 
     .skills-scroll {
       display: flex;
-      gap: 0;
       animation: skills-slide 30s linear infinite;
       width: max-content;
     }
@@ -1763,10 +1519,6 @@
 
       .posters-grid {
         grid-template-columns: repeat(2, 1fr);
-      }
-
-      .contact-grid {
-        grid-template-columns: 1fr;
       }
 
       .header-nav {
@@ -1882,8 +1634,8 @@
       <div class="paper-name">✵ The Design Times ✵</div>
       <div class="hero-wrapper">
         <div class="hero-name">
-          <span class="typing-animation" style="display: block; text-align: center;">Gandlapalli</span>
-          <span class="typing-animation-delayed" style="display: block; text-align: center;">Monesha</span>
+          <span class="typing-animation">Gandlapalli</span>
+          <span class="typing-animation-delayed">Monesha</span>
         </div>
         <img src="images/chennai-badge.png" alt="Chennai badge" class="hero-badge" />
       </div>
@@ -1986,8 +1738,7 @@
 
         </div>
 
-        <div style="margin-top: 25px;"></div>
-        <div class="pull-quote pull-quote--sm">
+        <div class="pull-quote pull-quote--sm" style="margin-top: 25px;">
           <p>"Design is where science and art break even."<br />— Robin Matthew</p>
         </div>
       </div>
@@ -1995,9 +1746,7 @@
       <!-- RIGHT: Spotlight + Timeline -->
       <div class="spotlight-section fade-up" id="spotlight">
         <h2>Blending <em>Creativity</em><br />with Code</h2>
-        <br>
-        <div class="subhead beth-ellen-regular">— A designer's origin story</div>
-        <br>
+        <div class="subhead beth-ellen-regular" style="margin-top: 16px; margin-bottom: 20px;">— A designer's origin story</div>
         <div class="timeline" id="timeline">
           <!-- Animated spine -->
           <div class="timeline-spine">
@@ -2115,7 +1864,6 @@
         <!-- SLIDE 01: Cherry's Community -->
         <div class="deck-slide active" data-index="0">
           <div class="deck-visual">
-            <!-- Replace src with your Cherry's Community design screenshot -->
             <img class="deck-design-img" src="images/Cherry Design.png" alt="Cherry's Community SRM — Events Page Redesign" />
           </div>
           <div class="deck-info">
@@ -2137,7 +1885,6 @@
         <!-- SLIDE 02: Microsoft SRM -->
         <div class="deck-slide" data-index="1">
           <div class="deck-visual">
-            <!-- Replace src with your MSA / Microsoft SRM design screenshot -->
             <img class="deck-design-img" src="images/MSA Design.png"
               alt="Microsoft Student Ambassadors SRM — Mobile Onboarding Design" />
           </div>
@@ -2163,7 +1910,6 @@
         <!-- SLIDE 03: Prada -->
         <div class="deck-slide" data-index="2">
           <div class="deck-visual">
-            <!-- Replace src with your Tradzo landing page design screenshot -->
             <img class="deck-design-img" src="images/Tradzo Design.png" alt="Tradzo Landing Page Redesign" />
           </div>
           <div class="deck-info">
@@ -2185,7 +1931,6 @@
         <!-- SLIDE 04: Suzanne Collins -->
         <div class="deck-slide" data-index="3">
           <div class="deck-visual">
-            <!-- Replace src with your Suzanne Collins author website design screenshot -->
             <img class="deck-design-img" src="images/Author Design.png" alt="Suzanne Collins Author Website Redesign" />
           </div>
           <div class="deck-info">
@@ -2208,7 +1953,6 @@
         <!-- SLIDE 05: CodeNex -->
         <div class="deck-slide" data-index="4">
           <div class="deck-visual">
-            <!-- Replace src with your CodeNex website redesign screenshot -->
             <img class="deck-design-img" src="images/CodeNex Design.png" alt="CodeNex Website Redesign" />
           </div>
           <div class="deck-info">
@@ -2231,7 +1975,6 @@
         <!-- SLIDE 06: Nocturne -->
         <div class="deck-slide" data-index="5">
           <div class="deck-visual">
-            <!-- Replace src with your Nocturne journal app design screenshot -->
             <img class="deck-design-img" src="images/Nocturne Design.png" alt="Nocturne Personal Journal App Design" />
           </div>
           <div class="deck-info">
@@ -2361,7 +2104,6 @@
         <div class="connect-message">
           <div class="cm-eyebrow beth-ellen-regular">— A note from Monesha</div>
           <h3>Design is a story <br />best told <em>together.</em></h3>
-          </h3>
           <p>Whether you’re looking for a designer to shape interfaces, a collaborator for creative work, or simply
             someone to exchange ideas with — I’d love to connect. Let’s turn concepts into experiences worth sharing.
           </p>
