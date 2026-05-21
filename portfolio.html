@@ -44,12 +44,28 @@
 
     html {
       scroll-behavior: smooth;
+      overflow-x: hidden;
+      width: 100%;
     }
 
     body {
       font-family: 'Cormorant', serif;
       background: var(--white);
       color: var(--black);
+      overflow-x: hidden;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    /* Prevent any element from creating horizontal overflow */
+    .site-header,
+    .skills-bar,
+    .section-divider,
+    .page-content,
+    .deck-section,
+    .creative-wrap,
+    .footer-section {
+      max-width: 100%;
       overflow-x: hidden;
     }
 
@@ -93,12 +109,6 @@
       100% {
         transform: translateX(-50%);
       }
-    }
-
-    .header-masthead {
-      text-align: center;
-      padding: 18px 20px 0;
-      position: relative;
     }
 
     .header-masthead .paper-name {
@@ -148,6 +158,16 @@
       position: relative;
       margin: 18px auto 12px;
       width: fit-content;
+      /* Badge is positioned absolutely outside, clip at viewport edge */
+      overflow: visible;
+    }
+
+    .header-masthead {
+      text-align: center;
+      padding: 18px 20px 0;
+      position: relative;
+      /* Contain horizontal overflow from badge positioning */
+      overflow: hidden;
     }
 
     .hero-badge {
@@ -155,13 +175,15 @@
       left: 96%;
       top: 105%;
       transform: translate(-15%, -50%);
-      width: clamp(90px, 11vw, 140px);
+      width: clamp(80px, 10vw, 140px);
       max-height: 140px;
       object-fit: contain;
       border: none;
       border-radius: 0;
       background: transparent;
       margin-left: 0;
+      /* Prevent overflow past viewport */
+      max-width: calc(100vw - 100% - 20px);
     }
 
     .welcome-tag {
@@ -196,6 +218,10 @@
       transition: background 0.2s, color 0.2s;
       flex: 1;
       text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1.2;
     }
 
     .header-nav a:first-child {
@@ -240,9 +266,9 @@
 
     /* ===== MAIN GRID ===== */
     .page-content {
-      max-width: 1200px;
+      max-width: 1400px;
       margin: 0 auto;
-      padding: 0 20px;
+      padding: 0 40px;
     }
 
     /* ===== ABOUT + SPOTLIGHT ===== */
@@ -697,7 +723,7 @@
       position: absolute;
       inset: 0;
       display: grid;
-      grid-template-columns: 1.65fr 1fr;
+      grid-template-columns: 1.4fr 1fr;
       background: var(--white);
       opacity: 0;
       pointer-events: none;
@@ -816,7 +842,7 @@
       position: relative;
       overflow: hidden;
       border-right: 3px solid var(--black);
-      background: var(--cream);
+      background: var(--black);
     }
 
     /* Very slow Ken Burns–style zoom only while this slide is active (no fast scale on change) */
@@ -848,7 +874,7 @@
       justify-content: center;
       align-items: flex-start;
       text-align: left;
-      padding: 28px 32px 36px;
+      padding: 40px 48px 48px 44px;
       position: relative;
       background: var(--white);
       border-left: none;
@@ -994,6 +1020,10 @@
       padding: 0 0 48px;
     }
 
+    .creative-wrap .page-content {
+      padding: 0 40px;
+    }
+
     .creative-intro {
       text-align: center;
       padding: 28px 24px 12px;
@@ -1133,7 +1163,7 @@
     .posters-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
+      gap: 24px;
       align-items: stretch;
     }
 
@@ -1215,11 +1245,11 @@
     .footer-section {
       background: var(--black);
       color: var(--white);
-      padding: 0 20px;
+      padding: 0 40px;
     }
 
     .footer-inner {
-      max-width: 1200px;
+      max-width: 1400px;
       margin: 0 auto;
     }
 
@@ -1509,50 +1539,80 @@
     @media (min-width: 1600px) {
       .page-content,
       .footer-inner {
-        max-width: 1440px;
+        max-width: min(90vw, 1800px);
+        padding-left: max(40px, 3vw);
+        padding-right: max(40px, 3vw);
       }
 
       .deck-slide {
-        grid-template-columns: 1.8fr 1fr;
+        grid-template-columns: 1.5fr 1fr;
       }
 
       .deck-info {
-        padding: 40px 56px;
+        padding: 48px 64px 48px 56px;
       }
 
       .deck-title {
-        font-size: clamp(36px, 2.4vw, 52px);
+        font-size: clamp(36px, 2.4vw, 56px);
       }
 
       .deck-desc {
         font-size: 18px;
+        max-width: 44ch;
       }
 
       .posters-grid {
-        gap: 28px;
+        gap: 32px;
       }
     }
 
-    /* --- Standard desktop 1440 (1280-1599px) --- */
-    @media (min-width: 1280px) and (max-width: 1599px) {
+    /* --- Standard desktop 1920 (1440-1599px) --- */
+    @media (min-width: 1440px) and (max-width: 1599px) {
       .page-content,
       .footer-inner {
-        max-width: 1280px;
+        max-width: 1360px;
       }
 
       .deck-info {
-        padding: 32px 44px;
+        padding: 44px 56px 44px 52px;
       }
 
       .deck-title {
-        font-size: clamp(30px, 2.6vw, 42px);
+        font-size: clamp(34px, 2.5vw, 50px);
+      }
+
+      .deck-desc {
+        font-size: 17px;
+      }
+    }
+
+    /* --- Standard desktop 1440 (1280-1439px) --- */
+    @media (min-width: 1280px) and (max-width: 1439px) {
+      .page-content,
+      .footer-inner {
+        max-width: 1240px;
+      }
+
+      .deck-info {
+        padding: 36px 48px 36px 44px;
+      }
+
+      .deck-title {
+        font-size: clamp(30px, 2.6vw, 44px);
       }
     }
 
     /* --- Small laptop (<=1280px) --- */
     @media (max-width: 1280px) {
+      .page-content,
+      .footer-inner {
+        max-width: 100%;
+        padding-left: 32px;
+        padding-right: 32px;
+      }
+
       .deck-info {
-        padding: 24px 32px;
+        padding: 28px 36px 28px 32px;
       }
 
       .deck-title {
@@ -1575,7 +1635,7 @@
       }
 
       .deck-info {
-        padding: 20px 24px;
+        padding: 20px 28px;
       }
 
       .deck-title {
@@ -1607,8 +1667,11 @@
         flex: 1 1 50%;
         min-width: 0;
         font-size: 12px;
-        padding: 12px 8px;
+        padding: 14px 8px;
         text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         border-right: 2px solid rgba(0,0,0,0.6);
         border-bottom: 2px solid rgba(0,0,0,0.6);
       }
@@ -1627,7 +1690,9 @@
       }
 
       .hero-badge {
-        width: clamp(70px, 9vw, 100px);
+        width: clamp(64px, 8vw, 90px);
+        left: 94%;
+        transform: translate(-20%, -50%);
       }
 
       .about-section {
@@ -1694,10 +1759,12 @@
         border-bottom: 3px solid var(--black);
         height: min(52vw, 480px);
         overflow: hidden;
+        background: var(--black);
       }
 
       .deck-design-img {
         object-fit: contain;
+        background: var(--black);
       }
 
       .deck-info {
@@ -1757,8 +1824,23 @@
 
     /* --- Mobile (<=600px) --- */
     @media (max-width: 600px) {
+      /* Show badge on mobile but keep it from overflowing */
       .hero-badge {
-        display: none;
+        position: relative;
+        left: auto;
+        top: auto;
+        transform: none;
+        display: block;
+        margin: 0 auto -10px;
+        width: clamp(64px, 18vw, 90px);
+        max-height: none;
+      }
+
+      .hero-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
       }
 
       .header-nav a {
@@ -1790,6 +1872,14 @@
       .posters-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 14px;
+      }
+
+      .page-content {
+        padding: 0 16px;
+      }
+
+      .creative-wrap .page-content {
+        padding: 0 16px;
       }
     }
 
@@ -1883,6 +1973,7 @@
 
       .deck-visual {
         height: min(58vw, 320px);
+        background: var(--black);
       }
 
       .deck-nav-side {
