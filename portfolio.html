@@ -1505,7 +1505,66 @@
 
     /* ===== RESPONSIVE ===== */
 
-    /* --- Tablet landscape & small desktop (≤1024px) --- */
+    /* --- Large desktop / ultrawide (>=1600px) --- */
+    @media (min-width: 1600px) {
+      .page-content,
+      .footer-inner {
+        max-width: 1440px;
+      }
+
+      .deck-slide {
+        grid-template-columns: 1.8fr 1fr;
+      }
+
+      .deck-info {
+        padding: 40px 56px;
+      }
+
+      .deck-title {
+        font-size: clamp(36px, 2.4vw, 52px);
+      }
+
+      .deck-desc {
+        font-size: 18px;
+      }
+
+      .posters-grid {
+        gap: 28px;
+      }
+    }
+
+    /* --- Standard desktop 1440 (1280-1599px) --- */
+    @media (min-width: 1280px) and (max-width: 1599px) {
+      .page-content,
+      .footer-inner {
+        max-width: 1280px;
+      }
+
+      .deck-info {
+        padding: 32px 44px;
+      }
+
+      .deck-title {
+        font-size: clamp(30px, 2.6vw, 42px);
+      }
+    }
+
+    /* --- Small laptop (<=1280px) --- */
+    @media (max-width: 1280px) {
+      .deck-info {
+        padding: 24px 32px;
+      }
+
+      .deck-title {
+        font-size: clamp(24px, 2.6vw, 36px);
+      }
+
+      .deck-desc {
+        font-size: 15px;
+      }
+    }
+
+    /* --- Tablet landscape / small desktop (<=1024px) --- */
     @media (max-width: 1024px) {
       .about-section {
         grid-template-columns: 1fr 1.3fr;
@@ -1516,15 +1575,20 @@
       }
 
       .deck-info {
-        padding: 20px 22px 28px;
+        padding: 20px 24px;
       }
 
       .deck-title {
-        font-size: clamp(24px, 3vw, 36px);
+        font-size: clamp(22px, 2.8vw, 32px);
+      }
+
+      .deck-desc {
+        font-size: 14px;
       }
 
       .posters-grid {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
       }
 
       .connect-layout {
@@ -1532,53 +1596,48 @@
       }
     }
 
-    /* --- Tablet portrait (≤768px) --- */
-    @media (max-width: 768px) {
-      /* Page wrapper */
-      .page-content {
-        padding: 0 16px;
-      }
-
-      /* Header */
-      .header-masthead {
-        padding: 14px 16px 0;
-      }
-
-      .hero-badge {
-        display: none;
-      }
-
-      .welcome-tag {
-        font-size: clamp(22px, 6vw, 36px);
-        padding: 20px 12px 12px;
-      }
-
+    /* --- Tablet portrait / iPad (<=834px) --- */
+    @media (max-width: 834px) {
+      /* Nav: 2x2 with all separators */
       .header-nav {
         flex-wrap: wrap;
       }
 
       .header-nav a {
-        padding: 9px 16px;
-        font-size: 11px;
-        flex: 1 1 45%;
-        border-right: none;
-        border-bottom: 1px solid rgba(0,0,0,0.2);
+        flex: 1 1 50%;
+        min-width: 0;
+        font-size: 12px;
+        padding: 12px 8px;
+        text-align: center;
+        border-right: 2px solid rgba(0,0,0,0.6);
+        border-bottom: 2px solid rgba(0,0,0,0.6);
       }
 
       .header-nav a:first-child {
-        border-left: none;
+        border-left: 2px solid rgba(0,0,0,0.6);
       }
 
-      /* About section */
+      .header-nav a:nth-child(3) {
+        border-left: 2px solid rgba(0,0,0,0.6);
+      }
+
+      .header-nav a:nth-child(3),
+      .header-nav a:nth-child(4) {
+        border-bottom: none;
+      }
+
+      .hero-badge {
+        width: clamp(70px, 9vw, 100px);
+      }
+
       .about-section {
         grid-template-columns: 1fr;
       }
 
       .about-left {
-        padding: 24px 0 0;
+        padding: 24px 0 28px;
         border-right: none;
         border-bottom: 2px solid var(--black);
-        padding-bottom: 28px;
       }
 
       .spotlight-section {
@@ -1586,10 +1645,9 @@
       }
 
       .spotlight-section h2 {
-        font-size: clamp(22px, 5vw, 32px);
+        font-size: clamp(22px, 4vw, 30px);
       }
 
-      /* Timeline */
       .timeline-spine {
         left: 64px;
       }
@@ -1599,60 +1657,83 @@
         font-size: 10px;
       }
 
-      /* Deck slideshow */
+      /* Deck: image stacks above info panel.
+         Use display:none/grid instead of opacity/position tricks
+         so the stage height is driven naturally by the active slide. */
       .deck-stage {
-        min-height: auto;
+        height: auto;
+        min-height: 0;
       }
 
       .deck-slide {
-        grid-template-columns: 1fr;
-        grid-template-rows: minmax(240px, 44vh) auto;
         position: relative;
+        grid-template-columns: 1fr;
+        grid-template-rows: min(52vw, 480px) auto;
+        opacity: 1;
+        pointer-events: all;
+        display: none;
+      }
+
+      .deck-slide.active {
+        display: grid;
+      }
+
+      /* Preserve animation classes — just ensure visibility */
+      .deck-slide.enter-from-right,
+      .deck-slide.enter-from-left {
+        display: grid;
+      }
+
+      .deck-slide.exit-to-left,
+      .deck-slide.exit-to-right {
+        display: none;
       }
 
       .deck-visual {
         border-right: none;
         border-bottom: 3px solid var(--black);
+        height: min(52vw, 480px);
+        overflow: hidden;
+      }
+
+      .deck-design-img {
+        object-fit: contain;
       }
 
       .deck-info {
-        padding: 20px 18px 24px;
-        position: relative;
+        padding: 28px 32px 36px;
+        min-height: 280px;
       }
 
       .deck-index {
-        font-size: 40px;
-        top: 8px;
-        right: 12px;
+        font-size: 56px;
+      }
+
+      .deck-title {
+        font-size: clamp(24px, 4vw, 34px);
       }
 
       .deck-desc {
-        font-size: 14px;
+        font-size: 15px;
+        max-width: none;
       }
 
       .deck-nav-side {
-        top: calc(44vh / 2);
+        top: calc(min(52vw, 480px) / 2);
         transform: translateY(-50%);
-        width: 34px;
-        height: 34px;
-        font-size: 14px;
+        width: 38px;
+        height: 38px;
+        font-size: 16px;
       }
 
-      .deck-nav-prev {
-        left: 8px;
-      }
+      .deck-nav-prev { left: 10px; }
+      .deck-nav-next { right: 10px; }
 
-      .deck-nav-next {
-        right: 8px;
-      }
-
-      /* Posters grid */
       .posters-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 14px;
+        gap: 20px;
       }
 
-      /* Footer / contact */
       .connect-layout {
         grid-template-columns: 1fr;
         gap: 32px;
@@ -1665,11 +1746,6 @@
         padding-bottom: 28px;
       }
 
-      .footer-section {
-        padding: 0 16px;
-      }
-
-      /* Cases grid (if present) */
       .cases-grid {
         grid-template-columns: 1fr;
       }
@@ -1677,29 +1753,65 @@
       .case-card {
         border-right: none;
       }
+    }
 
-      /* Deck decoration — simplify on tablet */
-      .deck-line {
-        width: 40px;
+    /* --- Mobile (<=600px) --- */
+    @media (max-width: 600px) {
+      .hero-badge {
+        display: none;
+      }
+
+      .header-nav a {
+        flex: 1 1 100%;
+        border-left: 2px solid rgba(0,0,0,0.6);
+        border-bottom: 2px solid rgba(0,0,0,0.6);
+      }
+
+      .header-nav a:nth-child(3) {
+        border-bottom: 2px solid rgba(0,0,0,0.6);
+      }
+
+      .header-nav a:last-child {
+        border-bottom: none;
+      }
+
+      .deck-slide {
+        grid-template-rows: min(56vw, 380px) auto;
+      }
+
+      .deck-visual {
+        height: min(56vw, 380px);
+      }
+
+      .deck-nav-side {
+        top: calc(min(56vw, 380px) / 2);
+      }
+
+      .posters-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
       }
     }
 
-    /* --- Mobile (≤480px) --- */
+    /* --- Mobile (<=480px) --- */
     @media (max-width: 480px) {
-      /* Header */
       .header-ticker {
         font-size: 9px;
         letter-spacing: 1px;
       }
 
+      .header-masthead {
+        padding: 14px 12px 0;
+      }
+
       .header-masthead .paper-name {
-        font-size: clamp(18px, 5vw, 24px);
+        font-size: clamp(16px, 5vw, 22px);
         letter-spacing: 3px;
       }
 
       .header-masthead .paper-name::before,
       .header-masthead .paper-name::after {
-        max-width: 50px;
+        max-width: 40px;
       }
 
       .welcome-tag {
@@ -1708,24 +1820,10 @@
         word-spacing: 4px;
       }
 
-      .header-nav a {
-        flex: 1 1 100%;
-        font-size: 10px;
-        padding: 9px 12px;
-        border-bottom: 1px solid rgba(0,0,0,0.2);
-      }
-
-      /* Section mastheads */
-      .section-masthead {
-        padding: 12px 14px;
-      }
-
-      /* Page padding */
       .page-content {
-        padding: 0 12px;
+        padding: 0 14px;
       }
 
-      /* About */
       .about-left {
         padding: 16px 0 20px;
       }
@@ -1749,11 +1847,6 @@
         font-size: 14px;
       }
 
-      .tools-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      /* Timeline */
       .timeline-spine {
         left: 52px;
       }
@@ -1775,24 +1868,33 @@
         padding-left: 10px;
       }
 
-      /* Pull quote */
       .pull-quote p {
         font-size: 24px;
       }
 
-      /* Skills bar */
       .skill-item {
         font-size: 16px;
         padding: 0 18px;
       }
 
-      /* Deck */
       .deck-slide {
-        grid-template-rows: minmax(200px, 38vh) auto;
+        grid-template-rows: min(58vw, 320px) auto;
+      }
+
+      .deck-visual {
+        height: min(58vw, 320px);
+      }
+
+      .deck-nav-side {
+        top: calc(min(58vw, 320px) / 2);
+        width: 30px;
+        height: 30px;
+        font-size: 12px;
       }
 
       .deck-info {
-        padding: 16px 14px 20px;
+        padding: 18px 16px 24px;
+        min-height: 0;
       }
 
       .deck-title {
@@ -1806,70 +1908,50 @@
         margin-bottom: 12px;
       }
 
-      .deck-tags {
-        gap: 6px;
-      }
+      .deck-tags { gap: 6px; }
 
       .deck-tag {
         font-size: 9px;
         padding: 4px 8px;
       }
 
-      .deck-nav-side {
-        width: 30px;
-        height: 30px;
-        font-size: 12px;
-      }
-
-      /* Design deck title stars */
-      .deck-decoration-left .star-large,
-      .deck-decoration-right .star-large {
-        font-size: 18px;
-      }
-
       .deck-decoration-left .star-medium,
-      .deck-decoration-right .star-medium {
-        display: none;
-      }
-
+      .deck-decoration-right .star-medium,
       .deck-decoration-left .star-small,
       .deck-decoration-right .star-small {
         display: none;
+      }
+
+      .deck-decoration-left .star-large,
+      .deck-decoration-right .star-large {
+        font-size: 18px;
       }
 
       .deck-line {
         width: 24px;
       }
 
-      /* Creative / posters */
-      .posters-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-      }
-
       .poster-caption {
-        padding: 16px 14px;
+        padding: 14px 12px;
       }
 
       .poster-caption .pc-title {
-        font-size: 22px;
+        font-size: 18px;
       }
 
       .poster-caption .pc-desc {
-        font-size: 14px;
+        font-size: 13px;
       }
 
-      /* Creative title */
       .creative-title-wrapper .star-outer,
       .creative-title-wrapper .star-mid {
         display: none;
       }
 
       .creative-title-wrapper .line {
-        width: 40px;
+        width: 30px;
       }
 
-      /* Footer */
       .footer-masthead h2 {
         font-size: clamp(20px, 5vw, 28px);
       }
@@ -1879,7 +1961,7 @@
       }
 
       .footer-section {
-        padding: 0 12px;
+        padding: 0 14px;
       }
 
       .connect-link-row a {
@@ -1888,26 +1970,39 @@
       }
     }
 
-    /* --- Very small mobile (≤360px) --- */
-    @media (max-width: 360px) {
+    /* --- Very small mobile (<=390px) --- */
+    @media (max-width: 390px) {
       .hero-name {
-        font-size: clamp(42px, 14vw, 62px);
+        font-size: clamp(38px, 12vw, 60px);
       }
 
       .header-masthead .paper-name {
+        font-size: 15px;
         letter-spacing: 1px;
-        font-size: 16px;
       }
 
       .deck-slide {
-        grid-template-rows: minmax(180px, 36vh) auto;
+        grid-template-rows: min(62vw, 280px) auto;
       }
 
-      .record-header {
-        font-size: 10px;
-        letter-spacing: 2px;
+      .deck-visual {
+        height: min(62vw, 280px);
+      }
+
+      .deck-nav-side {
+        top: calc(min(62vw, 280px) / 2);
+      }
+
+      .posters-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .page-content {
+        padding: 0 10px;
       }
     }
+
 
     /* ===== ENTRY ANIMATIONS ===== */
     .fade-up {

@@ -24,7 +24,7 @@
 
 4)Large Desktop / Ultrawide (2560 × 1440)
 
-R*emarks: Its like the problems in Standard amplified a million times.* 
+R*emarks: Its like the problems in Standard amplified a million times.*
 
 
 
@@ -73,6 +73,4 @@ R*emarks: Its like the problems in Standard amplified a million times.*
 6)Pixel 2
 
 *Remarks: Same as iPhone SE.*
-
-
 
