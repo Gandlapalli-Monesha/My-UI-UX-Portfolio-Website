@@ -1,3 +1,0 @@
-1) The laptop/desktop issues haven't been fixed but they aren't that disrupting. The website looks decent enough on laptops and desktops. We can try to fix these in the next version iteration perhaps.
-2) It looks fine on most mobiles and iPads except iPad Pro where The Design Deck is a mess because the images are getting cropped off and the text card has so much space all around the left justified text.
-3) I changed the behaviour of the left, right buttons. It had a shadow effect before which looked weird and I removed that. I changed the BG color of the images in The Design Deck to #000000 to match the black around it. 
