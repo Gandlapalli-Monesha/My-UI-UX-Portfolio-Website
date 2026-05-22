@@ -176,16 +176,18 @@
       position: absolute;
       left: 96%;
       top: 105%;
-      transform: translate(-15%, -50%);
-      width: clamp(80px, 10vw, 140px);
-      max-height: 140px;
+      width: clamp(96px, 12vw, 162px);
+      max-height: 162px;
       object-fit: contain;
       border: none;
       border-radius: 0;
       background: transparent;
       margin-left: 0;
-      /* Prevent overflow past viewport */
       max-width: calc(100vw - 100% - 20px);
+      /* stamp animation — hidden until it fires */
+      opacity: 0;
+      transform: translate(-15%, -50%) scale(2.2) rotate(-18deg);
+      animation: stampIn 0.55s cubic-bezier(0.22, 1, 0.36, 1) 3.2s forwards;
     }
 
     .welcome-tag {
@@ -1705,9 +1707,18 @@
       }
 
       .hero-badge {
-        width: clamp(64px, 8vw, 90px);
+        width: clamp(80px, 10vw, 112px);
         left: 94%;
-        transform: translate(-20%, -50%);
+        opacity: 0;
+        transform: translate(-20%, -50%) scale(2.2) rotate(-18deg);
+        animation: stampInTablet 0.55s cubic-bezier(0.22, 1, 0.36, 1) 3.2s forwards;
+      }
+
+      @keyframes stampInTablet {
+        0%   { opacity: 0; transform: translate(-20%, -50%) scale(2.2) rotate(-18deg); }
+        55%  { opacity: 1; transform: translate(-20%, -50%) scale(0.88) rotate(3deg); }
+        75%  { opacity: 1; transform: translate(-20%, -50%) scale(1.07) rotate(-1deg); }
+        100% { opacity: 1; transform: translate(-20%, -50%) scale(1) rotate(0deg); }
       }
 
       .about-section {
@@ -1844,11 +1855,13 @@
         position: relative;
         left: auto;
         top: auto;
-        transform: none;
         display: block;
         margin: 0 auto -10px;
-        width: clamp(64px, 18vw, 90px);
+        width: clamp(78px, 20vw, 108px);
         max-height: none;
+        opacity: 0;
+        transform: scale(2.2) rotate(-18deg);
+        animation: stampInMobile 0.55s cubic-bezier(0.22, 1, 0.36, 1) 3.2s forwards;
       }
 
       .hero-wrapper {
@@ -2168,6 +2181,21 @@
     .fade-in-left {
       opacity: 0;
       animation: fadeInLeft 2s ease-out 1s forwards;
+    }
+
+    @keyframes stampIn {
+      0%   { opacity: 0;   transform: translate(-15%, -50%) scale(2.2) rotate(-18deg); }
+      55%  { opacity: 1;   transform: translate(-15%, -50%) scale(0.88) rotate(3deg); }
+      75%  { opacity: 1;   transform: translate(-15%, -50%) scale(1.07) rotate(-1deg); }
+      100% { opacity: 1;   transform: translate(-15%, -50%) scale(1)    rotate(0deg); }
+    }
+
+    /* Mobile stamp — no translate, just scale+rotate */
+    @keyframes stampInMobile {
+      0%   { opacity: 0;   transform: scale(2.2) rotate(-18deg); }
+      55%  { opacity: 1;   transform: scale(0.88) rotate(3deg); }
+      75%  { opacity: 1;   transform: scale(1.07) rotate(-1deg); }
+      100% { opacity: 1;   transform: scale(1)    rotate(0deg); }
     }
   </style>
 </head>
