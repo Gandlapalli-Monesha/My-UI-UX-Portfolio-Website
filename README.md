@@ -1,4 +1,4 @@
-# Monesha Portfolio Website
+# My UI/UX Portfolio Website
 
 An editorial-inspired UI/UX portfolio website exploring the intersection of design, storytelling, and frontend development.
 
